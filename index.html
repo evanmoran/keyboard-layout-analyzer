@@ -1,0 +1,167 @@
+<!doctype html>
+<html ng-app="kla">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="./img/kb-q-10.png">
+
+    <title>Keyboard Layout Analyzer - SteveP's fork!</title>
+
+<!--
+source code: https://github.com/stevep99/keyboard-layout-analyzer
+-->
+
+    <!-- vendor css -->
+    <link href="./common/vendor/bootstrap-flat/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./common/vendor/jqplot/jquery.jqplot.min.css" rel="stylesheet">
+    
+    <!-- app css -->
+    <link rel="stylesheet" type="text/css" href="./css/main.css?2013.12" />
+    <link rel="stylesheet" type="text/css" href="./css/kb-config.css?2013" />
+    <link href="./common/pat/keyboard/css/keyboard.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top" style='z-index:1001;'>
+        <div class="navbar-inner">
+            <div class="container">
+
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </a>
+
+                <!-- Be sure to leave the brand out there if you want it shown -->
+                <div class="brand" style='position:relative'>
+                    
+                    <div style='position:absolute; top:7px'>
+                        <img src='img/kb-q-10.png'>
+                    </div>
+                    <div style='margin-left:40px'>
+                        Keyboard Layout Analyzer [SP]
+                    </div>
+                </div>
+
+                <!-- Everything you want hidden at 940px or less, place within here -->
+                <div class="nav-collapse collapse">
+                    <!-- .nav, .navbar-search, .navbar-form, etc -->
+                    <ul class="nav pull-right">
+                        <li navbar-link>
+                            <a href="#/main">Main</a>
+                        </li>
+                        <li navbar-link>
+                            <a href="#/config">Configuration</a>
+                        </li>
+                        <li navbar-link>
+                            <a href="#/about">About</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="view-container" class="container">
+        <div id='view' 
+            class='page'
+            ng-view="" 
+            ng-cloak></div>
+        <div id='kla-loading' class='text-center ng-cloak'>
+            <p>
+                <img src='http://patorjk.com/images/qwerty.png'/>
+            </p>
+            <p>
+                <img src='img/loading2.gif'>
+            </p>
+            Loading, one moment please...
+        </div>
+    </div>
+
+    <div id='newsModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>
+        <div class='modal-header'>
+            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>
+            <h3 id='resultLabel'>News</h3>
+        </div>
+        <div class='modal-body'>
+        </div>
+
+        <div class='modal-footer'>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+
+    <div id='aboutModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>
+        <div class='modal-header'>
+            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>
+            <h3 id='resultLabel'>About</h3>
+        </div>
+        <div class='modal-body'>
+        This application allows you to compare layouts. See the About section for more details. 
+        </div>
+
+        <div class='modal-footer'>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+
+    <div id='footer'>
+        <div id='footer-col-set'>
+            <div class='footer-col'>
+                <div class='footer-col-header'></div>
+                <div class='footer-col-fixed-width'>
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            <div class='footer-col' id='footer-news'>
+                <div class='footer-col-header'></div>
+                <div class='footer-col-fixed-width'>
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            <div class='footer-col'>
+                <div class='footer-col-header'></div>
+            </div>
+        </div>
+    </div> <!-- end footer -->
+
+    <!-- Vendor Scripts -->
+    <script src="./common/vendor/jquery/jquery-1.9.1.min.js"></script>
+    <script src='./common/vendor/jqplot/jquery.jqplot.min.js'></script>
+    <script src="./common/vendor/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script src="./common/vendor/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+    <script src="./common/vendor/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script src="./common/vendor/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+
+    <script src='./common/vendor/heatmap/heatmap.js'></script>
+
+    <script src="./common/vendor/bootstrap-flat/dist/js/bootstrap.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-animate.min.js'></script>
+    <!--<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js'></script>-->
+
+    <!-- Custom GUI -->
+    <script src="./common/pat/keyboard/js/kb.js?2013.09.16"></script>
+    <script src="./common/pat/keyboard/js/key.js?2014.01.01"></script>
+    <script src="./common/pat/keyboard/js/key-dialog.js?2013.09.14"></script>
+    <script src="./common/pat/keyboard/js/keyboard.js?2013.09.14"></script>
+
+    <!-- App Scripts -->
+    <script src="js/app.js?2014.01.01"></script>
+    <script src="js/analyzer.js"></script>
+
+    
+    <script src="js/build/services.js?2014.01.08"></script>
+    <script src="js/build/controllers.js?2014.01.08"></script>
+    <script src="js/build/filters.js"></script>
+    <script src="js/build/directives.js?2014.01.02"></script>
+    <script src="js/build/templates.js?2014.02.17"></script>
+
+    <!--<script src="js/animations.js"></script>-->
+
+</body>
+</html>
