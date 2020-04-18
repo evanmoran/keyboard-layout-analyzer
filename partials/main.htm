@@ -1,5 +1,8 @@
 <div>
     <div class="jumbotron subhead">
+        This is <a href="https://github.com/ColemakMods/keyboard-layout-analyzer">SteveP's fork</a> of patorjk's <a href="https://github.com/patorjk/keyboard-layout-analyzer">Keyboard Layout Analyzer</a>. See the <a href="/#/about">About Page</a> [@todo] for explanation.
+        <br/>
+        <br/>
         <h1>Analyze Text Input</h1>
         <p class="lead">See which layout is best for your input text<p>
     </div>
@@ -19,6 +22,35 @@
                     <option value='alice-ch1' selected>English: Alice in Wonderland, Chapter 1</option>
                     <option value='common-english-words'>English: List of the most commonly used words</option>
                     <option value='common-sat-words'>English: Most commonly used SAT words</option>
+                    <option value='magna-carta-english'>English: Magna Carta</option>
+                    <option value='classiccollection'>English: Classics collection</option>
+                    <option value='1984-chapter-1'>English: 1984 Chapter 1</option>
+                    <option value='animalfarm'>English: Animal Farm</option>
+                    <option value='tarzan-of-the-apes'>English: Tarzan Of The Apes</option>
+                    <option value='jungle-book'>English: Jungle Book</option>
+                    <option value='difficultwords'>English: Difficult words</option>
+                    <option value='medical'>English: Medical words</option>
+                    <option value='quotes'>English: Quotes</option>
+                    <option value='daode-jing'>English: Tao te Ching / DaodeJing</option>
+                    <option value='poems'>English: Poems</option>
+                    <option value='bigrams'>English: Bigrams</option>
+                    <option value='trigrams'>English: Trigrams</option>
+                    <option value='quadgrams'>English: Quadgrams</option>
+                    <option value='typing-champ-1'>English: Typing Championship 1</option>
+                    <option value='academic-1'>Academic: Cost Optimization Model</option>
+                    <option value='academic-2'>Academic: Contractors' Performance in Construction</option>
+                    <option value='academic-3'>Academic: Binary Logistic Analysis</option>
+                    <option value='academic-4'>Academic: Preformulation Studies Of Carbamazepine</option>
+                    <option value='academic-5'>Academic: Spectral studies of Divalent Metal of Co, Ni, Cu and Zn</option>
+                    <option value='academic-6'>Academic: Phytochemical studies on Cocculus Hirsutus</option>
+                    <option value='lorem'>Lorem Ipsum</option>
+                    <option value='www.google.com.htm'>Tech: Google home page</option>
+                    <option value='hanoi-a-m'>Tech: Towers of Hanoi A-M</option>
+                    <option value='hanoi-n-z'>Tech: Towers of Hanoi N-Z</option>
+                    <option value='kle.html'>Tech: Keyboard Layout Editor</option>
+                    <option value='gol'>Tech: Game of Life</option>
+                    <option value='pi1000'>Tech: Pi 1000</option>
+                    <option value='pptt'>Tech: Programming Punctuation Torture Test</option>
                 </select>
                 <button class='btn' type='button' ng-click='applyPreset()'>Apply</button>
             </div>
@@ -27,6 +59,10 @@
             <div class='controls'>
                 <button class="btn btn-large" type="button" ng-click="generateOutput(data.text)">See Which Layout is Best</button>
             </div>
+        </div>
+        <div>
+            <br/>
+            <p>Preset source texts are from <a href="https://github.com/patorjk/keyboard-layout-analyzer">patorjk's original repo</a> and from <a href="https://bitbucket.org/Shenafu/keyboard-layout-analyzer/src/master/">sheenafu's fork</a>.</p>
         </div>
     </form>
 </div>

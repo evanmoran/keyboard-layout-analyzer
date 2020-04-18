@@ -1,0 +1,730 @@
+Scientific Papers (www.scientificpapers.org)
+Journal of Knowledge Management, Economics and Information Technology
+
+1
+Vol. VII, Issue 4
+August 2017
+Determining the Level of Blended e-
+Learning Using a Cost Optimization Model 1
+Author: Marilou IOAKIMIDIS, Assistant Professor, University of
+ Peloponnese and Visiting Professor, National and
+ Kapodistrian University of Athens, Greece
+At a time when e-learning is increasingly being employed as an educational
+alternative to traditional face-to-face learning, there is evidence that the
+preferable educational mode may actually be blended learning, which is a
+combination of e-learning and face-to-face learning. To date, little research
+appears to have been done on the costs incurred by an educational program
+that is transitioning from a wholly traditional system to one that may
+include both e-learning and face-to-face classes. This paper presents a cost
+minimization model for adjusting the mixture of e-learning and face-to-face
+learning in a university program moving from a wholly traditional to a
+blended-learning model. Given several basic assumptions, we derive a model
+for the distribution of face-to-face and e-learning that minimizes the total
+cost for both students and the institution. We present an application of the
+model and draw conclusions.
+
+Keywords: Blended learning, Distance/ e-learning, Cost Minimization,
+Assignment Problem.
+
+1 The author would like to thank Dr. Y. Smirlis for his invaluable contribution and ideas in the
+technical part of this paper.
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+2
+Vol. VII, Issue 4
+August 2017
+Introduction
+
+Knowledge management includes the basic educational mission of
+determining the best strategies for transmitting knowledge to students so
+they are well prepared for future employment. Given new and emerging
+technologies that enable e-learning, a number of studies have focused on the
+strengths and weaknesses of this mode of learning in respect to fulfilling the
+educational mission. However, limited research has been reported on the
+theoretical analysis of the costs incurred by a transition from a wholly face-
+to-face (f2f) university-based program to a successful technology-facilitated
+off-campus study program that includes e-learning classes.
+ The main objective of the present study is to provide a model for
+analysing the replacement of all or part of a university program, that has
+until now been taught using traditional means, with e-learning, with a focus
+on how to minimise costs implicated in the transition phase. In Section 2,
+we present an overview of studies that examine the present educational
+situation. In Section 3, there is an analysis of our model for cost
+minimization in the university, and in Section 4, we examine the application
+of the model and present certain results. Section 5 presents conclusions.
+Literature review
+Traditionally, higher education students have attended classes in physical
+classrooms face-to-face (f2f) with instructors, while in distance education
+students take classes outside the traditional classroom (Narodowski, Nores,
+& Manolakis, 2002). Today, distance learning is being revolutionized by
+information and communication technologies in the form of e-learning,
+which offers considerable convenience and flexibility to the student (LaBay
+& Comm, 2003). The primary tools of e-learning are technological, including
+computers, the Internet, and digital storage and playback devices (Keller &
+Cenerud, 2002), enabling access to learning programs at any time via
+computer (Raymond, 2000). These tools drive change to which universities
+must respond by becoming more flexible (Jones & O'Shea, 2004). Indeed,
+Oakley (1997) suggested that universities that do not respond are likely to
+become obsolete.
+ However, responding appropriately to the new technology does not
+entail that universities should convert their educational systems entirely to
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+3
+Vol. VII, Issue 4
+August 2017
+e-learning. Many commentators note that distance/e-learning does not fully
+substitute for traditional education. Teacher-student interactions are crucial
+in higher education (McCain, 2002), and a great deal of learning occurs in
+the classroom between students (Bose, 2003). Thus, traditional and e-
+learning need not be seen as alternatives (Cedefop, 2001); rather, universities
+should consider mixing the best possibilities of f2f and distance/e-learning
+(Ess, 2003). This blended approach, in which the institution combines
+traditional f2f education and e-learning, can provide increased flexibility to
+educators (Linkaityte, Valiuskeviciute, Cubajevaite, & Zilinskaite, 2005).
+ Insofar as e-learning modes are combined with traditional f2f or
+classroom learning, the term "blended learning" can be applied (Bentley,
+Selassie, & Parkin 2012). Blended learning has been considered to constitute
+a new paradigm for education (Chen & Yao, 2016) and has been proposed as
+the most attractive and effective approach for learning (Gunter 2001). A
+recent meta-analysis of research on the effectiveness of e-learning and
+blended learning in comparison to f2f instruction suggests that overall,
+students in blended learning programs have better outcomes than those
+who learn solely in face-to-face settings (Means, Toyama, Murphy, Bakia, &
+Jones, 2010). Moreover, studies suggest that higher education students prefer
+blended learning to solely online learning (Precel et al., 2009, Ioakimidis et
+al., 2011).
+ In choosing how to blend traditional and e-learning, the particular
+instructional task should determine the mix (Linkaityte et al., 2005).
+Educators must understand that course design and instructional design are
+extremely important parts of e-learning. Because e-learners must generally
+work alone, they may feel isolated (McInnerney & Roberts, 2004).
+Conversely, student perceptions of the presence of other students and the
+instructor in e-learning have been found to be associated with learning
+satisfaction (Russo & Benson, 2004). Moreover, social communication
+appears to be as important in e-learning as in the traditional classroom
+(Peters, 1998). Thus, in designing e-learning coursework, special attention
+should be paid to facilitating student-student and student-instructor
+communication. Here again, the value of blended learning surfaces because
+it enables the e-learner to have face-to-face contact with fellow students and
+the instructor. Even when most of the coursework is done via e-learning,
+having at least a few face-to-face meetings may be valuable. For example,
+Hodgkinson (2002) found that e-learning students provided with the
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+4
+Vol. VII, Issue 4
+August 2017
+opportunity for f2f orientation believed it would help them in class
+participation.
+ Due to increased competition, there is substantial pressure on
+higher education institutions to be more cost-effective in the delivery of
+services (Whitaker, 2003). However, there is disagreement on whether
+application of technology will decrease costs for most universities. Simmons
+(2001) maintained that distance education through e-learning provides
+questionable economic benefits for universities, and Ruth (2006) held that
+with current university staffing norms, there are serious financial drawbacks
+for traditional schools. On the other hand, Whitaker (2003) held that the
+appropriate use of technology can help conserve needed institutional
+resources. For example, use of a blended approach that requires less physical
+classroom time from students can financially benefit the institution by
+freeing up classrooms and reducing new building costs (Ruth, 2006).
+Whichever side is correct, the argument may be moot, for all universities are
+in fact using blended approaches to some degree, as f2f education and e-
+learning converge (Bose, 2003).
+ Indeed, e-learning has become a necessity (Ruth, 2006), and it is
+imperative for institutions of higher education to understand the costs of its
+various implementations. While this is difficult due to constantly changing
+technology (Wentling & Park, 2002), various costing models have been
+proposed. These include the University of Virginia Distance Learning Cost
+Model (ICASIT, 2001). Use of the model suggests that costs per course
+section vary widely, but that courses and programs become more cost
+effective with increased enrollment, decreased use of space, and reliance on
+part-time faculty after development of content.
+ Levin and Woo (1981) suggested the following procedure for
+estimating the cost effectiveness of educational technologies: list resources,
+determine costs for each resource based on actual costs or estimated market
+values, and convert costs into analytical categories, such as annualized costs
+and marginal costs. Laurillard (2006) held that a cost-benefit modeling tool
+should define benefits and associated cost parameters, focus on staff time
+costs, represent learner value in terms of time use, represent technology-
+specific benefits and improvements in learning, and support local
+exploration of the cost-benefit relationship. Another costing model
+considers institutional costs of e-learning under three heads: developing
+web-based materials, delivery, and initial overhead costs (Rumble, 2001).
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+5
+Vol. VII, Issue 4
+August 2017
+ None of these models had the objective of analysing the costs of
+replacing all or part of a program that had been taught using traditional
+means with e-learning. The present paper focuses on this issue, including
+how to minimize costs in the transition phase.
+The model for adjusting the level of blended curriculum
+design based on total cost
+The cost-minimization model for adjusting the mixture of e-learning and f2f
+educational procedures takes into consideration some basic assumptions.
+There must be an educational institution offering a program divided into a
+number of courses or learning modules. A number of students registered to
+the program have to attend these courses, some of which are compulsory
+and some optional. The institution has established the required background
+technology to support asynchronous e-learning in an efficient way. We
+assume that there exists a computer center with appropriate web,
+application, and database servers; a learning management system; and
+lessons in electronic format for all the offered courses. The computer center
+has technical staff and programmers for developing the educational
+material. The operational costs for running this e-learning centre and for
+developing the e-learning modules, although significant, are regarded as
+common to all the other educational activities of the institution and does
+not affect directly the cost of the program under consideration. However,
+this setup requires a minimum number of courses to be given by e-learning,
+thus comprising one of the parameters of the model. For better
+implementation of the instructional design of the program, some specific
+courses of it should be offered by f2f. The rest can be offered both as f2f or e-
+learning.
+ The model considers as important some cost factors that are on the
+part of both the student and the institution. These are dedicated either to e-
+learning or to the f2f type of courses/learning modules. For the institution
+only direct costs for the particular program are considered. Other
+operational costs for running the institution are regarded as indifferent for
+the model. Costs considered in the model are course/module dependent. For
+a typical course, the cost factors are shown in Table 1.
+
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+6
+Vol. VII, Issue 4
+August 2017
+Table 1: Cost factors encountered in the model
+Cost
+Factor
+Name
+Burden Learning
+Type
+Description
+C 1 E-tutor payment Institution e-Learning Gross payment for the e-
+tutor in a typical course,
+expressed in € per hour.
+C 2 Instructor's
+payment
+Institution f2f Gross payment for the
+instructor in a f2f
+course. Expressed in €
+per hour.
+C 3 Student fee Student e-Learning Fee determined by the
+license fee if the e-
+Learning course/module
+is obtained by leasing or
+as the depreciated
+amount that the
+institution has paid for
+the development of the
+course.
+C 4 Educational
+material
+Institution f2f Fee for distribution of
+printed books,
+handouts, etc. to
+students. This is a
+variable cost dependent
+on the particular
+module.
+C 5 Internet
+connection/
+communication
+costs
+Student e-Learning Cost for Internet
+connection per lesson
+hour. (Only applied for
+synchronous and
+asynchronous e-
+learning, not for
+computer based
+learning or training).
+C 6 Daily expenses Student f2f Transportation and
+other personal costs –
+dependent on the hours
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+7
+Vol. VII, Issue 4
+August 2017
+of f2f classes.
+C 7 Opportunity cost Student f2f Only for f2f. No cost for
+asynchronous e-
+learning.
+
+ For implementation of the model, a number of parameters are
+needed to express the information required and the restrictions of the
+problem. These are presented in Table 2.
+
+Table 2: The parameters of the model
+Parameter Description
+k Number of courses to be offered either as f2f or as e-learning.
+min
+k
+Minimum number of courses/modules to be offered via e-
+learning.
+i
+n Number of students registered for the course/module i . We
+assume that
+i
+n is such that only one class is required.
+f
+i
+h
+Total hours for attending a course/module if it is offered in f2f
+environment.
+e
+i
+h
+Total hours for attending a course/module if it is offered via
+e-learning
+i
+t Number of e-tutors required, depending on the particular e-
+learning course/module i .
+
+ The model is formulated as an "assignment problem," which is one
+of the fundamental optimization problems in the field of operational
+research (Munkres, 1957, Algorithms and Theory of Computation Handbook,
+1999). An assignment problem attempts to assign workers to tasks,
+considering a cost function for each particular assignment. In our case, the
+workers are the courses/modules and the task is the association of a
+course/module to the e-learning or the f2f method of delivering it. The cost
+involved in the two cases is the cost for both students and the institution, as
+it is estimated for each particular course/module, when its characteristics
+described in Table 1 are taken into account. The assignment should
+minimize the total cost function for all the courses/modules.
+ Following the terminology and the formulation of the assignment
+problem, we define
+i
+x as a binary variable to distinguish whether the
+course/module should be offered f2f or with e-learning method. If the
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+8
+Vol. VII, Issue 4
+August 2017
+course/module i is offered as e-learning, then 1
+i
+x  ; otherwise, for the case
+of f2f, 0
+i
+x  .
+ In each course i , a number of
+i
+n students may be registered, no
+matter if this course is defined as compulsory or optional. The total number
+of teaching hours in e-learning and f2f cases is represented by ,
+e f
+i i
+h h
+respectively.
+ The total cost for both students and institution is analyzed as
+follows.
+ For the f2f case, the cost put on the part of the institution, say f
+i
+C ,
+is the cost for instructors' payroll, i.e.,
+2
+f
+i
+h c , and the cost for production and
+distribution of educational materials such as books, handouts, etc., which is
+proportional to the number of students, i.e.,
+4 i
+n c . The cost for the student is
+analyzed as an average amount for daily expenses (transportation, food, etc.)
+plus the opportunity cost (measured in an hourly basis), which is
+6 7
+f
+i i
+n c h c  . From the above, the total cost that derives for the f2f part is
+2 4 6 7
+f f f
+i i i i i
+C h c n c n c h c     .
+ For the case of e-learning (asynchronous), the cost which overloads
+a student is the cost for Internet/communication services measured by the
+hours spent in front of the computer, i.e.,
+5
+e
+i
+h c , plus the special fee for
+entering the e-learning course
+3 i
+n c (and maybe to attend an orientation
+course). That is,
+3 5
+e
+i i
+n c h c  . The cost for the institution is the cost for the
+e-tutors for the total hours of teaching and supervision, i.e.,
+1
+e
+i i
+h t c (we
+assume that an e-learning class should have such a number of students that
+will require
+i
+t e-tutors for the whole class). The cost for the e-learning
+module is now set to
+1 3 5
+e e e
+i i i i i
+C h t c n c h c    .
+ As there is no initial information available about the distribution of
+the courses/modules between f2f and e-learning, and the model is free to be
+assigned to both instructional methods, there must be a restriction for the
+minimum level of e-learning involvement expressing the need for the
+institution to support its setup for e-learning. This is expressed by the
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+9
+Vol. VII, Issue 4
+August 2017
+formula
+min
+1
+k
+i
+i
+x k
+
+  , in which the parameter
+min
+k , (
+min i
+k n  ) is known at
+the beginning of the assignment process.
+
+ Considering all the above, the following linear integer programming
+model is derived.
+
+ 
+1
+min
+1
+2 4 6 7
+1 3 5
+min ( (1 ))
+. .
+0,1
+( )
+k
+e f
+i i i i
+i
+k
+i
+i
+i
+f f f
+i i i i
+e e e
+i i i i i
+C C x C x
+s t
+x k
+x
+C h c n c c h c
+C h t c n c h c
+
+
+  
+
+
+   
+  
+
+ (1)
+
+ In model (1), , 1,..,
+i
+x i k  are unknown variables to be estimated
+and, according to the minimization procedure, the total cost C is to be
+formed accordingly. If 0
+i
+x  , i.e., when course/module i is assigned to
+f2f, the term e
+i i
+C x will be zero, so only the cost f
+i
+C defined in the second
+term will be considered. Accordingly, when 1
+i
+x  (course/module i is
+assigned to e-learning), the second term (1 )
+f
+i i
+C x  will be zero and only
+the corresponding to e-learning cost e
+i
+C will be added to the total cost.
+When model (1) is solved, the distribution between f2f and e-learning that
+minimizes the total cost for both students and the institution is derived.
+An application of the model
+To demonstrate the model, in this section we present an application
+concerning a 2 years postgraduate program (3 semesters course studies + 1
+semester dissertation writing) in the field of business administration and
+economics offered by a Greek university. That particular program consists of
+17 different courses/modules among which are Business Statistics,
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+10
+Vol. VII, Issue 4
+August 2017
+Managerial Economics, Macroeconomics, Management and Marketing,
+Project Management, Business Strategy & Policy, Financial Accounting,
+Strategic IS, Human Resources Management, etc. Twelve of the offered
+courses/modules are compulsory and the other 5 are optional, from which
+students have to choose three courses/modules. For each one of the
+modules a number of students is registered. In order an elective course to be
+offered a minimum of 10 students is required to select it. For the compulsory
+modules the number of students is 35.
+ The required data and the parameters of the model are presented in
+Table 3.
+Table 3: Data and the parameters of the model
+Course/
+Module he hf n t C1 C2 C3 C4 C5 C6 C7
+1 18 18 35 2 810 1530 120 60 42 48 53
+2 15 21 35 2 675 1785 130 60 51 41 62
+3 21 15 35 2 945 1275 75 30 34 55 44
+4 19 36 35 2 855 3060 80 120 37 26 106
+5 15 21 35 2 675 1785 90 60 48 41 62
+6 20 21 35 2 900 1785 100 60 37 41 62
+7 15 10 35 2 675 850 110 45 49 85 30
+8 24 12 35 2 1080 1020 120 30 31 69 35
+9 14 18 35 1 630 1530 90 60 52 48 53
+10 18 18 35 1 810 1530 80 35 40 46 53
+11 36 30 35 1 1620 2550 110 40 21 28 89
+12 18 18 35 1 810 1530 100 60 41 48 53
+13 8 10 19 2 360 850 90 100 90 90 30
+14 10 12 21 2 450 1020 140 120 77 77 35
+15 10 10 18 2 450 850 75 30 71 83 30
+16 12 12 28 2 540 1020 90 55 60 71 35
+17 14 12 19 2 630 1020 80 60 51 72 35
+
+ For the estimation of the cost factors involved, the following
+arrangements have been made.
+ The e-tutor payment (cost factor C1) is estimated at up to 45€ per
+hour (according to the average monthly wage of an e-tutors in
+Greece).
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+11
+Vol. VII, Issue 4
+August 2017
+ The instructor payment in f2f (cost factor C2) is estimated at 85€ per
+hour (according to the average monthly wage of an instructor in
+Greece).
+ The cost (fee) for entering an e-learning course/module (cost factor
+C3) depends on the particular course and its duration. It ranges
+between 75€ and 140€.
+ The cost for educational material, C4, depends on the size and the
+type of the course/module. It ranges between 30€ and 120€.
+ The cost category C5 represents mostly the Internet connection fees
+that a student must pay in order to have full access to the distance/
+e-learning environment of the university. This depends on the hours
+required for attending an e-learning course/module.
+ Cost category C6 consists of the daily expenses that a student
+following a traditional course of study will face. This last category
+includes costs like transportation or monthly rental of a house-
+apartment in case the university is located far from his/her
+hometown etc and is calculated on an hourly basis.
+ Finally, cost category C7 represents the value of lost productivity or
+in other words the lost remunerated productivity of students who
+potentially would enter the job market if they did not continue their
+studies (we assume that an employed graduate student will earn at
+least the minimum wage for this case, so in an 8 hour workday we
+can calculate his hourly opportunity cost which is approximately
+€2.95). It must be pointed out that opportunity cost to those who
+study remotely and in an asynchronous base is considered to be
+close to zero, if not zero, as these students study from their home
+and may be able to generate some income in addition to following a
+course of studies remotely.
+ All numbers of the above cost categories are based on equivalent
+figures that are reported in several Greek studies (Ioakimidis, 2007) and also
+from the Greek ministry of Education, Research and Religious Affairs (2012).
+Model (1) is solved by using the data of Table 3 and by setting . The obtained
+results are presented in Table 4. According to these results, five
+courses/modules (1, 3, 7, 8, and 17) are chosen to be offered as f2f and the
+rest as e-learning.
+
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+12
+Vol. VII, Issue 4
+August 2017
+Table 4: The resulting distribution for the courses/modules of the
+programme
+Code E-Learning / f2f
+1 f2f
+2 e-learning
+3 f2f
+4 e-learning
+5 e-learning
+6 e-learning
+7 f2f
+8 f2f
+9 e-learning
+10 e-learning
+11 e-learning
+12 e-learning
+13 e-learning
+14 e-learning
+15 e-learning
+16 e-learning
+17 f2f
+
+ The total cost for all the courses/ modules is set to C = 421.242€,
+while if all the courses/modules were chosen as f2f, the total cost would be
+579.385€. The cost if all courses were offered via e-learning would be
+450.217€.
+Conclusions
+Even if universities and colleges are taking a sober approach to the
+implementation of technological means of learning, distance education,
+especially in the form of e-learning, has generated a revolution in many of
+the ways in which education is delivered, without fundamentally changing
+the very nature of learning itself. In fact, distance learning works best when
+it enters the production function without changing pre-existing educational
+models: the tools have changed, but the outcome remains fundamentally the
+same. It should be strongly affirmed that e-learning and classroom-based
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+13
+Vol. VII, Issue 4
+August 2017
+methods of training are not necessarily alternatives to each other and may
+be complementary. While for suppliers of training, greater use of e-learning
+goes with less use of classroom-based methods, for users this is much less
+the case (Cedefop, 2001).
+ One should never assume that change must be absolute. For each
+program that has the potential to be offered online, a "mix and match"
+approach may be taken, combining the most suitable aspects of traditional
+and electronic learning respectively. As Owen et al. (2004) state, "it is
+possible to mimic the richness of a traditional in-class experience when we
+move to online course applications but ... we need to know exactly what is
+being lost (or gained) with respect to educational outcomes."
+ The model described in this paper could serve as a decision making
+aid as well, especially in the case when a potential university manager has to
+evaluate university programs or courses offered in different environments
+aiming cost minimization.
+References
+[1]. Algorithms and Theory of Computation Handbook, CRC Press LLC,
+(1999), "assignment problem", in Dictionary of Algorithms and Data
+Structures, in Vreda Pieterse and Paul E. Black, eds. 16 May 2005.
+Available from: https://www.nist.gov/dads/HTML/assignment.html
+[2]. Y. Bentley, H. Selassie & E. Parkin, Evaluation of a global blended
+learning MBA programme. The International Journal of
+Management Education ,10 (2012) 75–87
+[3]. K. Bose, An e-learning experience—A written analysis based on my
+experience in an e-learning pilot project. Campus-Wide Information
+Systems, 20(5) 2003, 193-199.
+[4]. Cedefop. E-learning and training in Europe: A survey into the use of
+e-learning in training and professional development in the
+European Union. Cedefop Reference Series, 26. 2001 Luxembourg:
+Office for Official Publications of the European Communities.
+[5]. W.S.Chen, & A.Y.T.Yao, An empirical evaluation of critical factors
+influencing learner satisfaction in blended learning: A pilot study.
+Universal Journal of Educational Research 4(7) 2016: 1667-1671. DOI:
+10.13189/ujer.2016.040719
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+14
+Vol. VII, Issue 4
+August 2017
+[6]. C. Ess, Liberal arts and distance education: Can Socratic virtue
+(arête) and Confucius' exemplary person (junzi) be taught online?
+Arts & Humanities in Higher Education, 2(2) 2003, 117-137.
+[7]. G.A. Gunter, "Making a difference: Using emerging technologies and
+teaching strategies to restructure an undergraduate technology
+course for pre-service teachers". Educational Media International,
+38(1) 2001, 13–20
+[8]. M. Hodgkinson, Student perceptions of face-to-face induction for
+on-line programmes, Quality Assurance in Education, 10(4) 2002,
+207-212.
+[9]. ICASIT Develops Cost Model for Distance Learning, The Mason
+Gazette https://gazette.gmu.edu/articles/2427 International Center
+for Applied Studies in Information Technology (ICASIT), (2001)
+[10].M. Ioakimidis "Online or On Campus: A Student Tertiary Education
+Cost Model Comparing the Two, with a Quality Proviso". Higher
+Education in Europe, UNESCO-CEPES (The European Centre for
+Higher Education), Vol. 32, Issue 2 & 3, October 2007, pp. 249-260.
+[11]. M. Ioakimidis, Y. Smirlis, J. Hassid, "Analysing costs of educational
+services for universities and e-universities: A further analysis on the
+student point of view", in Jόrgen Backhaus, Raul Eamets, Diana
+Eerma (Eds.) Economics of Education: Issues of Transition and
+Transformation 2011
+[12]. N. Jones, & J. O'Shea, Challenging hierarchies: the impact of e-
+learning. Higher Education 48 2004, 379-395.
+[13]. C. Keller & L. Cenerud, Students' perceptions of e-learning in
+university education, Journal of Educational Media, 27(1/2) 2002, 55-
+67.
+[14]. D.G. LaBay & C.L. Comm, A case study using gap analysis to assess
+distance learning versus traditional course delivery, The
+International Journal of Educational Management, 17(7) 2003, 312-
+317.
+[15]. D. Laurillard, D, Modelling benefits-oriented costs for technology
+enhanced learning. Higher Education, 54 2006, 21-39.
+[16]. H.M. Levin & L. Woo, An evaluation of the costs of
+computer-assisted instruction. Economics of Education Review, 1(1)
+1981, 1-25.
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+15
+Vol. VII, Issue 4
+August 2017
+[17]. G. Linkaityte, A. Valiuskeviciute, L. Cubajevaite, & L. Zilinskaite, E
+learning as a mean for transition of Higher education towards the
+paradigm of lifelong learning. Proceedings EDEN annual
+conference Helsinki, 2005
+[18].J. M. McInnerney & T. S.Roberts, Online learning: Social interaction
+and the creation of a sense of community. Educational Technology
+& Society, 7(3) 2004, 73–81.
+[19]. B. Means, Y. Toyama, R. Murphy, M. Bakia, & K. Jones,
+Evaluation of evidence-based practices in online learning: A meta-
+analysis and review of online learning studies. DC: Washington: U.S.
+Department of Education, 2010. Available from: http://www2.ed.
+gov/rschstat/eval/tech/evidence-based-practices/finalreport.pdf
+[20]. J. Munkres, Algorithms for the Assignment and
+Transportation Problems. Journal of the Society for Industrial and
+Applied Mathematics Vol. 5, No. 1957, pp. 32-38
+[21]. M. Narodowski, M. Nores & L. Manolakis, Policies in education
+concerning new information technologies: learning from Latin
+America and Argentina, Education, Communication & Information,
+2(2/3) 2002, 181-214.
+[22]. B. Oakley, 'Will universities survive the knowledge
+economy?', Interface, IEEE Newsletter, April 1997, p. 72.
+[23]. O. Peters, Learning and Teaching in Distance Education
+1998, London, Kogan Page.
+[24]. K. Precel, Y. Eshet-Alkalai, Y. Alberton, Pedagogical and
+design aspects of a blended learning course. The International
+Review of Research in Open and Distributed Learning, 10(2) 2009,
+Available from:
+http://www.irrodl.org/index.php/irrodl/article/view/618/1221
+[25]. F. B. Raymond, Delivering distance education through
+technology: a pioneer's experience, Campus-Wide Information
+Systems, 17(1) 2000, 49-55.
+[26]. G. Rumble, The costs and costing of networked learning.
+JALN, 5(2) 2001, 75-96.
+[27]. T. Russo, & S. Benson, Learning with invisible others:
+Perceptions of online presence and their relationship to cognitive
+and affective learning, Educational Technology & Society, 8 (1) 2005,
+54-62.
+Determining the Level of Blended e-Learning Using a Cost Optimization Model
+
+16
+Vol. VII, Issue 4
+August 2017
+[28]. J. R. Simmons, Distance learning: Education or economics?
+International Journal of Value-Based Management, 14 2001, 147-159.
+[29]. T.L. Wentling, & J.H. Park, Cost analysis of e-Learning: A
+case study of a university program. In T. M. Egan, & S.A Lynham,
+(Eds.). Proceedings of the Academy of Human Resource
+Development 2002 (pp 27-4), Bowling Green, OH: Academy of
+Human Resource Development.
+[30]. G. Whitaker, Jr., Cost effective use of technology in
+teaching: Challenges and Opportunities 2003. Available from
+https://net.educause.edu/ir/library/pdf/ffp9806.pdf

@@ -100,270 +100,271 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "    <p></p>\n" +
     "\n" +
-    "	<div id='kb-config-container'>\n" +
+    "    <div id='kb-config-container'>\n" +
     "\n" +
-    "	    <keyboardeditor name=\"0\" current=\"current\"></keyboardeditor>\n" +
-    "	    <keyboardeditor name=\"1\" current=\"current\"></keyboardeditor>\n" +
-    "	    <keyboardeditor name=\"2\" current=\"current\"></keyboardeditor>\n" +
-    "	    <keyboardeditor name=\"3\" current=\"current\"></keyboardeditor>\n" +
-    "	    <keyboardeditor name=\"4\" current=\"current\"></keyboardeditor>\n" +
+    "        <keyboardeditor name=\"0\" current=\"current\"></keyboardeditor>\n" +
+    "        <keyboardeditor name=\"1\" current=\"current\"></keyboardeditor>\n" +
+    "        <keyboardeditor name=\"2\" current=\"current\"></keyboardeditor>\n" +
+    "        <keyboardeditor name=\"3\" current=\"current\"></keyboardeditor>\n" +
+    "        <keyboardeditor name=\"4\" current=\"current\"></keyboardeditor>\n" +
     "\n" +
-    "	    <table class=\"kb-config-table\">\n" +
-    "	        <thead>\n" +
-    "	            <th>\n" +
-    "	                Properties\n" +
-    "	            </th>\n" +
-    "	            <th>\n" +
-    "	                Data\n" +
-    "	            </th>\n" +
-    "	        </thead>\n" +
-    "	        <tbody>\n" +
-    "	            <tr>\n" +
-    "	                <td class=\"kb-config-td\">\n" +
-    "	                    <div class=\"kb-config-editor\">\n" +
-    "	                        <form class='form-horizontal'>\n" +
+    "        <table class=\"kb-config-table\">\n" +
+    "            <thead>\n" +
+    "                <th>\n" +
+    "                    Properties\n" +
+    "                </th>\n" +
+    "                <th>\n" +
+    "                    Data\n" +
+    "                </th>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr>\n" +
+    "                    <td class=\"kb-config-td\">\n" +
+    "                        <div class=\"kb-config-editor\">\n" +
+    "                            <form class='form-horizontal'>\n" +
     "\n" +
-    "	                            <div class='control-group'>\n" +
-    "	                                <label class='control-label' for=\"kb-config-name\">Name:</label>\n" +
-    "	                                <div class='controls'>\n" +
-    "	                                    <input id=\"kb-config-name\" class=\"kb-config-name\" type=\"text\" ng-model=\"keyboards.getLayout(current).keySet.label\"/>\n" +
-    "	                                </div>\n" +
-    "	                            </div>\n" +
+    "                                <div class='control-group'>\n" +
+    "                                    <label class='control-label' for=\"kb-config-name\">Name:</label>\n" +
+    "                                    <div class='controls'>\n" +
+    "                                        <input id=\"kb-config-name\" class=\"kb-config-name\" type=\"text\" ng-model=\"keyboards.getLayout(current).keySet.label\"/>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
     "\n" +
-    "	                            <div class='control-group'>\n" +
-    "	                                <label class='control-label' for=\"kb-config-kbtype\">Submitted By:</label>\n" +
-    "	                                <div class='controls'>\n" +
-    "	                                    <div style='padding:5px 7px;'>{{keyboards.getLayout(current).keySet.author}}</div>\n" +
-    "	                                </div>\n" +
-    "	                            </div>\n" +
+    "                                <div class='control-group'>\n" +
+    "                                    <label class='control-label' for=\"kb-config-kbtype\">Submitted By:</label>\n" +
+    "                                    <div class='controls'>\n" +
+    "                                        <div style='padding:5px 7px;'>{{keyboards.getLayout(current).keySet.author}}</div>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
     "\n" +
-    "	                            <div class='control-group'>\n" +
-    "	                                <label class='control-label' for=\"kb-config-kbtype\">More Info:</label>\n" +
-    "	                                <div class='controls'>\n" +
-    "	                                	<div ng-show='!isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>None</div>\n" +
-    "	                                	<div ng-show='isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>\n" +
-    "	                                		<a href='{{keyboards.getLayout(current).keySet.moreInfoUrl}}'>{{keyboards.getLayout(current).keySet.moreInfoText}}</a>\n" +
-    "	                                	</div>\n" +
-    "	                                </div>\n" +
-    "	                            </div>\n" +
+    "                                <div class='control-group'>\n" +
+    "                                    <label class='control-label' for=\"kb-config-kbtype\">More Info:</label>\n" +
+    "                                    <div class='controls'>\n" +
+    "                                        <div ng-show='!isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>None</div>\n" +
+    "                                        <div ng-show='isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>\n" +
+    "                                            <a href='{{keyboards.getLayout(current).keySet.moreInfoUrl}}'>{{keyboards.getLayout(current).keySet.moreInfoText}}</a>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
     "\n" +
-    "	                        </form>\n" +
-    "	                    </div>\n" +
-    "	                </td>\n" +
-    "	                <td class=\"kb-config-td\">\n" +
+    "                            </form>\n" +
+    "                        </div>\n" +
+    "                    </td>\n" +
+    "                    <td class=\"kb-config-td\">\n" +
     "\n" +
-    "	                    <div class=\"kb-config-editor\">\n" +
-    "	                        <form class='form-horizontal'>\n" +
+    "                        <div class=\"kb-config-editor\">\n" +
+    "                            <form class='form-horizontal'>\n" +
     "\n" +
-    "	                            <div class='control-group'>\n" +
-    "	                                <label class='control-label'>Load/Save:</label>\n" +
-    "	                                <div class='controls'>\n" +
-    "	                                    <button class=\"kb-config-import btn\" ng-click=\"showImportDialog()\">Import</button>\n" +
-    "	                                    <button class=\"kb-config-export btn\" ng-click=\"showExportDialog()\">Export</button>\n" +
-    "	                                </div>\n" +
-    "	                            </div>\n" +
+    "                                <div class='control-group'>\n" +
+    "                                    <label class='control-label'>Load/Save:</label>\n" +
+    "                                    <div class='controls'>\n" +
+    "                                        <button class=\"kb-config-import btn\" ng-click=\"showImportDialog()\">Import</button>\n" +
+    "                                        <button class=\"kb-config-export btn\" ng-click=\"showExportDialog()\">Export</button>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
     "\n" +
-    "	                            <div class='control-group'>\n" +
-    "	                                <label class='control-label' for=\"kb-config-select-list\">Preset:</label>\n" +
-    "	                                <div class='controls'>\n" +
-    "	                                    <select id=\"kb-config-select-list\" class=\"kb-config-select-list\">\n" +
-    "	                                        <option value=\"none\">[Select Layout]</option>\n" +
-    "	                                        <optgroup label=\"US-International Keyboards\">\n" +
-    "	                                            <option value=\"standard.abcdef\">ABCDEF</option>\n" +
-    "	                                            <option value=\"standard.acemak1\">Acemak 1</option>\n" +
-    "	                                            <option value=\"standard.aoeyk\">AOEYK</option>\n" +
-    "	                                            <!--<option value=\"standard.ashley-gudyr\">ASHLEY-GUDYR</option>-->\n" +
-    "	                                            <option value=\"standard.anglian\">Anglian</option>\n" +
-    "	                                            <option value=\"standard.arensito\">Arensito</option>\n" +
-    "	                                            <option value=\"standard.asset\">Asset</option>\n" +
-    "	                                            <option value=\"standard.balance-twelve\">Balance Twelve</option>\n" +
-    "	                                            <option value=\"standard.bvofrak\">BvoFRak EN V0.5</option>\n" +
-    "	                                            <option value=\"standard.bvofrak1\">BvoFRak V1.0 FR</option>\n" +
-    "	                                            <option value=\"standard.eaton\">EAton</option>\n" +
-    "	                                            <option value=\"standard.capewell\">Capewell</option>\n" +
-    "	                                            <option value=\"standard.carpalxq\">CarpalxQ</option>\n" +
-    "	                                            <option value=\"standard.chin\">CHIN</option>\n" +
-    "	                                            <option value=\"standard.chin-programmer\">CHIN-Programmer</option>\n" +
-    "	                                            <option value=\"standard.colemak\">Colemak</option>\n" +
-    "	                                            <option value=\"standard.colemakuk\">Colemak Mod UK</option>\n" +
-    "	                                            <option value=\"standard.colemakjph\">Colemak Mod JPH</option>\n" +
-    "												<option value=\"standard.hieamtsrn\">HIEAMTSRN</option>\n" +
-    "												<option value=\"standard.jppe\">JPPE</option>\n" +
-    "												<option value=\"standard.kaeteker\">Kaeteker's Modified Dvorak</option>\n" +
-    "	                                            <option value=\"standard.klausler\">Klausler</option>\n" +
-    "	                                            <option value=\"standard.minimak8key\">Minimak 8-key</option>\n" +
-    "	                                            <option value=\"standard.minimak12key\">Minimak 12-key</option>\n" +
-    "	                                            <option value=\"standard.mtgap\">MTGAP</option>\n" +
-    "	                                            <option value=\"standard.neo2\">Neo 2 (v1)</option>\n" +
-    "	                                            <option value=\"standard.neo2_new\">Neo 2 (v2)</option>\n" +
-    "	                                            <option value=\"standard.norman\">Norman</option>\n" +
-    "	                                            <!--<option value=\"standard.nrstm\">NRSTM</option>-->\n" +
-    "	                                            <option value=\"standard.oiseau\">OISEAU</option>\n" +
-    "	                                            <option value=\"standard.ohdvorakl\">One-handed Dvorak (Left)</option>\n" +
-    "	                                            <option value=\"standard.ohdvorakr\">One-handed Dvorak (Right)</option>\n" +
-    "	                                            <option value=\"standard.colemakss\">Programmer Colemak</option>\n" +
-    "	                                            <option value=\"standard.programmerDvorak\">Programmer Dvorak</option>\n" +
-    "												<option value=\"standard.qgmlwy\">QGMLWY</option>\n" +
-    "	                                            <option value=\"standard.qwerfj\">QWERFJ</option>\n" +
-    "	                                            <option value=\"standard.qwerty\">QWERTY</option>\n" +
-    "	                                            <option value=\"standard.qwerty-programmer\">QWERTY-Programmer</option>\n" +
-    "	                                            <option value=\"standard.qwertymod\">QWERTY: Top Row +Thumbs</option>\n" +
-    "	                                            <option value=\"standard.qwertywm\">QWERTY: Wide Mod</option>\n" +
-    "	                                            <option value=\"standard.qwpr\">QWPR</option>\n" +
-    "	                                            <option value=\"standard.russian\">Russian</option>\n" +
-    "	                                            <option value=\"standard.simplifiedDvorak\">Simplified Dvorak</option>\n" +
-    "	                                            <option value=\"standard.dvorakmb\">Simplified Dvorak w/ Caps as Backspace</option>\n" +
-    "	                                            <option value=\"standard.dvorakmod\">Simplified Dvorak UI Swap w/ Caps as Backspace</option>\n" +
-    "	                                            <option value=\"standard.spanish-dvorak\">Spanish Dvorak</option>\n" +
-    "	                                            <option value=\"standard.stndc\">STNDC</option>\n" +
-    "	                                            <option value=\"standard.tarmak1\">Tarmak 1</option>\n" +
-    "	                                            <option value=\"standard.tarmak2\">Tarmak 2</option>\n" +
-    "	                                            <option value=\"standard.tarmak3\">Tarmak 3</option>\n" +
-    "	                                            <option value=\"standard.tarmak4\">Tarmak 4</option>\n" +
-    "	                                            <option value=\"standard.typehack\">TypeHacK</option>\n" +
-    "	                                            <option value=\"standard.typematrix\">Typematrix</option>\n" +
-    "	                                            <option value=\"standard.vukeys\">Vu Keys</option>\n" +
-    "	                                            <option value=\"standard.workman\">Workman</option>\n" +
-    "	                                        </optgroup>\n" +
-    "	                                        <optgroup label=\"European Keyboards\">\n" +
-    "	                                        	<option value=\"european.azerty\">AZERTY</option>\n" +
-    "	                                        	<option value=\"european.bepo\">BÉPO</option>\n" +
-    "	                                        	<option value=\"european.bvofrak1\">BvoFRak V1.0 FR</option>\n" +
-    "	                                        	<option value=\"european.colemak_hu\">Colemak HU</option>\n" +
-    "	                                            <option value=\"european.germandvorak2\">German Dvorak Type II</option>\n" +
-    "	                                            <option value=\"european.qwerty\">QWERTY</option>\n" +
-    "	                                            <option value=\"european.english-varient\">QWERTY (English Varient)</option>\n" +
-    "	                                            <option value=\"european.qwerty-spanish\">QWERTY (Spanish)</option>\n" +
-    "	                                            <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
-    "	                                        </optgroup>\n" +
-    "	                                        <optgroup label=\"Ergodox Keyboards\">\n" +
-    "	                                        	<option value=\"ergodox.colemak\">Ergodox Colemak (v1)</option>\n" +
-    "	                                        	<option value=\"ergodox.colemak2\">Ergodox Colemak (v2)</option>\n" +
-    "	                                        	<option value=\"ergodox.colemakjjt2\">Ergodox Colemak (JJT)</option>\n" +
-    "	                                        	<option value=\"ergodox.colemakcub\">Ergodox Colemak/Cub</option>\n" +
-    "	                                        	<option value=\"ergodox.gelatin\">Ergodox Gelatin</option>\n" +
-    "	                                        	<option value=\"ergodox.qgmlwbcub\">Ergodox QGMLWB/Cub</option>\n" +
-    "	                                        	<option value=\"ergodox.qgmlwycub\">Ergodox QGMLWY/Cub</option>\n" +
-    "	                                        	<option value=\"ergodox.qwerty\">Ergodox QWERTY</option>\n" +
-    "	                                        	<option value=\"ergodox.neo2_inprogress\">Ergodox Neo 2 (in progress)</option>\n" +
-    "	                                        	<option value=\"ergodox.norman\">Ergodox Norman</option>\n" +
-    "	                                        	<option value=\"ergodox.workman\">Ergodox Workman for Programmers with cub@uanic Modifications</option>\n" +
-    "	                                        	<option value=\"ergodox.kinesis-advantage-colemak\">Kinesis Advantage Colemak</option>\n" +
-    "	                                        </optgroup>\n" +
+    "                                <div class='control-group'>\n" +
+    "                                    <label class='control-label' for=\"kb-config-select-list\">Preset:</label>\n" +
+    "                                    <div class='controls'>\n" +
+    "                                        <select id=\"kb-config-select-list\" class=\"kb-config-select-list\">\n" +
+    "                                            <option value=\"none\">[Select Layout]</option>\n" +
+    "                                            <optgroup label=\"US-International Keyboards\">\n" +
+    "                                                <option value=\"standard.abcdef\">ABCDEF</option>\n" +
+    "                                                <option value=\"standard.acemak1\">Acemak 1</option>\n" +
+    "                                                <option value=\"standard.aoeyk\">AOEYK</option>\n" +
+    "                                                <!--<option value=\"standard.ashley-gudyr\">ASHLEY-GUDYR</option>-->\n" +
+    "                                                <option value=\"standard.anglian\">Anglian</option>\n" +
+    "                                                <option value=\"standard.arensito\">Arensito</option>\n" +
+    "                                                <option value=\"standard.asset\">Asset</option>\n" +
+    "                                                <option value=\"standard.balance-twelve\">Balance Twelve</option>\n" +
+    "                                                <option value=\"standard.bvofrak\">BvoFRak EN V0.5</option>\n" +
+    "                                                <option value=\"standard.bvofrak1\">BvoFRak V1.0 FR</option>\n" +
+    "                                                <option value=\"standard.eaton\">EAton</option>\n" +
+    "                                                <option value=\"standard.capewell\">Capewell</option>\n" +
+    "                                                <option value=\"standard.carpalxq\">CarpalxQ</option>\n" +
+    "                                                <option value=\"standard.chin\">CHIN</option>\n" +
+    "                                                <option value=\"standard.chin-programmer\">CHIN-Programmer</option>\n" +
+    "                                                <option value=\"standard.colemak\">Colemak</option>\n" +
+    "                                                <option value=\"standard.colemakuk\">Colemak Mod UK</option>\n" +
+    "                                                <option value=\"standard.colemakjph\">Colemak Mod JPH</option>\n" +
+    "                                                <option value=\"standard.hieamtsrn\">HIEAMTSRN</option>\n" +
+    "                                                <option value=\"standard.jppe\">JPPE</option>\n" +
+    "                                                <option value=\"standard.kaeteker\">Kaeteker's Modified Dvorak</option>\n" +
+    "                                                <option value=\"standard.klausler\">Klausler</option>\n" +
+    "                                                <option value=\"standard.minimak8key\">Minimak 8-key</option>\n" +
+    "                                                <option value=\"standard.minimak12key\">Minimak 12-key</option>\n" +
+    "                                                <option value=\"standard.mtgap\">MTGAP</option>\n" +
+    "                                                <option value=\"standard.neo2\">Neo 2 (v1)</option>\n" +
+    "                                                <option value=\"standard.neo2_new\">Neo 2 (v2)</option>\n" +
+    "                                                <option value=\"standard.norman\">Norman</option>\n" +
+    "                                                <!--<option value=\"standard.nrstm\">NRSTM</option>-->\n" +
+    "                                                <option value=\"standard.oiseau\">OISEAU</option>\n" +
+    "                                                <option value=\"standard.ohdvorakl\">One-handed Dvorak (Left)</option>\n" +
+    "                                                <option value=\"standard.ohdvorakr\">One-handed Dvorak (Right)</option>\n" +
+    "                                                <option value=\"standard.colemakss\">Programmer Colemak</option>\n" +
+    "                                                <option value=\"standard.programmerDvorak\">Programmer Dvorak</option>\n" +
+    "                                                <option value=\"standard.qgmlwy\">QGMLWY</option>\n" +
+    "                                                <option value=\"standard.qwerfj\">QWERFJ</option>\n" +
+    "                                                <option value=\"standard.qwerty\">QWERTY</option>\n" +
+    "                                                <option value=\"standard.qwerty-programmer\">QWERTY-Programmer</option>\n" +
+    "                                                <option value=\"standard.qwertymod\">QWERTY: Top Row +Thumbs</option>\n" +
+    "                                                <option value=\"standard.qwertywm\">QWERTY: Wide Mod</option>\n" +
+    "                                                <option value=\"standard.qwpr\">QWPR</option>\n" +
+    "                                                <option value=\"standard.russian\">Russian</option>\n" +
+    "                                                <option value=\"standard.simplifiedDvorak\">Simplified Dvorak</option>\n" +
+    "                                                <option value=\"standard.dvorakmb\">Simplified Dvorak w/ Caps as Backspace</option>\n" +
+    "                                                <option value=\"standard.dvorakmod\">Simplified Dvorak UI Swap w/ Caps as Backspace</option>\n" +
+    "                                                <option value=\"standard.spanish-dvorak\">Spanish Dvorak</option>\n" +
+    "                                                <option value=\"standard.stndc\">STNDC</option>\n" +
+    "                                                <option value=\"standard.tarmak1\">Tarmak 1</option>\n" +
+    "                                                <option value=\"standard.tarmak2\">Tarmak 2</option>\n" +
+    "                                                <option value=\"standard.tarmak3\">Tarmak 3</option>\n" +
+    "                                                <option value=\"standard.tarmak4\">Tarmak 4</option>\n" +
+    "                                                <option value=\"standard.typehack\">TypeHacK</option>\n" +
+    "                                                <option value=\"standard.typematrix\">Typematrix</option>\n" +
+    "                                                <option value=\"standard.vukeys\">Vu Keys</option>\n" +
+    "                                                <option value=\"standard.workman\">Workman</option>\n" +
+    "                                            </optgroup>\n" +
+    "                                            <optgroup label=\"European Keyboards\">\n" +
+    "                                                <option value=\"european.azerty\">AZERTY</option>\n" +
+    "                                                <option value=\"european.bepo\">BÉPO</option>\n" +
+    "                                                <option value=\"european.bvofrak1\">BvoFRak V1.0 FR</option>\n" +
+    "                                                <option value=\"european.germandvorak2\">German Dvorak Type II</option>\n" +
+    "                                                <option value=\"european.qwerty\">QWERTY</option>\n" +
+    "                                                <option value=\"european.english-varient\">QWERTY (English Varient)</option>\n" +
+    "                                                <option value=\"european.qwerty-spanish\">QWERTY (Spanish)</option>\n" +
+    "                                                <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
+    "                                            </optgroup>\n" +
+    "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
+    "                                                <option value=\"ergodox.colemak\">Ergodox Colemak (v1)</option>\n" +
+    "                                                <option value=\"ergodox.colemak2\">Ergodox Colemak (v2)</option>\n" +
+    "                                                <option value=\"ergodox.colemakjjt2\">Ergodox Colemak (JJT)</option>\n" +
+    "                                                <option value=\"ergodox.colemakcub\">Ergodox Colemak/Cub</option>\n" +
+    "                                                <option value=\"ergodox.gelatin\">Ergodox Gelatin</option>\n" +
+    "                                                <option value=\"ergodox.qgmlwbcub\">Ergodox QGMLWB/Cub</option>\n" +
+    "                                                <option value=\"ergodox.qgmlwycub\">Ergodox QGMLWY/Cub</option>\n" +
+    "                                                <option value=\"ergodox.qwerty\">Ergodox QWERTY</option>\n" +
+    "                                                <option value=\"ergodox.neo2_inprogress\">Ergodox Neo 2 (in progress)</option>\n" +
+    "                                                <option value=\"ergodox.norman\">Ergodox Norman</option>\n" +
+    "                                                <option value=\"ergodox.workman\">Ergodox Workman for Programmers with cub@uanic Modifications</option>\n" +
+    "                                                <option value=\"ergodox.kinesis-advantage-colemak\">Kinesis Advantage Colemak</option>\n" +
+    "                                            </optgroup>\n" +
     "\n" +
-    "	                                    </select>\n" +
-    "	                                    <button class=\"kb-config-load btn\" ng-click=\"loadLayout()\">Load</button>\n" +
-    "	                                </div>\n" +
-    "	                            </div>\n" +
+    "                                        </select>\n" +
+    "                                        <button class=\"kb-config-load btn\" ng-click=\"loadLayout()\">Load</button>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
     "\n" +
-    "	                            <div class='control-group'>\n" +
-    "	                                <label class='control-label'>Share:</label>\n" +
-    "	                                <div class='controls'>\n" +
-    "	                                    <button class=\"btn\" ng-click=\"submitDialog()\">Submit Layout</button>\n" +
-    "	                                </div>\n" +
-    "	                            </div>\n" +
+    "<!--\n" +
+    "                                <div class='control-group'>\n" +
+    "                                    <label class='control-label'>Share:</label>\n" +
+    "                                    <div class='controls'>\n" +
+    "                                        <button class=\"btn\" ng-click=\"submitDialog()\">Submit Layout</button>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "-->\n" +
     "\n" +
-    "	                        </form>\n" +
-    "	                    </div>\n" +
+    "                            </form>\n" +
+    "                        </div>\n" +
     "\n" +
-    "	                </td>\n" +
-    "	            </tr>\n" +
-    "	        </tbody>\n" +
-    "	    </table>\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
     "\n" +
-    "	    <paginate start=\"1\" stop=\"5\" handler=\"switchLayout\"></paginate>\n" +
+    "        <paginate start=\"1\" stop=\"5\" handler=\"switchLayout\"></paginate>\n" +
     "\n" +
-    "	    <!-- import modal -->\n" +
-    "	    <div id='kb-config-import-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
-    "	        <div class='modal-header'>\n" +
-    "	            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>\n" +
-    "	            <h3 id='resultLabel'>Import Layout</h3>\n" +
-    "	        </div>\n" +
-    "	        <div class='modal-body'>\n" +
+    "        <!-- import modal -->\n" +
+    "        <div id='kb-config-import-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
+    "            <div class='modal-header'>\n" +
+    "                <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>\n" +
+    "                <h3 id='resultLabel'>Import Layout</h3>\n" +
+    "            </div>\n" +
+    "            <div class='modal-body'>\n" +
     "\n" +
-    "	            <textarea class='input-block-level kb-config-dialog-txt'></textarea>\n" +
-    "	            <p class='text-left'>\n" +
-    "	                Paste the text of a previously exported layout in the textbox above and press \"Import\" to load the layout.\n" +
-    "	            </p>\n" +
-    "	        </div>\n" +
+    "                <textarea class='input-block-level kb-config-dialog-txt'></textarea>\n" +
+    "                <p class='text-left'>\n" +
+    "                    Paste the text of a previously exported layout in the textbox above and press \"Import\" to load the layout.\n" +
+    "                </p>\n" +
+    "            </div>\n" +
     "\n" +
-    "	        <div class='modal-footer'>\n" +
-    "	            <button class=\"btn\" ng-click=\"importLayout()\">Import</button>\n" +
-    "	            <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n" +
-    "	        </div>\n" +
-    "	    </div>\n" +
+    "            <div class='modal-footer'>\n" +
+    "                <button class=\"btn\" ng-click=\"importLayout()\">Import</button>\n" +
+    "                <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "\n" +
-    "	    <!-- import modal -->\n" +
-    "	    <div id='kb-config-export-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
-    "	        <div class='modal-header'>\n" +
-    "	            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>\n" +
-    "	            <h3 id='resultLabel'>Export Layout</h3>\n" +
-    "	        </div>\n" +
-    "	        <div class='modal-body'>\n" +
+    "        <!-- import modal -->\n" +
+    "        <div id='kb-config-export-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
+    "            <div class='modal-header'>\n" +
+    "                <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>\n" +
+    "                <h3 id='resultLabel'>Export Layout</h3>\n" +
+    "            </div>\n" +
+    "            <div class='modal-body'>\n" +
     "\n" +
-    "	            <textarea class='input-block-level kb-config-dialog-txt'></textarea>\n" +
-    "	            <p class='text-left'>\n" +
-    "	                The above text represents the keyboard layout. You can come back to the app later and load this layout with this text using the \"Import\" feature.\n" +
-    "	            </p>\n" +
-    "	        </div>\n" +
+    "                <textarea class='input-block-level kb-config-dialog-txt'></textarea>\n" +
+    "                <p class='text-left'>\n" +
+    "                    The above text represents the keyboard layout. You can come back to the app later and load this layout with this text using the \"Import\" feature.\n" +
+    "                </p>\n" +
+    "            </div>\n" +
     "\n" +
-    "	        <div class='modal-footer'>\n" +
-    "	            <button class=\"btn\" ng-click=\"selectAllExportText()\">Select All</button>\n" +
-    "	            <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n" +
-    "	        </div>\n" +
-    "	    </div>\n" +
+    "            <div class='modal-footer'>\n" +
+    "                <button class=\"btn\" ng-click=\"selectAllExportText()\">Select All</button>\n" +
+    "                <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "\n" +
-    "	    <!-- submit modal -->\n" +
-    "	    <div id='kb-config-submit-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
-    "	        <div class='modal-header'>\n" +
-    "	            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>\n" +
-    "	            <h3 id='resultLabel'>Submit Layout</h3>\n" +
-    "	        </div>\n" +
-    "	        <div class='modal-body'>\n" +
-    "	        	<form class='form-horizontal' ng-show='!submitter.submitting'>\n" +
-    "			        <div class='control-group'>\n" +
-    "			            <label class='control-label' for='sub-name'>Name:</label>\n" +
-    "			            <div class='controls'>\n" +
-    "			                <input id='sub-name' class='input-block-level' type='text' ng-model='submitter.name'>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
+    "        <!-- submit modal -->\n" +
+    "        <div id='kb-config-submit-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
+    "            <div class='modal-header'>\n" +
+    "                <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>x</button>\n" +
+    "                <h3 id='resultLabel'>Submit Layout</h3>\n" +
+    "            </div>\n" +
+    "            <div class='modal-body'>\n" +
+    "                <form class='form-horizontal' ng-show='!submitter.submitting'>\n" +
+    "                    <div class='control-group'>\n" +
+    "                        <label class='control-label' for='sub-name'>Name:</label>\n" +
+    "                        <div class='controls'>\n" +
+    "                            <input id='sub-name' class='input-block-level' type='text' ng-model='submitter.name'>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "\n" +
-    "			        <div class='control-group'>\n" +
-    "			            <label class='control-label' for='sub-email'>Email:</label>\n" +
-    "			            <div class='controls'>\n" +
-    "			                <input id='sub-email' class='input-block-level' type='text' ng-model='submitter.email'>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
+    "                    <div class='control-group'>\n" +
+    "                        <label class='control-label' for='sub-email'>Email:</label>\n" +
+    "                        <div class='controls'>\n" +
+    "                            <input id='sub-email' class='input-block-level' type='text' ng-model='submitter.email'>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "\n" +
-    "			        <div class='control-group'>\n" +
-    "			            <label class='control-label' for='sub-url'>URL:</label>\n" +
-    "			            <div class='controls'>\n" +
-    "			                <input id='sub-url' class='input-block-level' type='text' ng-model='submitter.url'>\n" +
-    "			            </div>\n" +
-    "			        </div>\n" +
-    "		    	</form>\n" +
+    "                    <div class='control-group'>\n" +
+    "                        <label class='control-label' for='sub-url'>URL:</label>\n" +
+    "                        <div class='controls'>\n" +
+    "                            <input id='sub-url' class='input-block-level' type='text' ng-model='submitter.url'>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
     "\n" +
-    "		    	<div ng-show='submitter.submitting'>\n" +
-    "		            <p>\n" +
-    "		            	<img src='img/loading2.gif'>\n" +
-    "		            </p>\n" +
-    "		    	</div>\n" +
+    "                <div ng-show='submitter.submitting'>\n" +
+    "                    <p>\n" +
+    "                        <img src='img/loading2.gif'>\n" +
+    "                    </p>\n" +
+    "                </div>\n" +
     "\n" +
-    "	            <p class='text-left'>\n" +
-    "	                Fill out the above information and then press \"Submit\". After submitting, you're layout will be evaluated and then placed into the \"Preset\" option.\n" +
-    "	            </p>\n" +
-    "	        </div>\n" +
+    "                <p class='text-left'>\n" +
+    "                    Fill out the above information and then press \"Submit\". After submitting, you're layout will be evaluated and then placed into the \"Preset\" option.\n" +
+    "                </p>\n" +
+    "            </div>\n" +
     "\n" +
-    "	        <div class='modal-footer'>\n" +
-    "	            <button class=\"btn\" ng-click=\"submitLayout()\">Submit</button>\n" +
-    "	            <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n" +
-    "	        </div>\n" +
-    "	    </div>\n" +
+    "            <div class='modal-footer'>\n" +
+    "                <button class=\"btn\" ng-click=\"submitLayout()\">Submit</button>\n" +
+    "                <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "\n" +
-    "	</div>\n" +
+    "    </div>\n" +
     "\n" +
     "\n" +
-    "</div>"
+    "</div>\n"
   );
 
 
@@ -383,6 +384,9 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/main.htm',
     "<div>\n" +
     "    <div class=\"jumbotron subhead\">\n" +
+    "        This is <a href=\"https://github.com/ColemakMods/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"/#/about\">About Page</a> [@todo] for explanation.\n" +
+    "        <br/>\n" +
+    "        <br/>\n" +
     "        <h1>Analyze Text Input</h1>\n" +
     "        <p class=\"lead\">See which layout is best for your input text<p>\n" +
     "    </div>\n" +
@@ -402,6 +406,35 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                    <option value='alice-ch1' selected>English: Alice in Wonderland, Chapter 1</option>\n" +
     "                    <option value='common-english-words'>English: List of the most commonly used words</option>\n" +
     "                    <option value='common-sat-words'>English: Most commonly used SAT words</option>\n" +
+    "                    <option value='magna-carta-english'>English: Magna Carta</option>\n" +
+    "                    <option value='classiccollection'>English: Classics collection</option>\n" +
+    "                    <option value='1984-chapter-1'>English: 1984 Chapter 1</option>\n" +
+    "                    <option value='animalfarm'>English: Animal Farm</option>\n" +
+    "                    <option value='tarzan-of-the-apes'>English: Tarzan Of The Apes</option>\n" +
+    "                    <option value='jungle-book'>English: Jungle Book</option>\n" +
+    "                    <option value='difficultwords'>English: Difficult words</option>\n" +
+    "                    <option value='medical'>English: Medical words</option>\n" +
+    "                    <option value='quotes'>English: Quotes</option>\n" +
+    "                    <option value='daode-jing'>English: Tao te Ching / DaodeJing</option>\n" +
+    "                    <option value='poems'>English: Poems</option>\n" +
+    "                    <option value='bigrams'>English: Bigrams</option>\n" +
+    "                    <option value='trigrams'>English: Trigrams</option>\n" +
+    "                    <option value='quadgrams'>English: Quadgrams</option>\n" +
+    "                    <option value='typing-champ-1'>English: Typing Championship 1</option>\n" +
+    "                    <option value='academic-1'>Academic: Cost Optimization Model</option>\n" +
+    "                    <option value='academic-2'>Academic: Contractors' Performance in Construction</option>\n" +
+    "                    <option value='academic-3'>Academic: Binary Logistic Analysis</option>\n" +
+    "                    <option value='academic-4'>Academic: Preformulation Studies Of Carbamazepine</option>\n" +
+    "                    <option value='academic-5'>Academic: Spectral studies of Divalent Metal of Co, Ni, Cu and Zn</option>\n" +
+    "                    <option value='academic-6'>Academic: Phytochemical studies on Cocculus Hirsutus</option>\n" +
+    "                    <option value='lorem'>Lorem Ipsum</option>\n" +
+    "                    <option value='www.google.com.htm'>Tech: Google home page</option>\n" +
+    "                    <option value='hanoi-a-m'>Tech: Towers of Hanoi A-M</option>\n" +
+    "                    <option value='hanoi-n-z'>Tech: Towers of Hanoi N-Z</option>\n" +
+    "                    <option value='kle.html'>Tech: Keyboard Layout Editor</option>\n" +
+    "                    <option value='gol'>Tech: Game of Life</option>\n" +
+    "                    <option value='pi1000'>Tech: Pi 1000</option>\n" +
+    "                    <option value='pptt'>Tech: Programming Punctuation Torture Test</option>\n" +
     "                </select>\n" +
     "                <button class='btn' type='button' ng-click='applyPreset()'>Apply</button>\n" +
     "            </div>\n" +
@@ -411,8 +444,12 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                <button class=\"btn btn-large\" type=\"button\" ng-click=\"generateOutput(data.text)\">See Which Layout is Best</button>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "        <div>\n" +
+    "            <br/>\n" +
+    "            <p>Preset source texts are from <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">patorjk's original repo</a> and from <a href=\"https://bitbucket.org/Shenafu/keyboard-layout-analyzer/src/master/\">sheenafu's fork</a>.</p>\n" +
+    "        </div>\n" +
     "    </form>\n" +
-    "</div>"
+    "</div>\n"
   );
 
 

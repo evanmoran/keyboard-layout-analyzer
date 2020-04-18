@@ -1,0 +1,1574 @@
+with Ada.Text_IO;  use Ada.Text_IO;
+ 
+procedure Life is
+   type Cell is (O, X); -- Two states of a cell
+      -- Computation of neighborhood
+   function "+" (L, R : Cell) return Integer is
+   begin
+      case L is
+         when O =>
+            case R is
+               when O => return 0;
+               when X => return 1;
+            end case;
+         when X =>
+            case R is
+               when O => return 1;
+               when X => return 2;
+            end case;
+      end case;
+   end "+";
+   function "+" (L : Integer; R : Cell) return Integer is
+   begin
+      case R is
+         when O => return L;
+         when X => return L + 1;
+      end case;
+   end "+";
+      -- A colony of cells. The borders are dire and unhabited
+   type Petri_Dish is array (Positive range <>, Positive range <>) of Cell;
+ 
+   procedure Step (Culture : in out Petri_Dish) is
+      Above : array (Culture'Range (2)) of Cell := (others => O);
+      Left  : Cell;
+      This  : Cell;
+   begin
+      for I in Culture'First (1) + 1 .. Culture'Last (1) - 1 loop
+         Left := O;
+         for J in Culture'First (2) + 1 .. Culture'Last (2) - 1 loop
+            case Above        (J-1) + Above        (J) + Above        (J+1) +
+                 Left                                  + Culture (I,   J+1) +
+                 Culture (I+1, J-1) + Culture (I+1, J) + Culture (I+1, J+1) is
+               when 2 =>     -- Survives if alive
+                  This := Culture (I, J);
+               when 3 =>     -- Survives or else multiplies
+                  This := X;
+               when others => -- Dies
+                  This := O;
+            end case;
+            Above (J-1) := Left;
+            Left        := Culture (I, J);
+            Culture (I, J) := This;
+         end loop;
+         Above (Above'Last - 1) := Left;
+      end loop;
+   end Step;
+ 
+   procedure Put (Culture : Petri_Dish) is
+   begin
+      for I in Culture'Range loop
+         for J in Culture'Range loop
+            case Culture (I, J) is
+               when O => Put (' ');
+               when X => Put ('#');
+            end case;
+         end loop;
+         New_Line;
+      end loop;
+   end Put;
+ 
+   Blinker : Petri_Dish := (2..4 =>(O,O,X,O,O), 1|5 =>(O,O,O,O,O));
+   Glider  : Petri_Dish :=
+             (  (O,O,O,O,O,O,O,O,O,O,O),
+                (O,O,X,O,O,O,O,O,O,O,O),
+                (O,O,O,X,O,O,O,O,O,O,O),
+                (O,X,X,X,O,O,O,O,O,O,O),
+                (O,O,O,O,O,O,O,O,O,O,O),
+                (O,O,O,O,O,O,O,O,O,O,O)
+             );
+begin
+   for Generation in 1..3 loop
+      Put_Line ("Blinker" & Integer'Image (Generation));
+      Put (Blinker);
+      Step (Blinker);
+   end loop;
+   for Generation in 1..5 loop
+      Put_Line ("Glider" & Integer'Image (Generation));
+      Put (Glider);
+      Step (Glider);
+   end loop;
+end Life;
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+ 
+#define for_x for (int x = 0; x < w; x++)
+#define for_y for (int y = 0; y < h; y++)
+#define for_xy for_x for_y
+void show(void *u, int w, int h)
+{
+	int (*univ)[w] = u;
+	printf("\033[H");
+	for_y {
+		for_x printf(univ[y][x] ? "\033[07m  \033[m" : "  ");
+		printf("\033[E");
+	}
+	fflush(stdout);
+}
+ 
+void evolve(void *u, int w, int h)
+{
+	unsigned (*univ)[w] = u;
+	unsigned new[h][w];
+ 
+	for_y for_x {
+		int n = 0;
+		for (int y1 = y - 1; y1 <= y + 1; y1++)
+			for (int x1 = x - 1; x1 <= x + 1; x1++)
+				if (univ[(y1 + h) % h][(x1 + w) % w])
+					n++;
+ 
+		if (univ[y][x]) n--;
+		new[y][x] = (n == 3 || (n == 2 && univ[y][x]));
+	}
+	for_y for_x univ[y][x] = new[y][x];
+}
+ 
+void game(int w, int h)
+{
+	unsigned univ[h][w];
+	for_xy univ[y][x] = rand() < RAND_MAX / 10 ? 1 : 0;
+	while (1) {
+		show(univ, w, h);
+		evolve(univ, w, h);
+		usleep(200000);
+	}
+}
+ 
+int main(int c, char **v)
+{
+	int w = 0, h = 0;
+	if (c > 1) w = atoi(v[1]);
+	if (c > 2) h = atoi(v[2]);
+	if (w <= 0) w = 30;
+	if (h <= 0) h = 30;
+	game(w, h);
+}
+
+#include <iostream>
+#define HEIGHT 4
+#define WIDTH 4
+ 
+struct Shape {
+public:
+    char xCoord;
+    char yCoord;
+    char height;
+    char width;
+    char **figure;
+};
+ 
+struct Glider : public Shape {
+    static const char GLIDER_SIZE = 3;
+    Glider( char x , char y );
+    ~Glider();
+};
+ 
+struct Blinker : public Shape {
+    static const char BLINKER_HEIGHT = 3;
+    static const char BLINKER_WIDTH = 1;
+    Blinker( char x , char y );
+    ~Blinker();
+};
+ 
+class GameOfLife {
+public:
+    GameOfLife( Shape sh );
+    void print();
+    void update();
+    char getState( char state , char xCoord , char yCoord , bool toggle);
+    void iterate(unsigned int iterations);
+private:
+    char world[HEIGHT][WIDTH];
+    char otherWorld[HEIGHT][WIDTH];
+    bool toggle;
+    Shape shape;
+};
+ 
+GameOfLife::GameOfLife( Shape sh ) :
+    shape(sh) ,
+    toggle(true) 
+{
+    for ( char i = 0; i < HEIGHT; i++ ) {
+        for ( char j = 0; j < WIDTH; j++ ) {
+            world[i][j] = '.';
+        }
+    }
+    for ( char i = shape.yCoord; i - shape.yCoord < shape.height; i++ ) {
+        for ( char j = shape.xCoord; j - shape.xCoord < shape.width; j++ ) {
+            if ( i < HEIGHT && j < WIDTH ) {
+                world[i][j] = 
+                    shape.figure[ i - shape.yCoord ][j - shape.xCoord ];
+            }
+        }
+    }
+}
+ 
+void GameOfLife::print() {
+    if ( toggle ) {
+        for ( char i = 0; i < HEIGHT; i++ ) {
+            for ( char j = 0; j < WIDTH; j++ ) {
+                std::cout << world[i][j];
+            }
+            std::cout << std::endl;
+        }
+    } else {
+        for ( char i = 0; i < HEIGHT; i++ ) {
+            for ( char j = 0; j < WIDTH; j++ ) {
+                std::cout << otherWorld[i][j];
+            }
+            std::cout << std::endl;
+        }
+    }
+    for ( char i = 0; i < WIDTH; i++ ) {
+        std::cout << '=';
+    }
+    std::cout << std::endl;
+}
+ 
+void GameOfLife::update() {
+    if (toggle) {
+        for ( char i = 0; i < HEIGHT; i++ ) {
+            for ( char j = 0; j < WIDTH; j++ ) {
+                otherWorld[i][j] = 
+                    GameOfLife::getState(world[i][j] , i , j , toggle);
+            }
+        }
+        toggle = !toggle;
+    } else {
+        for ( char i = 0; i < HEIGHT; i++ ) {
+            for ( char j = 0; j < WIDTH; j++ ) {
+                world[i][j] = 
+                    GameOfLife::getState(otherWorld[i][j] , i , j , toggle);
+            }
+        }
+        toggle = !toggle;
+    }
+}
+ 
+char GameOfLife::getState( char state, char yCoord, char xCoord, bool toggle ) {
+    char neighbors = 0;
+    if ( toggle ) {
+        for ( char i = yCoord - 1; i <= yCoord + 1; i++ ) {
+            for ( char j = xCoord - 1; j <= xCoord + 1; j++ ) {
+                if ( i == yCoord && j == xCoord ) {
+                    continue;
+                }
+                if ( i > -1 && i < HEIGHT && j > -1 && j < WIDTH ) {
+                    if ( world[i][j] == 'X' ) {
+                        neighbors++;
+                    }
+                }
+            }
+        }
+    } else {
+        for ( char i = yCoord - 1; i <= yCoord + 1; i++ ) {
+            for ( char j = xCoord - 1; j <= xCoord + 1; j++ ) {
+                if ( i == yCoord && j == xCoord ) {
+                    continue;
+                }
+                if ( i > -1 && i < HEIGHT && j > -1 && j < WIDTH ) {
+                    if ( otherWorld[i][j] == 'X' ) {
+                        neighbors++;
+                    }
+                }
+            }
+        }
+    }
+    if (state == 'X') {
+        return ( neighbors > 1 && neighbors < 4 ) ? 'X' : '.';
+    }
+    else {
+        return ( neighbors == 3 ) ? 'X' : '.';
+    }
+}
+ 
+void GameOfLife::iterate( unsigned int iterations ) {
+    for ( int i = 0; i < iterations; i++ ) {
+        print();
+        update();
+    }
+}
+ 
+Glider::Glider( char x , char y ) {
+    xCoord = x;
+    yCoord = y;
+    height = GLIDER_SIZE;
+    width = GLIDER_SIZE;
+    figure = new char*[GLIDER_SIZE];
+    for ( char i = 0; i < GLIDER_SIZE; i++ ) {
+        figure[i] = new char[GLIDER_SIZE];
+    }
+    for ( char i = 0; i < GLIDER_SIZE; i++ ) {
+        for ( char j = 0; j < GLIDER_SIZE; j++ ) {
+            figure[i][j] = '.';
+        }
+    }
+    figure[0][1] = 'X';
+    figure[1][2] = 'X';
+    figure[2][0] = 'X';
+    figure[2][1] = 'X';
+    figure[2][2] = 'X';
+}
+ 
+Glider::~Glider() {
+    for ( char i = 0; i < GLIDER_SIZE; i++ ) {
+        delete[] figure[i];
+    }
+    delete[] figure;
+}
+ 
+Blinker::Blinker( char x , char y ) {
+    xCoord = x;
+    yCoord = y;
+    height = BLINKER_HEIGHT;
+    width = BLINKER_WIDTH;
+    figure = new char*[BLINKER_HEIGHT];
+    for ( char i = 0; i < BLINKER_HEIGHT; i++ ) {
+        figure[i] = new char[BLINKER_WIDTH];
+    }
+    for ( char i = 0; i < BLINKER_HEIGHT; i++ ) {
+        for ( char j = 0; j < BLINKER_WIDTH; j++ ) {
+            figure[i][j] = 'X';
+        }
+    }
+}
+ 
+Blinker::~Blinker() {
+    for ( char i = 0; i < BLINKER_HEIGHT; i++ ) {
+        delete[] figure[i];
+    }
+    delete[] figure;
+}
+ 
+int main() {
+    Glider glider(0,0);
+    GameOfLife gol(glider);
+    gol.iterate(5);
+    Blinker blinker(1,0);
+    GameOfLife gol2(blinker);
+    gol2.iterate(4);
+}
+
+using System;
+using System.Text;
+using System.Threading;
+ 
+namespace ConwaysGameOfLife
+{
+    // Plays Conway's Game of Life on the console with a random initial state.
+    class Program
+    {
+        // The delay in milliseconds between board updates.
+        private const int DELAY = 50;
+ 
+        // The cell colors.
+        private const ConsoleColor DEAD_COLOR = ConsoleColor.White;
+        private const ConsoleColor LIVE_COLOR = ConsoleColor.Black;
+ 
+        // The color of the cells that are off of the board.
+        private const ConsoleColor EXTRA_COLOR = ConsoleColor.Gray;
+ 
+        private const char EMPTY_BLOCK_CHAR = ' ';
+        private const char FULL_BLOCK_CHAR = '\u2588';
+ 
+        // Holds the current state of the board.
+        private static bool[,] board;
+ 
+        // The dimensions of the board in cells.
+        private static int width = 32;
+        private static int height = 32;
+ 
+        // True if cell rules can loop around edges.
+        private static bool loopEdges = true;
+ 
+ 
+        static void Main(string[] args)
+        {
+            // Use initializeRandomBoard for a larger, random board.
+            initializeDemoBoard();
+ 
+            initializeConsole();
+ 
+            // Run the game until the Escape key is pressed.
+            while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape) {
+                Program.drawBoard();
+                Program.updateBoard();
+ 
+                // Wait for a bit between updates.
+                Thread.Sleep(DELAY);
+            }
+        }
+ 
+        // Sets up the Console.
+        private static void initializeConsole()
+        {
+            Console.BackgroundColor = EXTRA_COLOR;
+            Console.Clear();
+ 
+            Console.CursorVisible = false;
+ 
+            // Each cell is two characters wide.
+            // Using an extra row on the bottom to prevent scrolling when drawing the board.
+            int width = Math.Max(Program.width, 8) * 2 + 1;
+            int height = Math.Max(Program.height, 8) + 1;
+            Console.SetWindowSize(width, height);
+            Console.SetBufferSize(width, height);
+ 
+            Console.BackgroundColor = DEAD_COLOR;
+            Console.ForegroundColor = LIVE_COLOR;
+        }
+ 
+        // Creates the initial board with a random state.
+        private static void initializeRandomBoard()
+        {
+            var random = new Random();
+ 
+            Program.board = new bool[Program.width, Program.height];
+            for (var y = 0; y < Program.height; y++) {
+                for (var x = 0; x < Program.width; x++) {
+                    // Equal probability of being true or false.
+                    Program.board[x, y] = random.Next(2) == 0;
+                }
+            }
+        }
+ 
+        // Creates a 3x3 board with a blinker.
+        private static void initializeDemoBoard()
+        {
+            Program.width = 3;
+            Program.height = 3;
+ 
+            Program.loopEdges = false;
+ 
+            Program.board = new bool[3, 3];
+            Program.board[1, 0] = true;
+            Program.board[1, 1] = true;
+            Program.board[1, 2] = true;
+        }
+ 
+        // Draws the board to the console.
+        private static void drawBoard()
+        {
+            // One Console.Write call is much faster than writing each cell individually.
+            var builder = new StringBuilder();
+ 
+            for (var y = 0; y < Program.height; y++) {
+                for (var x = 0; x < Program.width; x++) {
+                    char c = Program.board[x, y] ? FULL_BLOCK_CHAR : EMPTY_BLOCK_CHAR;
+ 
+                    // Each cell is two characters wide.
+                    builder.Append(c);
+                    builder.Append(c);
+                }
+                builder.Append('\n');
+            }
+ 
+            // Write the string to the console.
+            Console.SetCursorPosition(0, 0);
+            Console.Write (builder.ToString());
+        }
+ 
+        // Moves the board to the next state based on Conway's rules.
+        private static void updateBoard()
+        {
+            // A temp variable to hold the next state while it's being calculated.
+            bool[,] newBoard = new bool[Program.width, Program.height];
+ 
+            for (var y = 0; y < Program.height; y++) {
+                for (var x = 0; x < Program.width; x++) {
+                    var n = countLiveNeighbors(x, y);
+                    var c = Program.board[x, y];
+ 
+                    // A live cell dies unless it has exactly 2 or 3 live neighbors.
+                    // A dead cell remains dead unless it has exactly 3 live neighbors.
+                    newBoard[x, y] = c && (n == 2 || n == 3) || !c && n == 3;
+                }
+            }
+ 
+            // Set the board to its new state.
+            Program.board = newBoard;
+        }
+ 
+        // Returns the number of live neighbors around the cell at position (x,y).
+        private static int countLiveNeighbors(int x, int y)
+        {
+            // The number of live neighbors.
+            int value = 0;
+ 
+            // This nested loop enumerates the 9 cells in the specified cells neighborhood.
+            for (var j = -1; j <= 1; j++) {
+                // If loopEdges is set to false and y+j is off the board, continue.
+                if (!Program.loopEdges && y + j < 0 || y + j >= Program.height) {
+                    continue;
+                }
+ 
+                // Loop around the edges if y+j is off the board.
+                int k = (y + j + Program.height) % Program.height;
+ 
+                for (var i = -1; i <= 1; i++) {
+                    // If loopEdges is set to false and x+i is off the board, continue.
+                    if (!Program.loopEdges && x + i < 0 || x + i >= Program.width) {
+                        continue;
+                    }
+ 
+                    // Loop around the edges if x+i is off the board.
+                    int h = (x + i + Program.width) % Program.width;
+ 
+                    // Count the neighbor cell at (h,k) if it is alive.
+                    value += Program.board[h, k] ? 1 : 0;
+                }
+            }
+ 
+            // Subtract 1 if (x,y) is alive since we counted it as a neighbor.
+            return value - (Program.board[x, y] ? 1 : 0);
+        }
+    }
+}
+
+(defun next-life (array &optional results)
+  (let* ((dimensions (array-dimensions array))
+         (results (or results (make-array dimensions :element-type 'bit))))
+    (destructuring-bind (rows columns) dimensions
+      (labels ((entry (row col)
+                 "Return array(row,col) for valid (row,col) else 0."
+                 (if (or (not (< -1 row rows))
+                         (not (< -1 col columns)))
+                   0
+                   (aref array row col)))
+               (neighbor-count (row col &aux (count 0))
+                 "Return the sum of the neighbors of (row,col)."
+                 (dolist (r (list (1- row) row (1+ row)) count)
+                   (dolist (c (list (1- col) col (1+ col)))
+                     (unless (and (eql r row) (eql c col))
+                       (incf count (entry r c))))))
+               (live-or-die? (current-state neighbor-count)
+                 (if (or (and (eql current-state 1)
+                              (<=  2 neighbor-count 3))
+                         (and (eql current-state 0)
+                              (eql neighbor-count 3)))
+                   1
+                   0)))
+        (dotimes (row rows results)
+          (dotimes (column columns)
+            (setf (aref results row column)
+                  (live-or-die? (aref array row column)
+                                (neighbor-count row column)))))))))
+ 
+(defun print-grid (grid &optional (out *standard-output*))
+  (destructuring-bind (rows columns) (array-dimensions grid)
+    (dotimes (r rows grid)
+      (dotimes (c columns (terpri out))
+        (write-char (if (zerop (aref grid r c)) #\+ #\#) out)))))
+ 
+(defun run-life (&optional world (iterations 10) (out *standard-output*))
+  (let* ((world (or world (make-array '(10 10) :element-type 'bit)))
+         (result (make-array (array-dimensions world) :element-type 'bit)))
+    (do ((i 0 (1+ i))) ((eql i iterations) world)
+      (terpri out) (print-grid world out)
+      (psetq world (next-life world result)
+             result world))))
+
+import std.stdio, std.string, std.algorithm, std.array, std.conv;
+ 
+struct GameOfLife {
+  enum Cell : char { dead = ' ', alive = '#' }
+  Cell[][] grid, newGrid;
+ 
+  this(in int x, in int y) pure nothrow @safe {
+    grid = new typeof(grid)(y + 2, x + 2);
+    newGrid = new typeof(grid)(y + 2, x + 2);
+  }
+ 
+  void opIndexAssign(in string[] v, in size_t y, in size_t x)
+  pure /*nothrow*/ @safe /*@nogc*/ {
+    foreach (immutable nr, row; v)
+      foreach (immutable nc, state; row)
+        grid[y + nr][x + nc] = state.to!Cell;
+  }
+ 
+  void iteration() pure nothrow @safe @nogc {
+    newGrid[0][] = Cell.dead;
+    newGrid[$ - 1][] = Cell.dead;
+    foreach (row; newGrid)
+      row[0] = row[$ - 1] = Cell.dead;
+ 
+    foreach (immutable r; 1 .. grid.length - 1)
+      foreach (immutable c; 1 .. grid[0].length - 1) {
+        uint count = 0;
+        foreach (immutable i; -1 .. 2)
+          foreach (immutable j; -1 .. 2)
+            if (i != 0 || j != 0)
+              count += grid[r + i][c + j] == Cell.alive;
+        immutable a = count == 3 ||
+                      (count == 2 && grid[r][c] == Cell.alive);
+        newGrid[r][c] = a ? Cell.alive : Cell.dead;
+      }
+ 
+    grid.swap(newGrid);
+  }
+ 
+  string toString() const pure /*nothrow @safe*/ {
+    auto ret = "-".replicate(grid[0].length - 1) ~ "\n";
+    foreach (const row; grid[1 .. $ - 1])
+      ret ~= "|%(%c%)|\n".format(row[1 .. $ - 1]);
+    return ret ~ "-".replicate(grid[0].length - 1);
+  }
+}
+ 
+void main() /*@safe*/ {
+  immutable glider1 = ["  #", "# #", " ##"];
+  immutable glider2 = ["#  ", "# #", "## "];
+ 
+  auto uni = GameOfLife(60, 20);
+  uni[3,  2] = glider1;
+  uni[3, 15] = glider2;
+  uni[3, 19] = glider1;
+  uni[3, 32] = glider2;
+  uni[5, 50] = [" #  #", "#  ", "#   #", "#### "];
+  uni.writeln;
+ 
+  foreach (immutable _; 0 .. 20) {
+    uni.iteration;
+    uni.writeln;
+  }
+}
+
+package main
+ 
+import (
+	"bytes"
+	"fmt"
+	"math/rand"
+	"time"
+)
+ 
+type Field struct {
+	s    [][]bool
+	w, h int
+}
+ 
+func NewField(w, h int) Field {
+	s := make([][]bool, h)
+	for i := range s {
+		s[i] = make([]bool, w)
+	}
+	return Field{s: s, w: w, h: h}
+}
+ 
+func (f Field) Set(x, y int, b bool) {
+	f.s[y][x] = b
+}
+ 
+func (f Field) Next(x, y int) bool {
+	on := 0
+	for i := -1; i <= 1; i++ {
+		for j := -1; j <= 1; j++ {
+			if f.State(x+i, y+j) && !(j == 0 && i == 0) {
+				on++
+			}
+		}
+	}
+	return on == 3 || on == 2 && f.State(x, y)
+}
+ 
+func (f Field) State(x, y int) bool {
+	for y < 0 {
+		y += f.h
+	}
+	for x < 0 {
+		x += f.w
+	}
+	return f.s[y%f.h][x%f.w]
+}
+ 
+type Life struct {
+	w, h int
+	a, b Field
+}
+ 
+func NewLife(w, h int) *Life {
+	a := NewField(w, h)
+	for i := 0; i < (w * h / 2); i++ {
+		a.Set(rand.Intn(w), rand.Intn(h), true)
+	}
+	return &Life{
+		a: a,
+		b: NewField(w, h),
+		w: w, h: h,
+	}
+}
+ 
+func (l *Life) Step() {
+	for y := 0; y < l.h; y++ {
+		for x := 0; x < l.w; x++ {
+			l.b.Set(x, y, l.a.Next(x, y))
+		}
+	}
+	l.a, l.b = l.b, l.a
+}
+ 
+func (l *Life) String() string {
+	var buf bytes.Buffer
+	for y := 0; y < l.h; y++ {
+		for x := 0; x < l.w; x++ {
+			b := byte(' ')
+			if l.a.State(x, y) {
+				b = '*'
+			}
+			buf.WriteByte(b)
+		}
+		buf.WriteByte('\n')
+	}
+	return buf.String()
+}
+ 
+func main() {
+	l := NewLife(80, 15)
+	for i := 0; i < 300; i++ {
+		l.Step()
+		fmt.Print("\x0c")
+		fmt.Println(l)
+		time.Sleep(time.Second / 30)
+	}
+}
+
+import Data.Array.Unboxed
+ 
+type Grid = UArray (Int,Int) Bool
+ -- The grid is indexed by (y, x).
+ 
+life :: Int -> Int -> Grid -> Grid
+{- Returns the given Grid advanced by one generation. -}
+life w h old =
+    listArray b (map f (range b))
+  where b@((y1,x1),(y2,x2)) = bounds old
+        f (y, x) = ( c && (n == 2 || n == 3) ) || ( not c && n == 3 )
+          where c = get x y
+                n = count [get (x + x') (y + y') |
+                    x' <- [-1, 0, 1], y' <- [-1, 0, 1],
+                    not (x' == 0 && y' == 0)]
+ 
+        get x y | x < x1 || x > x2 = False
+                | y < y1 || y > y2 = False
+                | otherwise       = old ! (y, x)
+ 
+count :: [Bool] -> Int
+count = length . filter id
+
+public class GameOfLife{
+	public static void main(String[] args){
+		String[] dish= {
+				"_#_",
+				"_#_",
+				"_#_",};
+		int gens= 3;
+		for(int i= 0;i < gens;i++){
+			System.out.println("Generation " + i + ":");
+			print(dish);
+			dish= life(dish);
+		}
+	}
+ 
+	public static String[] life(String[] dish){
+		String[] newGen= new String[dish.length];
+		for(int row= 0;row < dish.length;row++){//each row
+			newGen[row]= "";
+			for(int i= 0;i < dish[row].length();i++){//each char in the row
+				String above= "";//neighbors above
+				String same= "";//neighbors in the same row
+				String below= "";//neighbors below
+				if(i == 0){//all the way on the left
+					//no one above if on the top row
+					//otherwise grab the neighbors from above
+					above= (row == 0) ? null : dish[row - 1].substring(i,
+									i + 2);
+					same= dish[row].substring(i + 1, i + 2);
+					//no one below if on the bottom row
+					//otherwise grab the neighbors from below
+					below= (row == dish.length - 1) ? null : dish[row + 1]
+									.substring(i, i + 2);
+				}else if(i == dish[row].length() - 1){//right
+					//no one above if on the top row
+					//otherwise grab the neighbors from above
+					above= (row == 0) ? null : dish[row - 1].substring(i - 1,
+									i + 1);
+					same= dish[row].substring(i - 1, i);
+					//no one below if on the bottom row
+					//otherwise grab the neighbors from below
+					below= (row == dish.length - 1) ? null : dish[row + 1]
+									.substring(i - 1, i + 1);
+				}else{//anywhere else
+					//no one above if on the top row
+					//otherwise grab the neighbors from above
+					above= (row == 0) ? null : dish[row - 1].substring(i - 1,
+									i + 2);
+					same= dish[row].substring(i - 1, i)
+									+ dish[row].substring(i + 1, i + 2);
+					//no one below if on the bottom row
+					//otherwise grab the neighbors from below
+					below= (row == dish.length - 1) ? null : dish[row + 1]
+									.substring(i - 1, i + 2);
+				}
+				int neighbors= getNeighbors(above, same, below);
+				if(neighbors < 2 || neighbors > 3){
+					newGen[row]+= "_";//<2 or >3 neighbors -> die
+				}else if(neighbors == 3){
+					newGen[row]+= "#";//3 neighbors -> spawn/live
+				}else{
+					newGen[row]+= dish[row].charAt(i);//2 neighbors -> stay
+				}
+			}
+		}
+		return newGen;
+	}
+ 
+	public static int getNeighbors(String above, String same, String below){
+		int ans= 0;
+		if(above != null){//no one above
+			for(char x: above.toCharArray()){//each neighbor from above
+				if(x == '#') ans++;//count it if someone is here
+			}
+		}
+		for(char x: same.toCharArray()){//two on either side
+			if(x == '#') ans++;//count it if someone is here
+		}
+		if(below != null){//no one below
+			for(char x: below.toCharArray()){//each neighbor below
+				if(x == '#') ans++;//count it if someone is here
+			}
+		}
+		return ans;
+	}
+ 
+	public static void print(String[] dish){
+		for(String s: dish){
+			System.out.println(s);
+		}
+	}
+}
+
+function GameOfLife () {
+ 
+	this.init = function (turns,width,height) {
+		this.board = new Array(height);
+		for (var x = 0; x < height; x++) {
+			this.board[x] = new Array(width);
+			for (var y = 0; y < width; y++) {
+				this.board[x][y] = Math.round(Math.random());
+			}
+		}
+		this.turns = turns;
+	}
+ 
+	this.nextGen = function() {
+		this.boardNext = new Array(this.board.length);
+		for (var i = 0; i < this.board.length; i++) {
+			this.boardNext[i] = new Array(this.board[i].length);
+		}
+		for (var x = 0; x < this.board.length; x++) {
+			for (var y = 0; y < this.board[x].length; y++) {
+				var n = 0;
+				for (var dx = -1; dx <= 1; dx++) {
+					for (var dy = -1; dy <= 1; dy++) {
+						if ( dx == 0 && dy == 0){}
+						else if (typeof this.board[x+dx] !== 'undefined'
+								&& typeof this.board[x+dx][y+dy] !== 'undefined'
+								&& this.board[x+dx][y+dy]) {
+							n++;
+						}
+					}	
+				}
+				var c = this.board[x][y];
+				switch (n) {
+					case 0:
+					case 1:
+						c = 0;
+						break;
+					case 2:
+						break; 
+					case 3:
+						c = 1;
+						break;
+					default:
+						c = 0;
+				}
+				this.boardNext[x][y] = c;
+			}
+		}
+		this.board = this.boardNext.slice();
+	}
+ 
+	this.print = function() {
+		for (var x = 0; x < this.board.length; x++) {
+			var l = "";
+			for (var y = 0; y < this.board[x].length; y++) {
+				if (this.board[x][y])
+					l += "X";
+				else
+					l += " ";
+			}
+			print(l);
+		}
+	}
+ 
+	this.start = function() {
+		for (var t = 0; t < this.turns; t++) {
+			print("---\nTurn "+(t+1));
+			this.print();
+			this.nextGen()
+		}
+	}
+ 
+}
+ 
+ 
+var game = new GameOfLife();
+ 
+print("---\n3x3 Blinker over three turns.");
+game.init(3);
+game.board = [
+	[0,0,0],
+	[1,1,1],
+	[0,0,0]];
+game.start();
+ 
+print("---\n10x6 Glider over five turns.");
+game.init(5);
+game.board = [
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,1,0,0,0,0,0,0,0],
+	[0,0,0,1,0,0,0,0,0,0],
+	[0,1,1,1,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0,0,0]];
+game.start();
+ 
+print("---\nRandom 5x10");
+game.init(5,5,10);
+game.start();
+
+function Evolve( cell )
+    local m = #cell
+    local cell2 = {}
+    for i = 1, m do
+        cell2[i] = {}
+        for j = 1, m do
+            cell2[i][j] = cell[i][j]
+        end
+    end
+ 
+    for i = 1, m do
+        for j = 1, m do
+            local count
+            if cell2[i][j] == 0 then count = 0 else count = -1 end
+            for x = -1, 1 do
+                for y = -1, 1 do
+                    if i+x >= 1 and i+x <= m and j+y >= 1 and j+y <= m and cell2[i+x][j+y] == 1 then count = count + 1 end
+                end
+            end
+            if count < 2 or count > 3 then cell[i][j] = 0 end
+            if count == 3 then cell[i][j] = 1 end
+        end
+    end
+ 
+    return cell
+end    
+ 
+ 
+m = 3                   -- number rows / colums
+num_iterations = 10
+ 
+cell = {}
+for i = 1, m do
+    cell[i] = {}
+    for j = 1, m do
+        cell[i][j] = 0
+    end
+end
+ 
+cell[2][2], cell[2][1], cell[2][3] = 1, 1, 1 
+ 
+for l = 1, num_iterations do
+    for i = 1, m do
+        for j = 1, m do
+            if cell[i][j] == 1 then io.write( "#" ) else io.write( " " ) end
+        end
+        io.write( "\n" )
+    end    
+ 
+    cell = Evolve( cell )
+end    
+
+let get g x y =
+  try g.(x).(y)
+  with _ -> 0
+ 
+let neighbourhood g x y =
+  (get g (x-1) (y-1)) +
+  (get g (x-1) (y  )) +
+  (get g (x-1) (y+1)) +
+  (get g (x  ) (y-1)) +
+  (get g (x  ) (y+1)) +
+  (get g (x+1) (y-1)) +
+  (get g (x+1) (y  )) +
+  (get g (x+1) (y+1)) 
+ 
+let next_cell g x y =
+  let n = neighbourhood g x y in
+  match g.(x).(y), n with
+  | 1, 0 | 1, 1                      -> 0  (* lonely *)
+  | 1, 4 | 1, 5 | 1, 6 | 1, 7 | 1, 8 -> 0  (* overcrowded *)
+  | 1, 2 | 1, 3                      -> 1  (* lives *)
+  | 0, 3                             -> 1  (* get birth *)
+  | _ (* 0, (0|1|2|4|5|6|7|8) *)     -> 0  (* barren *)
+ 
+let copy g = Array.map Array.copy g
+ 
+let next g =
+  let width = Array.length g
+  and height = Array.length g.(0)
+  and new_g = copy g in
+  for x = 0 to pred width do
+    for y = 0 to pred height do
+      new_g.(x).(y) <- (next_cell g x y)
+    done
+  done;
+  (new_g)
+ 
+let print g =
+  let width = Array.length g
+  and height = Array.length g.(0) in
+  for x = 0 to pred width do
+    for y = 0 to pred height do
+      if g.(x).(y) = 0
+      then print_char '.'
+      else print_char 'o'
+    done;
+    print_newline()
+  done
+
+program Gol;
+// Game of life
+{$IFDEF FPC}
+   //save as gol.pp/gol.pas
+  {$Mode delphi}
+{$ELSE}
+  //for Delphi save as gol.dpr
+  {$Apptype Console}
+{$ENDIF}
+uses
+  crt;
+ 
+const
+  colMax = 76;
+  rowMax = 22;
+  dr = colMax+2; // element count of one row
+ 
+  cDelay = 20;  // delay in ms
+ 
+(*
+expand field by one row/column before and after
+for easier access no special treatment of torus
+*)
+ 
+type
+  tFldElem  = byte;//0..1
+  tpFldElem = ^tFldElem;
+  tRow = array[0..colMax+1] of tFldElem;
+  tpRow = ^tRow;
+  tBoard = array[0..rowMax+1] of tRow;
+  tpBoard = ^tBoard;
+  tpBoards = array[0..1] of tpBoard;
+ 
+type
+  tIntArr = array[0..2*dr+2] of tFldElem;
+  tpIntArr = ^tIntArr;
+ 
+var
+  aBoard,bBoard : tBoard;
+  pBoards :tpBoards;
+  gblActBoard : byte;
+  gblUseTorus :boolean;
+  gblGenCnt   : integer;
+ 
+procedure PrintGen;
+const
+  cChar: array[0..1] of char = (' ','#');
+var
+  p0 : tpIntArr;
+  col,row: integer;
+  s : string[colMax];
+begin
+  setlength(s,colmax);
+  gotoxy(1,1);
+  writeln(gblGenCnt:10);
+  For row := 1 to rowMax do
+  begin
+    p0 := @pBoards[gblActBoard]^[row,0];;
+    For col := 1 to colMax do
+      s[col] := cChar[p0[col]];
+    writeln(s);
+  end;
+  delay(cDelay);
+end;
+ 
+procedure Init0(useTorus:boolean);
+begin
+  gblUseTorus := useTorus;
+  gblGenCnt := 0;
+  fillchar(aBoard,SizeOf(aBoard),#0);
+  pBoards[0] := @aBoard;
+  pBoards[1] := @bBoard;
+  gblActBoard := 0;
+ 
+  clrscr;
+end;
+ 
+procedure InitRandom(useTorus:boolean);
+var
+  col,row : integer;
+begin
+  Init0(useTorus);
+  For row := 1 to rowMax do
+    For col := 1 to colMax do
+      aBoard[row,col]:= tFldElem(random>0.9);
+end;
+ 
+procedure InitBlinker(useTorus:boolean);
+var
+  col,row : integer;
+begin
+  Init0(useTorus);
+  For col := 1 to colMax do
+  begin
+    IF (col+2) mod 4 = 0 then
+      begin
+      For row := 1 to rowmax do
+        IF row mod 4 <> 0 then
+          aBoard[row,col]:= 1;
+      end;
+  end;
+end;
+ 
+procedure Torus;
+var
+  p0 : tpIntArr;
+  row: integer;
+begin
+  //copy column 1-> colMax+1 and colMax-> 0
+  p0 := @pBoards[gblActBoard]^[1,0];
+  For row := 1 to rowMax do
+    begin
+    p0^[0] := p0^[colMax];
+    p0^[colmax+1] := p0^[1];
+    //next row
+    p0 := Pointer(PtrUint(p0)+SizeOf(tRow));
+    end;
+  //copy row  1-> rowMax+1
+  move(pBoards[gblActBoard]^[1,0],pBoards[gblActBoard]^[rowMax+1,0],sizeof(trow));
+  //copy row  rowMax-> 0
+  move(pBoards[gblActBoard]^[rowMax,0],pBoards[gblActBoard]^[0,0],sizeof(trow));
+end;
+ 
+function Survive(p: tpIntArr):tFldElem;
+//p points to actual_board [row-1,col-1]
+//calculates the sum of alive around [row,col] aka p^[dr+1]
+//really fast using fpc 2.6.4 no element on stack
+const
+  cSurvives : array[boolean,0..8] of byte =
+              //0,1,2,3,4,5,6,7,8     sum of alive neighbours
+              ((0,0,0,1,0,0,0,0,0),   {alive =false 1->born}
+               (0,0,1,1,0,0,0,0,0));  {alive =true  0->die }
+var
+  sum : integer;
+begin
+  // row above
+  // sum := byte(aBoard[row-1,col-1])+byte(aBoard[row-1,col])+byte(aBoard[row-1,col+1]);
+  sum :=     integer(p^[     0])+integer(p^[     1])+integer(p^[     2]);
+  sum := sum+integer(p^[  dr+0])                    +integer(p^[  dr+2]);
+  sum := sum+integer(p^[2*dr+0])+integer(p^[2*dr+1])+integer(p^[2*dr+2]);
+  survive := cSurvives[boolean(p^[dr+1]),sum];
+end;
+ 
+procedure NextGen;
+var
+  p0,p1 : tpFldElem;
+  row: NativeInt;
+  col :NativeInt;
+begin
+  if gblUseTorus then
+    Torus;
+  p1 := @pBoards[1-gblActBoard]^[1,1];
+  //One row above and one column before because of survive
+  p0 := @pBoards[  gblActBoard]^[0,0];
+  For row := rowMax-1 downto 0 do
+  begin
+    For col := colMax-1 downto 0 do
+    begin
+      p1^ := survive(tpIntArr(p0));
+      inc(p0);
+      inc(p1);
+    end;
+    // jump over the borders
+    inc(p1,2);
+    inc(p0,2);
+  end;
+  //aBoard := bBoard;
+  gblActBoard :=1-gblActBoard;
+  inc(gblGenCnt);
+end;
+ 
+begin
+  InitBlinker(false);
+  repeat
+    PrintGen;
+    NextGen;
+  until keypressed;
+  PrintGen;
+end.
+
+my ($width, $height, $generations) = @ARGV;
+ 
+my $printed;
+ 
+sub generate {
+   (map
+       {[ (map { rand () < 0.5 } 1 .. $width), 0 ]}
+       1 .. $height),
+   [(0) x ($width + 1)];
+}
+ 
+sub nexgen {
+   my @prev = map {[@$_]} @_;
+   my @new = map {[ (0) x ($width + 1) ]} 0 .. $height;
+   foreach my $row ( 0 .. $height - 1 ) {
+       foreach my $col ( 0 .. $width - 1 ) {
+           my $val =
+             $prev[ $row - 1 ][ $col - 1 ] +
+             $prev[ $row - 1 ][ $col     ] +
+             $prev[ $row - 1 ][ $col + 1 ] +
+             $prev[ $row     ][ $col - 1 ] +
+             $prev[ $row     ][ $col + 1 ] +
+             $prev[ $row + 1 ][ $col - 1 ] +
+             $prev[ $row + 1 ][ $col     ] +
+             $prev[ $row + 1 ][ $col + 1 ];
+           $new[$row][$col] =
+               ( $prev[$row][$col] && $val == 2 || $val == 3 );
+       }
+   }
+   return @new;
+}
+ 
+sub printlife {
+   my @life = @_;
+   if ($printed) {
+	# Move the cursor up to print over prior generation.
+	print "\e[1A" x $height;
+   }
+   $printed = 1;
+   foreach my $row ( 0 .. $height - 1 ) {
+       foreach my $col ( 0 .. $width - 1 ) {
+           print($life[$row][$col]
+             ? "\e[33;45;1m \e[0m"
+             : "\e[1;34;1m \e[0m");
+       }
+       print "\n";
+   }
+}
+ 
+my @life = generate;
+print "Start\n";
+printlife @life;
+foreach my $stage ( 1 .. $generations ) {
+   sleep 1;
+   print "Generation $stage\n\e[1A";
+   @life = nexgen @life;
+   printlife @life;
+}
+print "\n";
+
+import random
+from collections import defaultdict
+ 
+printdead, printlive = '-#'
+maxgenerations = 3
+cellcount = 3,3
+celltable = defaultdict(int, {
+ (1, 2): 1,
+ (1, 3): 1,
+ (0, 3): 1,
+ } ) # Only need to populate with the keys leading to life
+ 
+##
+## Start States
+##
+# blinker
+u = universe = defaultdict(int)
+u[(1,0)], u[(1,1)], u[(1,2)] = 1,1,1
+ 
+## toad
+#u = universe = defaultdict(int)
+#u[(5,5)], u[(5,6)], u[(5,7)] = 1,1,1
+#u[(6,6)], u[(6,7)], u[(6,8)] = 1,1,1
+ 
+## glider
+#u = universe = defaultdict(int)
+#maxgenerations = 16
+#u[(5,5)], u[(5,6)], u[(5,7)] = 1,1,1
+#u[(6,5)] = 1
+#u[(7,6)] = 1
+ 
+## random start
+#universe = defaultdict(int, 
+#                       # array of random start values
+#                       ( ((row, col), random.choice((0,1)))
+#                         for col in range(cellcount[0])
+#                         for row in range(cellcount[1])
+#                       ) )  # returns 0 for out of bounds
+ 
+for i in range(maxgenerations):
+    print "\nGeneration %3i:" % ( i, )
+    for row in range(cellcount[1]):
+        print "  ", ''.join(str(universe[(row,col)])
+                            for col in range(cellcount[0])).replace(
+                                '0', printdead).replace('1', printlive)
+    nextgeneration = defaultdict(int)
+    for row in range(cellcount[1]):
+        for col in range(cellcount[0]):
+            nextgeneration[(row,col)] = celltable[
+                ( universe[(row,col)],
+                  -universe[(row,col)] + sum(universe[(r,c)]
+                                             for r in range(row-1,row+2)
+                                             for c in range(col-1, col+2) )
+                ) ]
+    universe = nextgeneration
+
+# Generates a new board - either a random one, sample blinker or gliders, or user specified.
+gen.board <- function(type="random", nrow=3, ncol=3, seeds=NULL)
+{
+    if(type=="random")
+    {
+       return(matrix(runif(nrow*ncol) > 0.5, nrow=nrow, ncol=ncol))
+    } else if(type=="blinker")
+    {
+       seeds <- list(c(2,1),c(2,2),c(2,3))
+    } else if(type=="glider")
+    {
+       seeds <- list(c(1,2),c(2,3),c(3,1), c(3,2), c(3,3))
+    }
+    board <- matrix(FALSE, nrow=nrow, ncol=ncol) 
+    for(k in seq_along(seeds))
+    {
+      board[seeds[[k]][1],seeds[[k]][2]] <- TRUE
+    }
+    board
+}
+ 
+# Returns the number of living neighbours to a location
+count.neighbours <- function(x,i,j) 
+{   
+   sum(x[max(1,i-1):min(nrow(x),i+1),max(1,j-1):min(ncol(x),j+1)]) - x[i,j]
+}
+ 
+# Implements the rulebase
+determine.new.state <- function(board, i, j)
+{
+   N <- count.neighbours(board,i,j)
+   (N == 3 || (N ==2 && board[i,j]))
+}
+ 
+# Generates the next interation of the board from the existing one
+evolve <- function(board)
+{ 
+   newboard <- board
+   for(i in seq_len(nrow(board)))
+   {
+      for(j in seq_len(ncol(board)))
+      {
+         newboard[i,j] <- determine.new.state(board,i,j)         
+      }   
+   }
+   newboard
+}
+ 
+# Plays the game.  By default, the board is shown in a plot window, though output to the console if possible.
+game.of.life <- function(board, nsteps=50, timebetweensteps=0.25, graphicaloutput=TRUE)
+{
+   if(!require(lattice)) stop("lattice package could not be loaded")   
+   nr <- nrow(board)
+ 
+   for(i in seq_len(nsteps))
+   {
+      if(graphicaloutput) 
+      {
+         print(levelplot(t(board[nr:1,]), colorkey=FALSE)) 
+      } else print(board)  
+ 
+      Sys.sleep(timebetweensteps)
+ 
+      newboard <- evolve(board)
+ 
+      if(all(newboard==board))
+      {
+         message("board is static")
+         break
+      } else if(sum(newboard) < 1)
+      {
+         message("everything is dead")
+         break
+      } else board <- newboard
+   }   
+   invisible(board)
+}
+ 
+# Example usage
+game.of.life(gen.board("blinker"))
+game.of.life(gen.board("glider", 18, 20))
+game.of.life(gen.board(, 50, 50))
+
+def game_of_life(name, size, generations, initial_life=nil)
+  board = new_board size
+  seed board, size, initial_life
+  print_board board, name, 0
+  reason = generations.times do |gen|
+    new = evolve board, size
+    print_board new, name, gen+1
+    break :all_dead if barren? new, size
+    break :static   if board == new
+    board = new
+  end
+  if    reason == :all_dead then puts "no more life."
+  elsif reason == :static   then puts "no movement"
+  else                           puts "specified lifetime ended"
+  end
+  puts
+end
+ 
+def new_board(n)
+  Array.new(n) {Array.new(n, 0)}
+end
+ 
+def seed(board, n, points=nil)
+  if points.nil?
+    # randomly seed board
+    indices = []
+    n.times {|x| n.times {|y| indices << [x,y] }}
+    indices.shuffle[0,10].each {|x,y| board[y][x] = 1}
+  else
+    points.each {|x, y| board[y][x] = 1}
+  end
+end
+ 
+def evolve(board, n)
+  new = new_board n
+  n.times {|i| n.times {|j| new[i][j] = fate board, i, j, n}}
+  new
+end
+ 
+def fate(board, i, j, n)
+  i1 = [0, i-1].max; i2 = [i+1, n-1].min
+  j1 = [0, j-1].max; j2 = [j+1, n-1].min
+  sum = 0
+  for ii in (i1..i2)
+    for jj in (j1..j2)
+      sum += board[ii][jj] if not (ii == i and jj == j)
+    end
+  end
+  (sum == 3 or (sum == 2 and board[i][j] == 1)) ? 1 : 0
+end
+ 
+def barren?(board, n)
+  n.times {|i| n.times {|j| return false if board[i][j] == 1}}
+  true
+end
+ 
+def print_board(m, name, generation)
+  puts "#{name}: generation #{generation}"
+  m.each {|row| row.each {|val| print "#{val == 1 ? '#' : '.'} "}; puts}
+end
+ 
+game_of_life "blinker", 3, 2, [[1,0],[1,1],[1,2]]
+game_of_life "glider", 4, 4, [[1,0],[2,1],[0,2],[1,2],[2,2]]
+game_of_life "random", 5, 10
+
+package require Tcl 8.5 
+ 
+proc main {} {
+    evolve 3 blinker [initialize_tableau {3 3} {{0 1} {1 1} {2 1}}]
+    evolve 5 glider  [initialize_tableau {4 4} {{0 1} {1 2} {2 0} {2 1} {2 2}}]
+}
+ 
+proc evolve {generations name tableau} {
+    for {set gen 1} {$gen <= $generations} {incr gen} {
+        puts "$name generation $gen:"
+        print $tableau
+        set tableau [next_generation $tableau]
+    }
+    puts ""
+}
+ 
+proc initialize_tableau {size initial_life} {
+    lassign $size ::max_x ::max_y 
+    set tableau [blank_tableau]
+    foreach point $initial_life {
+        lset tableau {*}$point 1
+    }
+    return $tableau
+}
+ 
+proc blank_tableau {} {
+    return [lrepeat $::max_x [lrepeat $::max_y 0]]
+}
+ 
+proc print {tableau} {
+    foreach row $tableau {puts [string map {0 . 1 #} [join $row]]}
+}
+ 
+proc next_generation {tableau} {
+    set new [blank_tableau]
+    for {set x 0} {$x < $::max_x} {incr x} {
+        for {set y 0} {$y < $::max_y} {incr y} {
+            lset new $x $y [fate [list $x $y] $tableau]
+        }
+    }
+    return $new
+}
+ 
+proc fate {point tableau} {
+    set current [value $point $tableau]
+    set neighbours [sum_neighbours $point $tableau]
+    return [expr {($neighbours == 3) || ($neighbours == 2 && $current == 1)}]
+}
+ 
+proc value {point tableau} {
+    return [lindex $tableau {*}$point]
+}
+ 
+proc sum_neighbours {point tableau} {
+    set sum 0
+    foreach neighbour [get_neighbours $point] {
+        incr sum [value $neighbour $tableau]
+    }
+    return $sum
+}
+ 
+proc get_neighbours {point} {
+    lassign $point x y
+    set results [list]
+    foreach x_off {-1 0 1} {
+        foreach y_off {-1 0 1} {
+            if { ! ($x_off == 0 && $y_off == 0)} {
+                set i [expr {$x + $x_off}] 
+                set j [expr {$y + $y_off}]
+                if {(0 <= $i && $i < $::max_x) && (0 <= $j && $j < $::max_y)} {
+                    lappend results [list $i $j]
+                }
+            }
+        }
+    }
+    return $results
+}
+ 
+main
