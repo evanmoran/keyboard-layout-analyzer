@@ -356,7 +356,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/main.htm',
     "<div>\n" +
     "    <div class=\"jumbotron subhead\">\n" +
-    "        This is <a href=\"https://github.com/ColemakMods/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"#/about\">About Page</a> [@todo] for explanation.\n" +
+    "        This is <a href=\"https://github.com/stevep99/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"#/about\">About Page</a> [@todo] for explanation.\n" +
     "        <br/>\n" +
     "        <br/>\n" +
     "        <h1>Analyze Text Input</h1>\n" +
@@ -418,7 +418,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "        <div>\n" +
     "            <br/>\n" +
-    "            <p>Preset source texts are from <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">patorjk's original repo</a> and from <a href=\"https://bitbucket.org/Shenafu/keyboard-layout-analyzer/src/master/\">sheenafu's fork</a>.</p>\n" +
+    "            <p>Preset source texts are from <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">patorjk's original repo</a> and from <a href=\"https://bitbucket.org/Shenafu/keyboard-layout-analyzer/src/master/\">shenafu's fork</a>.</p>\n" +
     "        </div>\n" +
     "    </form>\n" +
     "</div>\n"
