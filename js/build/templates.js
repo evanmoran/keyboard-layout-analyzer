@@ -140,8 +140,8 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                <div class='control-group'>\n" +
     "                                    <label class='control-label' for=\"kb-config-kbtype\">More Info:</label>\n" +
     "                                    <div class='controls'>\n" +
-    "                                        <div ng-show='!isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>None</div>\n" +
-    "                                        <div ng-show='isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>\n" +
+    "                                        <div ng-hide='keyboards.getLayout(current).keySet.moreInfoUrl' style='padding:5px 7px;'>    None</div>\n" +
+    "                                        <div ng-show='keyboards.getLayout(current).keySet.moreInfoUrl' style='padding:5px 7px;'>\n" +
     "                                            <a href='{{keyboards.getLayout(current).keySet.moreInfoUrl}}'>{{keyboards.getLayout(current).keySet.moreInfoText}}</a>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
@@ -168,28 +168,22 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                    <div class='controls'>\n" +
     "                                        <select id=\"kb-config-select-list\" class=\"kb-config-select-list\">\n" +
     "                                            <option value=\"none\">[Select Layout]</option>\n" +
-    "                                            <optgroup label=\"US-International Keyboards\">\n" +
+    "                                            <optgroup label=\"ANSI Keyboards\">\n" +
     "                                                <option value=\"standard.abcdef\">ABCDEF</option>\n" +
-    "                                                <option value=\"standard.acemak1\">Acemak 1</option>\n" +
-    "                                                <option value=\"standard.aoeyk\">AOEYK</option>\n" +
-    "                                                <!--<option value=\"standard.ashley-gudyr\">ASHLEY-GUDYR</option>-->\n" +
-    "                                                <option value=\"standard.anglian\">Anglian</option>\n" +
     "                                                <option value=\"standard.arensito\">Arensito</option>\n" +
     "                                                <option value=\"standard.asset\">Asset</option>\n" +
-    "                                                <option value=\"standard.balance-twelve\">Balance Twelve</option>\n" +
-    "                                                <option value=\"standard.bvofrak\">BvoFRak EN V0.5</option>\n" +
-    "                                                <option value=\"standard.bvofrak1\">BvoFRak V1.0 FR</option>\n" +
-    "                                                <option value=\"standard.eaton\">EAton</option>\n" +
     "                                                <option value=\"standard.capewell\">Capewell</option>\n" +
     "                                                <option value=\"standard.carpalxq\">CarpalxQ</option>\n" +
-    "                                                <option value=\"standard.chin\">CHIN</option>\n" +
-    "                                                <option value=\"standard.chin-programmer\">CHIN-Programmer</option>\n" +
     "                                                <option value=\"standard.colemak\">Colemak</option>\n" +
-    "                                                <option value=\"standard.colemakuk\">Colemak Mod UK</option>\n" +
-    "                                                <option value=\"standard.colemakjph\">Colemak Mod JPH</option>\n" +
-    "                                                <option value=\"standard.hieamtsrn\">HIEAMTSRN</option>\n" +
-    "                                                <option value=\"standard.jppe\">JPPE</option>\n" +
-    "                                                <option value=\"standard.kaeteker\">Kaeteker's Modified Dvorak</option>\n" +
+    "                                                <option value=\"standard.colemak_dh\">Colemak-DH (Mod-DH)</option>\n" +
+    "                                                <option value=\"standard.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
+    "                                                <option value=\"standard.tarmak1\">Colemak - Tarmak 1</option>\n" +
+    "                                                <option value=\"standard.tarmak2\">Colemak - Tarmak 2</option>\n" +
+    "                                                <option value=\"standard.tarmak3\">Colemak - Tarmak 3</option>\n" +
+    "                                                <option value=\"standard.tarmak4\">Colemak - Tarmak 4</option>\n" +
+    "                                                <option value=\"standard.simplifiedDvorak\">Dvorak (Simplified)</option>\n" +
+    "                                                <option value=\"standard.programmerDvorak\">Dvorak (Programmer)</option>\n" +
+    "                                                <option value=\"standard.spanish-dvorak\">Dvorak (Spanish)</option>\n" +
     "                                                <option value=\"standard.klausler\">Klausler</option>\n" +
     "                                                <option value=\"standard.minimak8key\">Minimak 8-key</option>\n" +
     "                                                <option value=\"standard.minimak12key\">Minimak 12-key</option>\n" +
@@ -197,57 +191,35 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"standard.neo2\">Neo 2 (v1)</option>\n" +
     "                                                <option value=\"standard.neo2_new\">Neo 2 (v2)</option>\n" +
     "                                                <option value=\"standard.norman\">Norman</option>\n" +
-    "                                                <!--<option value=\"standard.nrstm\">NRSTM</option>-->\n" +
-    "                                                <option value=\"standard.oiseau\">OISEAU</option>\n" +
     "                                                <option value=\"standard.ohdvorakl\">One-handed Dvorak (Left)</option>\n" +
     "                                                <option value=\"standard.ohdvorakr\">One-handed Dvorak (Right)</option>\n" +
-    "                                                <option value=\"standard.colemakss\">Programmer Colemak</option>\n" +
-    "                                                <option value=\"standard.programmerDvorak\">Programmer Dvorak</option>\n" +
     "                                                <option value=\"standard.qgmlwy\">QGMLWY</option>\n" +
     "                                                <option value=\"standard.qwerfj\">QWERFJ</option>\n" +
     "                                                <option value=\"standard.qwerty\">QWERTY</option>\n" +
-    "                                                <option value=\"standard.qwerty-programmer\">QWERTY-Programmer</option>\n" +
-    "                                                <option value=\"standard.qwertymod\">QWERTY: Top Row +Thumbs</option>\n" +
-    "                                                <option value=\"standard.qwertywm\">QWERTY: Wide Mod</option>\n" +
+    "                                                <option value=\"standard.qwertywm\">QWERTY - Wide Mod</option>\n" +
     "                                                <option value=\"standard.qwpr\">QWPR</option>\n" +
     "                                                <option value=\"standard.russian\">Russian</option>\n" +
-    "                                                <option value=\"standard.simplifiedDvorak\">Simplified Dvorak</option>\n" +
-    "                                                <option value=\"standard.dvorakmb\">Simplified Dvorak w/ Caps as Backspace</option>\n" +
-    "                                                <option value=\"standard.dvorakmod\">Simplified Dvorak UI Swap w/ Caps as Backspace</option>\n" +
-    "                                                <option value=\"standard.spanish-dvorak\">Spanish Dvorak</option>\n" +
-    "                                                <option value=\"standard.stndc\">STNDC</option>\n" +
-    "                                                <option value=\"standard.tarmak1\">Tarmak 1</option>\n" +
-    "                                                <option value=\"standard.tarmak2\">Tarmak 2</option>\n" +
-    "                                                <option value=\"standard.tarmak3\">Tarmak 3</option>\n" +
-    "                                                <option value=\"standard.tarmak4\">Tarmak 4</option>\n" +
-    "                                                <option value=\"standard.typehack\">TypeHacK</option>\n" +
-    "                                                <option value=\"standard.typematrix\">Typematrix</option>\n" +
-    "                                                <option value=\"standard.vukeys\">Vu Keys</option>\n" +
     "                                                <option value=\"standard.workman\">Workman</option>\n" +
     "                                            </optgroup>\n" +
-    "                                            <optgroup label=\"European Keyboards\">\n" +
+    "                                            <optgroup label=\"ISO Keyboards\">\n" +
     "                                                <option value=\"european.azerty\">AZERTY</option>\n" +
     "                                                <option value=\"european.bepo\">BÉPO</option>\n" +
-    "                                                <option value=\"european.bvofrak1\">BvoFRak V1.0 FR</option>\n" +
-    "                                                <option value=\"european.germandvorak2\">German Dvorak Type II</option>\n" +
+    "                                                <option value=\"european.colemak\">Colemak</option>\n" +
+    "                                                <option value=\"european.colemak_dh\">Colemak-DH (Mod-DH)</option>\n" +
+    "                                                <option value=\"european.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
     "                                                <option value=\"european.qwerty\">QWERTY</option>\n" +
-    "                                                <option value=\"european.english-varient\">QWERTY (English Varient)</option>\n" +
     "                                                <option value=\"european.qwerty-spanish\">QWERTY (Spanish)</option>\n" +
     "                                                <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
     "                                            </optgroup>\n" +
     "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
-    "                                                <option value=\"ergodox.colemak\">Ergodox Colemak (v1)</option>\n" +
-    "                                                <option value=\"ergodox.colemak2\">Ergodox Colemak (v2)</option>\n" +
-    "                                                <option value=\"ergodox.colemakjjt2\">Ergodox Colemak (JJT)</option>\n" +
-    "                                                <option value=\"ergodox.colemakcub\">Ergodox Colemak/Cub</option>\n" +
-    "                                                <option value=\"ergodox.gelatin\">Ergodox Gelatin</option>\n" +
-    "                                                <option value=\"ergodox.qgmlwbcub\">Ergodox QGMLWB/Cub</option>\n" +
-    "                                                <option value=\"ergodox.qgmlwycub\">Ergodox QGMLWY/Cub</option>\n" +
-    "                                                <option value=\"ergodox.qwerty\">Ergodox QWERTY</option>\n" +
-    "                                                <option value=\"ergodox.neo2_inprogress\">Ergodox Neo 2 (in progress)</option>\n" +
-    "                                                <option value=\"ergodox.norman\">Ergodox Norman</option>\n" +
-    "                                                <option value=\"ergodox.workman\">Ergodox Workman for Programmers with cub@uanic Modifications</option>\n" +
-    "                                                <option value=\"ergodox.kinesis-advantage-colemak\">Kinesis Advantage Colemak</option>\n" +
+    "                                                <option value=\"ergodox.colemak2\">Colemak</option>\n" +
+    "                                                <option value=\"ergodox.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
+    "                                                <option value=\"ergodox.qgmlwbcub\">QGMLWB/Cub</option>\n" +
+    "                                                <option value=\"ergodox.qgmlwycub\">QGMLWY/Cub</option>\n" +
+    "                                                <option value=\"ergodox.qwerty\">QWERTY</option>\n" +
+    "                                                <option value=\"ergodox.norman\">Norman</option>\n" +
+    "                                                <option value=\"ergodox.workman\">Workman</option>\n" +
+    "                                                <option value=\"ergodox.kinesis-advantage-colemak\">Colemak (Kinesis Advantage)</option>\n" +
     "                                            </optgroup>\n" +
     "\n" +
     "                                        </select>\n" +
@@ -384,7 +356,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/main.htm',
     "<div>\n" +
     "    <div class=\"jumbotron subhead\">\n" +
-    "        This is <a href=\"https://github.com/ColemakMods/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"/#/about\">About Page</a> [@todo] for explanation.\n" +
+    "        This is <a href=\"https://github.com/ColemakMods/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"#/about\">About Page</a> [@todo] for explanation.\n" +
     "        <br/>\n" +
     "        <br/>\n" +
     "        <h1>Analyze Text Input</h1>\n" +

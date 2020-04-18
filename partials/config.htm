@@ -45,8 +45,8 @@
                                 <div class='control-group'>
                                     <label class='control-label' for="kb-config-kbtype">More Info:</label>
                                     <div class='controls'>
-                                        <div ng-show='!isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>None</div>
-                                        <div ng-show='isMoreInfo(keyboards.getLayout(current).keySet)' style='padding:5px 7px;'>
+                                        <div ng-hide='keyboards.getLayout(current).keySet.moreInfoUrl' style='padding:5px 7px;'>    None</div>
+                                        <div ng-show='keyboards.getLayout(current).keySet.moreInfoUrl' style='padding:5px 7px;'>
                                             <a href='{{keyboards.getLayout(current).keySet.moreInfoUrl}}'>{{keyboards.getLayout(current).keySet.moreInfoText}}</a>
                                         </div>
                                     </div>
@@ -73,28 +73,22 @@
                                     <div class='controls'>
                                         <select id="kb-config-select-list" class="kb-config-select-list">
                                             <option value="none">[Select Layout]</option>
-                                            <optgroup label="US-International Keyboards">
+                                            <optgroup label="ANSI Keyboards">
                                                 <option value="standard.abcdef">ABCDEF</option>
-                                                <option value="standard.acemak1">Acemak 1</option>
-                                                <option value="standard.aoeyk">AOEYK</option>
-                                                <!--<option value="standard.ashley-gudyr">ASHLEY-GUDYR</option>-->
-                                                <option value="standard.anglian">Anglian</option>
                                                 <option value="standard.arensito">Arensito</option>
                                                 <option value="standard.asset">Asset</option>
-                                                <option value="standard.balance-twelve">Balance Twelve</option>
-                                                <option value="standard.bvofrak">BvoFRak EN V0.5</option>
-                                                <option value="standard.bvofrak1">BvoFRak V1.0 FR</option>
-                                                <option value="standard.eaton">EAton</option>
                                                 <option value="standard.capewell">Capewell</option>
                                                 <option value="standard.carpalxq">CarpalxQ</option>
-                                                <option value="standard.chin">CHIN</option>
-                                                <option value="standard.chin-programmer">CHIN-Programmer</option>
                                                 <option value="standard.colemak">Colemak</option>
-                                                <option value="standard.colemakuk">Colemak Mod UK</option>
-                                                <option value="standard.colemakjph">Colemak Mod JPH</option>
-                                                <option value="standard.hieamtsrn">HIEAMTSRN</option>
-                                                <option value="standard.jppe">JPPE</option>
-                                                <option value="standard.kaeteker">Kaeteker's Modified Dvorak</option>
+                                                <option value="standard.colemak_dh">Colemak-DH (Mod-DH)</option>
+                                                <option value="standard.colemak_dhm">Colemak-DHm (Mod-DH)</option>
+                                                <option value="standard.tarmak1">Colemak - Tarmak 1</option>
+                                                <option value="standard.tarmak2">Colemak - Tarmak 2</option>
+                                                <option value="standard.tarmak3">Colemak - Tarmak 3</option>
+                                                <option value="standard.tarmak4">Colemak - Tarmak 4</option>
+                                                <option value="standard.simplifiedDvorak">Dvorak (Simplified)</option>
+                                                <option value="standard.programmerDvorak">Dvorak (Programmer)</option>
+                                                <option value="standard.spanish-dvorak">Dvorak (Spanish)</option>
                                                 <option value="standard.klausler">Klausler</option>
                                                 <option value="standard.minimak8key">Minimak 8-key</option>
                                                 <option value="standard.minimak12key">Minimak 12-key</option>
@@ -102,57 +96,35 @@
                                                 <option value="standard.neo2">Neo 2 (v1)</option>
                                                 <option value="standard.neo2_new">Neo 2 (v2)</option>
                                                 <option value="standard.norman">Norman</option>
-                                                <!--<option value="standard.nrstm">NRSTM</option>-->
-                                                <option value="standard.oiseau">OISEAU</option>
                                                 <option value="standard.ohdvorakl">One-handed Dvorak (Left)</option>
                                                 <option value="standard.ohdvorakr">One-handed Dvorak (Right)</option>
-                                                <option value="standard.colemakss">Programmer Colemak</option>
-                                                <option value="standard.programmerDvorak">Programmer Dvorak</option>
                                                 <option value="standard.qgmlwy">QGMLWY</option>
                                                 <option value="standard.qwerfj">QWERFJ</option>
                                                 <option value="standard.qwerty">QWERTY</option>
-                                                <option value="standard.qwerty-programmer">QWERTY-Programmer</option>
-                                                <option value="standard.qwertymod">QWERTY: Top Row +Thumbs</option>
-                                                <option value="standard.qwertywm">QWERTY: Wide Mod</option>
+                                                <option value="standard.qwertywm">QWERTY - Wide Mod</option>
                                                 <option value="standard.qwpr">QWPR</option>
                                                 <option value="standard.russian">Russian</option>
-                                                <option value="standard.simplifiedDvorak">Simplified Dvorak</option>
-                                                <option value="standard.dvorakmb">Simplified Dvorak w/ Caps as Backspace</option>
-                                                <option value="standard.dvorakmod">Simplified Dvorak UI Swap w/ Caps as Backspace</option>
-                                                <option value="standard.spanish-dvorak">Spanish Dvorak</option>
-                                                <option value="standard.stndc">STNDC</option>
-                                                <option value="standard.tarmak1">Tarmak 1</option>
-                                                <option value="standard.tarmak2">Tarmak 2</option>
-                                                <option value="standard.tarmak3">Tarmak 3</option>
-                                                <option value="standard.tarmak4">Tarmak 4</option>
-                                                <option value="standard.typehack">TypeHacK</option>
-                                                <option value="standard.typematrix">Typematrix</option>
-                                                <option value="standard.vukeys">Vu Keys</option>
                                                 <option value="standard.workman">Workman</option>
                                             </optgroup>
-                                            <optgroup label="European Keyboards">
+                                            <optgroup label="ISO Keyboards">
                                                 <option value="european.azerty">AZERTY</option>
                                                 <option value="european.bepo">BÉPO</option>
-                                                <option value="european.bvofrak1">BvoFRak V1.0 FR</option>
-                                                <option value="european.germandvorak2">German Dvorak Type II</option>
+                                                <option value="european.colemak">Colemak</option>
+                                                <option value="european.colemak_dh">Colemak-DH (Mod-DH)</option>
+                                                <option value="european.colemak_dhm">Colemak-DHm (Mod-DH)</option>
                                                 <option value="european.qwerty">QWERTY</option>
-                                                <option value="european.english-varient">QWERTY (English Varient)</option>
                                                 <option value="european.qwerty-spanish">QWERTY (Spanish)</option>
                                                 <option value="european.qwerty-estonian">QWERTY (Estonian)</option>
                                             </optgroup>
                                             <optgroup label="Ergodox Keyboards">
-                                                <option value="ergodox.colemak">Ergodox Colemak (v1)</option>
-                                                <option value="ergodox.colemak2">Ergodox Colemak (v2)</option>
-                                                <option value="ergodox.colemakjjt2">Ergodox Colemak (JJT)</option>
-                                                <option value="ergodox.colemakcub">Ergodox Colemak/Cub</option>
-                                                <option value="ergodox.gelatin">Ergodox Gelatin</option>
-                                                <option value="ergodox.qgmlwbcub">Ergodox QGMLWB/Cub</option>
-                                                <option value="ergodox.qgmlwycub">Ergodox QGMLWY/Cub</option>
-                                                <option value="ergodox.qwerty">Ergodox QWERTY</option>
-                                                <option value="ergodox.neo2_inprogress">Ergodox Neo 2 (in progress)</option>
-                                                <option value="ergodox.norman">Ergodox Norman</option>
-                                                <option value="ergodox.workman">Ergodox Workman for Programmers with cub@uanic Modifications</option>
-                                                <option value="ergodox.kinesis-advantage-colemak">Kinesis Advantage Colemak</option>
+                                                <option value="ergodox.colemak2">Colemak</option>
+                                                <option value="ergodox.colemak_dhm">Colemak-DHm (Mod-DH)</option>
+                                                <option value="ergodox.qgmlwbcub">QGMLWB/Cub</option>
+                                                <option value="ergodox.qgmlwycub">QGMLWY/Cub</option>
+                                                <option value="ergodox.qwerty">QWERTY</option>
+                                                <option value="ergodox.norman">Norman</option>
+                                                <option value="ergodox.workman">Workman</option>
+                                                <option value="ergodox.kinesis-advantage-colemak">Colemak (Kinesis Advantage)</option>
                                             </optgroup>
 
                                         </select>
