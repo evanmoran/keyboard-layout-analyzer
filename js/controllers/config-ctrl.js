@@ -67,12 +67,8 @@ appControllers.controller('ConfigCtrl', ['$scope', '$http', '$timeout', '$log', 
             	});
             } else {
 		    	$http({
-		    		method: 'POST',
-		    		url: './api/get-layout.php',
-		    		data: {
-		    			type: val[0],
-		    			label: val[1]
-		    		}
+		    		method: 'GET',
+		    		url: './layouts/' + val[0] + "." + val[1]
 		    	})
 		    	.success(function(data, status, headers, config) {
 	            	keyboards.setLayout( $scope.current, {
