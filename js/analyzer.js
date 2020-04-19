@@ -10,8 +10,12 @@ if (typeof console === 'undefined') {
 
 KLA.Analyzer = (function() {
 
-    var me,
-        distanceBetweenKeysCached;
+    var me, distanceBetweenKeysCached;
+
+    // simulate the arm approaching the keyboard at an angle (15 degrees)
+    var theta = 15.0 * Math.PI / 180.0;
+    var sintheta = Math.sin(theta);
+    var costheta = Math.cos(theta);
 
     me = function() {
         return me;
@@ -27,10 +31,27 @@ KLA.Analyzer = (function() {
         };
     };
 
-    function distanceBetweenKeys(keyMap, keyIndex1, keyIndex2) {
+    function distanceBetweenKeys(keyMap, keyIndex1, keyIndex2, finger) {
         var xDiff = keyMap[keyIndex1].cx - keyMap[keyIndex2].cx,
             yDiff = keyMap[keyIndex1].cy - keyMap[keyIndex2].cy;
-        return Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+        
+        var hand = KB.finger.whichHand(parseInt(finger));
+
+        var xr, yr;
+        if (hand === "left" ) {
+            xr = xDiff * costheta + yDiff * sintheta
+            yr = -xDiff * sintheta + yDiff * costheta
+        } else if (hand === "right") {
+            xr = xDiff * costheta - yDiff * sintheta
+            yr = xDiff * sintheta + yDiff * costheta
+        } else {
+            xr = xDiff;
+            yr = yDiff;
+        }
+        // simulate lateral hand-movements move expensive than vertical finger movements
+        xr *= 1.5;
+        //console.log("hand=%s finger=%s:  xdiff=%f, ydiff=%f ... xr=%f, yr=%f", hand, finger, xDiff, yDiff, xr, yr);
+        return Math.sqrt(xr*xr + yr*yr);
     }
 
     /*
@@ -169,8 +190,7 @@ KLA.Analyzer = (function() {
         for (finger in KB.fingers) {
             if ( except[finger] ) {continue;} // don't return finger if in except list
             if ( fingerHomes[finger] === fingerPositions[finger]) {continue;} // finger already home
-            //console.log("finger:"+finger);
-            analysis.distance[finger] += distanceBetweenKeysCached(keyMap, fingerPositions[finger], fingerHomes[finger] );
+            analysis.distance[finger] += distanceBetweenKeysCached(keyMap, fingerPositions[finger], fingerHomes[finger], finger);
             fingerPositions[finger] = fingerHomes[finger]; // return finger to key
         }
         
@@ -389,7 +409,7 @@ KLA.Analyzer = (function() {
 
         // handle the key that was typed
 
-        analysis.fingerUsage[keyInfo.fingerUsed]++;     
+        analysis.fingerUsage[keyInfo.fingerUsed]++;
         analysis.distance[keyInfo.fingerUsed] += moveFingerToKey( keyMap, fingerPositions, keyInfo );
         analysis.rowUsage[keyMap[keyInfo.keyIndex].row]++;
         analysis.keyData[keyInfo.keyIndex].count++;
@@ -427,7 +447,7 @@ KLA.Analyzer = (function() {
     */
     function moveFingerToKey( keyMap, fingerPositions, keyInfo) {
         //console.log("Entering moveFingerToKey");
-        var dist = distanceBetweenKeysCached(keyMap, keyInfo.keyIndex, fingerPositions[keyInfo.fingerUsed]);
+        var dist = distanceBetweenKeysCached(keyMap, keyInfo.keyIndex, fingerPositions[keyInfo.fingerUsed], keyInfo.fingerUsed);
         fingerPositions[keyInfo.fingerUsed] = keyInfo.keyIndex;
         //console.log("Exiting moveFingerToKey");
         return dist; 
@@ -524,7 +544,7 @@ KLA.Analyzer = (function() {
         
         for (ii = 0; ii < tLen; ii++) {
             charCode = text.charCodeAt(ii);
-            //console.log(charCode);
+            //console.log(charCode + " " + String.fromCharCode(charCode));
 
             // return object contains: fingerUsed, keyIndex, pushType, errors
             char2KeyMap[charCode] = char2KeyMap[charCode] || findCharInKeySet(keySet, charCode);
@@ -593,13 +613,17 @@ KLA.Analyzer = (function() {
         var ii, jj, total = [], len = analysis.length;
         for (ii = 0; ii < len; ii++) {
             total[ii] = 0; 
+            var distu = 0;
             for (jj = 0; jj < analysis[ii].distance.length; jj++) {
                 total[ii] += (analysis[ii].distance[jj] / analysis[ii].pixelsPerCm);
+                distu += analysis[ii].distance[jj]/50;
             }
+            console.log("DIST (u): L%d %f", ii, distu); //for debug: show distance in key units
         }
 
         for (ii = 0; ii < len; ii++) {
             results.distScores[ii] = Math.max(0, 4 - (total[ii] / analysis[ii].numKeys)) / 4;
+            console.log("DIST SCORE: L%d, %f", ii, results.distScores[ii]); 
             if ( !isFinite(results.distScores[ii]) ) { results.distScores[ii]=0;}
         }
         
@@ -609,12 +633,12 @@ KLA.Analyzer = (function() {
         var fScoring = {};
         fScoring[KB.finger.LEFT_PINKY] =    0.5;
         fScoring[KB.finger.LEFT_RING] =     1.0;
-        fScoring[KB.finger.LEFT_MIDDLE] =   4.0;
+        fScoring[KB.finger.LEFT_MIDDLE] =   2.0;
         fScoring[KB.finger.LEFT_INDEX] =    2.0;
-        fScoring[KB.finger.LEFT_THUMB] =    0.5;
-        fScoring[KB.finger.RIGHT_THUMB] =   0.5;
+        fScoring[KB.finger.LEFT_THUMB] =    1.0;
+        fScoring[KB.finger.RIGHT_THUMB] =   1.0;
         fScoring[KB.finger.RIGHT_INDEX] =   2.0;
-        fScoring[KB.finger.RIGHT_MIDDLE] =  4.0;
+        fScoring[KB.finger.RIGHT_MIDDLE] =  2.0;
         fScoring[KB.finger.RIGHT_RING] =    1.0;
         fScoring[KB.finger.RIGHT_PINKY] =   0.5;
         
@@ -626,7 +650,9 @@ KLA.Analyzer = (function() {
                 percent = Math.min(percent, 20); // 20 is the max allowed percent
                 total += (percent * fScoring[jj]);        
             }
-            results.fingerScores[ii] = total / 260; // 220 is max possible score
+            results.fingerScores[ii] = total / 200; // 180 is max possible score
+            console.log("FINGER SCORE: L%d %f", ii, results.fingerScores[ii]); 
+
         }
         
         // CONSEC FINGER USAGE
@@ -641,6 +667,7 @@ KLA.Analyzer = (function() {
         }
         for (ii = 0; ii < len; ii++) {
             results.consecFingerScores[ii] = Math.max(0, 10 - total[ii]) / 10;
+            console.log("CONSEC FINGER USAGE: L%d %f", ii, results.consecFingerScores[ii]); 
         }
         
         // CONSEC HAND USAGE
@@ -653,10 +680,11 @@ KLA.Analyzer = (function() {
         }
         for (ii = 0; ii < len; ii++) {
             results.consecHandScores[ii] = Math.max(0, 50 - total[ii]) / 50;
+            console.log("CONSEC HAND USAGE: L%d %f", ii, results.consecHandScores[ii]); 
         }
         
         // put it all together!
-        var consecHandWeight = 17, consecFingerWeight = 17, fingerUsageWeight = 33, distWeight = 33;
+        var consecHandWeight = 0, consecFingerWeight = 30, fingerUsageWeight = 20, distWeight = 50;
         results.finalList = [];
         for (ii = 0; ii < len; ii++) {
             results.finalList[ii] = {};
