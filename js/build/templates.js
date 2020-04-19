@@ -107,6 +107,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "        <keyboardeditor name=\"2\" current=\"current\"></keyboardeditor>\n" +
     "        <keyboardeditor name=\"3\" current=\"current\"></keyboardeditor>\n" +
     "        <keyboardeditor name=\"4\" current=\"current\"></keyboardeditor>\n" +
+    "        <keyboardeditor name=\"5\" current=\"current\"></keyboardeditor>\n" +
     "\n" +
     "        <table class=\"kb-config-table\">\n" +
     "            <thead>\n" +
@@ -244,7 +245,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "            </tbody>\n" +
     "        </table>\n" +
     "\n" +
-    "        <paginate start=\"1\" stop=\"5\" handler=\"switchLayout\"></paginate>\n" +
+    "        <paginate start=\"1\" stop=\"6\" handler=\"switchLayout\"></paginate>\n" +
     "\n" +
     "        <!-- import modal -->\n" +
     "        <div id='kb-config-import-dialog' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='resultLabel' aria-hidden='true'>\n" +
@@ -521,7 +522,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "        <li class='kla-pill'><a ng-click='tabSwitch($event, \"rowUsage\")' href='#rowUsage'>Row Usage</a></li>\n" +
     "        <li class='kla-pill'><a ng-click='tabSwitch($event, \"heatMaps\")' href='#heatMaps'>Heat Maps</a></li>\n" +
     "        <li class='kla-pill'><a ng-click='tabSwitch($event, \"miscellaneous\")' href='#miscellaneous'>Miscellaneous</a></li>\n" +
-    "        <li class='kla-pill'><a ng-click='tabSwitch($event, \"personalized\")' href='#personalized'>Personalized</a></li>\n" +
+    "        <!-- <li class='kla-pill'><a ng-click='tabSwitch($event, \"personalized\")' href='#personalized'>Personalized</a></li> -->\n" +
     "    </ul>\n" +
     "    <div class='tab-content'>\n" +
     "        <div class='tab-pane active' id='summary'>\n" +
@@ -721,7 +722,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "        <button class=\"btn btn-large\" type=\"button\" ng-click=\"returnToInput()\">Try Another Input</button>\n" +
     "    </div>\n" +
     "\n" +
-    "</div>"
+    "</div>\n"
   );
 
 }]);

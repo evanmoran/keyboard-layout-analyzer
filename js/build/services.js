@@ -33,25 +33,30 @@ appServices.factory('keyboards', [
         layouts[0].keyboard = null;
         
         layouts[1] = {};
-        layouts[1].keySet = $.extend(true, {}, KB.keySet.standard.simplifiedDvorak);
-        layouts[1].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
+        layouts[1].keySet = $.extend(true, {}, KB.keySet.european.azerty);
+        layouts[1].keyMap = $.extend(true, {}, KB.keyMap.european.s683_225);
         layouts[1].keyboard = null;
 
         layouts[2] = {};
-        layouts[2].keySet = $.extend(true, {}, KB.keySet.standard.colemak);
+        layouts[2].keySet = $.extend(true, {}, KB.keySet.standard.simplifiedDvorak);
         layouts[2].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
         layouts[2].keyboard = null;
-        
+
         layouts[3] = {};
-        layouts[3].keySet = $.extend(true, {}, KB.keySet.european.azerty);
-        layouts[3].keyMap = $.extend(true, {}, KB.keyMap.european.s683_225);
+        layouts[3].keySet = $.extend(true, {}, KB.keySet.standard.programmerDvorak);
+        layouts[3].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
         layouts[3].keyboard = null;
-        
+
         layouts[4] = {};
-        layouts[4].keySet = $.extend(true, {}, KB.keySet.standard.programmerDvorak);
+        layouts[4].keySet = $.extend(true, {}, KB.keySet.standard.colemak);
         layouts[4].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
         layouts[4].keyboard = null;
-
+        
+        layouts[5] = {};
+        layouts[5].keySet = $.extend(true, {}, KB.keySet.european.colemak_dh);
+        layouts[5].keyMap = $.extend(true, {}, KB.keyMap.european.s683_225);
+        layouts[5].keyboard = null;
+        
         // public functions
 
         me.registerKeyboard = function(index, elmId) {
@@ -315,6 +320,7 @@ appServices.factory('keyboards', [
 	}
 
 ])
+
 /*
     Service for storing globally available data
 */
@@ -347,6 +353,8 @@ appServices.factory('library', [
 */
 
 var appServices = appServices || angular.module('kla.services', []);
+
+var shouldGeneratePersonalizedLayout = false;
 
 appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'library',
 
@@ -385,33 +393,35 @@ appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'libra
             // ---------------------------------------------------------------------
             // create personal layout
         
-            var qwertyAnalysis = analyzer.examine({
-                text: txt,
-                keyMap: KB.keyMap.standard.s683_225,
-                keySet: KB.keySet.standard.qwerty 
-            });
-            
-            var qKeys = Array.prototype.sort.call(qwertyAnalysis.keyData, function(a, b) {
-                return b.count - a.count;
-            });
-            var pKeys = keyboards.createPersonalLayout(qKeys, KB.keySet.standard.qwerty);
-            
-            var newLayout = {};
-            newLayout.keySet = pKeys;
-            newLayout.keyMap = KB.keyMap.standard.s683_225;
-            
-            analysis[analysis.length] = analyzer.examine({
-                text: txt,
-                keyMap: newLayout.keyMap,
-                keySet: newLayout.keySet
-            });
-            
-            library.set('personalized', newLayout);
-            library.set('inputText', txt);
+            if (shouldGeneratePersonalizedLayout) {
+                var qwertyAnalysis = analyzer.examine({
+                    text: txt,
+                    keyMap: KB.keyMap.standard.s683_225,
+                    keySet: KB.keySet.standard.qwerty 
+                });
+                
+                var qKeys = Array.prototype.sort.call(qwertyAnalysis.keyData, function(a, b) {
+                    return b.count - a.count;
+                });
+                var pKeys = keyboards.createPersonalLayout(qKeys, KB.keySet.standard.qwerty);
+                
+                var newLayout = {};
+                newLayout.keySet = pKeys;
+                newLayout.keyMap = KB.keyMap.standard.s683_225;
+                
+                analysis[analysis.length] = analyzer.examine({
+                    text: txt,
+                    keyMap: newLayout.keyMap,
+                    keySet: newLayout.keySet
+                });
+                
+                library.set('personalized', newLayout);
+                library.set('inputText', txt);
 
-            kLayouts.push(newLayout);
+                kLayouts.push(newLayout);
 
-            $log.info( analysis );
+                $log.info( analysis );
+            }
 
             // --------------------------------------------------------------------
             // Compute best layout
@@ -931,6 +941,7 @@ appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'libra
 	}
 
 ]);
+
 /*
     Service for storing globally available data
 */

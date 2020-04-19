@@ -2,9 +2,9 @@
 
 var KLA = KLA || {};
 
-KLA.maxNumLayouts = 5;
-KLA.numLayoutsToCompare = 5;
-KLA.generatePersonalizedLayout = true;
+KLA.maxNumLayouts = 6;
+KLA.numLayoutsToCompare = 6;
+KLA.generatePersonalizedLayout = false;
 KLA.getNumOutputLayouts = function() {
     if (KLA.shouldGeneratePersonalizedLayout()) {
         return KLA.numLayoutsToCompare + 1;
@@ -16,7 +16,7 @@ KLA.getMaxNumOutputLayouts = function() {
     return KLA.maxNumLayouts + 1;
 };
 KLA.shouldGeneratePersonalizedLayout = function() {
-    return !!document.getElementById("chkBoxUsePersonalLayout").checked;
+    return false;
 };
 
 KLA.displayType = {};

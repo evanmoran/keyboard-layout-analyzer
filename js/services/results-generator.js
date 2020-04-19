@@ -4,6 +4,8 @@
 
 var appServices = appServices || angular.module('kla.services', []);
 
+var shouldGeneratePersonalizedLayout = false;
+
 appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'library',
 
 	function($log, keyboards, analyzer, library) {
@@ -41,33 +43,35 @@ appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'libra
             // ---------------------------------------------------------------------
             // create personal layout
         
-            var qwertyAnalysis = analyzer.examine({
-                text: txt,
-                keyMap: KB.keyMap.standard.s683_225,
-                keySet: KB.keySet.standard.qwerty 
-            });
-            
-            var qKeys = Array.prototype.sort.call(qwertyAnalysis.keyData, function(a, b) {
-                return b.count - a.count;
-            });
-            var pKeys = keyboards.createPersonalLayout(qKeys, KB.keySet.standard.qwerty);
-            
-            var newLayout = {};
-            newLayout.keySet = pKeys;
-            newLayout.keyMap = KB.keyMap.standard.s683_225;
-            
-            analysis[analysis.length] = analyzer.examine({
-                text: txt,
-                keyMap: newLayout.keyMap,
-                keySet: newLayout.keySet
-            });
-            
-            library.set('personalized', newLayout);
-            library.set('inputText', txt);
+            if (shouldGeneratePersonalizedLayout) {
+                var qwertyAnalysis = analyzer.examine({
+                    text: txt,
+                    keyMap: KB.keyMap.standard.s683_225,
+                    keySet: KB.keySet.standard.qwerty 
+                });
+                
+                var qKeys = Array.prototype.sort.call(qwertyAnalysis.keyData, function(a, b) {
+                    return b.count - a.count;
+                });
+                var pKeys = keyboards.createPersonalLayout(qKeys, KB.keySet.standard.qwerty);
+                
+                var newLayout = {};
+                newLayout.keySet = pKeys;
+                newLayout.keyMap = KB.keyMap.standard.s683_225;
+                
+                analysis[analysis.length] = analyzer.examine({
+                    text: txt,
+                    keyMap: newLayout.keyMap,
+                    keySet: newLayout.keySet
+                });
+                
+                library.set('personalized', newLayout);
+                library.set('inputText', txt);
 
-            kLayouts.push(newLayout);
+                kLayouts.push(newLayout);
 
-            $log.info( analysis );
+                $log.info( analysis );
+            }
 
             // --------------------------------------------------------------------
             // Compute best layout

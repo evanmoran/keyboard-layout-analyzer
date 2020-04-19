@@ -19,25 +19,30 @@ appServices.factory('keyboards', [
         layouts[0].keyboard = null;
         
         layouts[1] = {};
-        layouts[1].keySet = $.extend(true, {}, KB.keySet.standard.simplifiedDvorak);
-        layouts[1].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
+        layouts[1].keySet = $.extend(true, {}, KB.keySet.european.azerty);
+        layouts[1].keyMap = $.extend(true, {}, KB.keyMap.european.s683_225);
         layouts[1].keyboard = null;
 
         layouts[2] = {};
-        layouts[2].keySet = $.extend(true, {}, KB.keySet.standard.colemak);
+        layouts[2].keySet = $.extend(true, {}, KB.keySet.standard.simplifiedDvorak);
         layouts[2].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
         layouts[2].keyboard = null;
-        
+
         layouts[3] = {};
-        layouts[3].keySet = $.extend(true, {}, KB.keySet.european.azerty);
-        layouts[3].keyMap = $.extend(true, {}, KB.keyMap.european.s683_225);
+        layouts[3].keySet = $.extend(true, {}, KB.keySet.standard.programmerDvorak);
+        layouts[3].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
         layouts[3].keyboard = null;
-        
+
         layouts[4] = {};
-        layouts[4].keySet = $.extend(true, {}, KB.keySet.standard.programmerDvorak);
+        layouts[4].keySet = $.extend(true, {}, KB.keySet.standard.colemak);
         layouts[4].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
         layouts[4].keyboard = null;
-
+        
+        layouts[5] = {};
+        layouts[5].keySet = $.extend(true, {}, KB.keySet.european.colemak_dh);
+        layouts[5].keyMap = $.extend(true, {}, KB.keyMap.european.s683_225);
+        layouts[5].keyboard = null;
+        
         // public functions
 
         me.registerKeyboard = function(index, elmId) {
