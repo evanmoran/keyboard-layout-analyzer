@@ -4,91 +4,128 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/about.htm',
     "<div>\n" +
     "    <div class=\"jumbotron subhead\">\n" +
-    "        <h1>Keyboard Layouts 101</h1>\n" +
-    "        <p class=\"lead\">A brief introduction<p>\n" +
+    "        <h1>About</h1>\n" +
     "    </div>\n" +
     "    <p>\n" +
     "        This application allows you to analyze and visualize the typing patterns you create when you use different keyboard layouts, such as the\n" +
-    "        <a href=\"http://home.earthlink.net/~dcrehr/\">QWERTY</a>, <a href=\"http://www.theworldofstuff.com/dvorak/\">Dvorak</a>, and\n" +
+    "        <a href=\"https://en.wikipedia.org/wiki/QWERTY\">QWERTY</a>, <a href=\"http://www.theworldofstuff.com/dvorak/\">Dvorak</a>, and\n" +
     "        <a href=\"http://colemak.com/\">Colemak</a> layouts.\n" +
     "    </p>\n" +
+    "    <hr/>\n" +
     "    <p>\n" +
-    "        If you have no idea what I'm talking about, the key layout on your keyboard isn't the only one that's out there, and not all \n" +
-    "        keyboard layouts are created equal. Some are better for your wrists and allow you to type faster and with more comfort. \n" +
-    "        Here are the three most popular keyboard layouts (which I also mentioned above):\n" +
+    "    This version of the app was forked by SteveP from <a href=\"http://patorjk.com/keyboard-layout-analyzer/\">patorjk's original analyzer</a>.\n" +
+    "    </p>\n" +
+    "    <p>A number of changes are made in this version with the aim of making the analyzer more useful and accurate, particularly in regard to the scoring calculation. \n" +
+    "    The changes are detailed below, so you can evaluate the merits of these changes yourself. A huge thanks to Patrick (patorjk) for releasing his source code, making this forked version possible!\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <h2>Scoring Algorithm</h2>\n" +
+    "    <p>\n" +
+    "        I have studied the source code in the original app to understand how the analyzer and scoring systems work. The following is my best interpretation of its methodology:\n" +
     "    </p>\n" +
     "    <p>\n" +
-    "        <div style=\"text-align: center;\">\n" +
-    "            <img src=\"http://patorjk.com/images/qwerty.png\" alt=\"\" />\n" +
-    "            <br/>  \n" +
-    "            <strong>QWERTY</strong>\n" +
-    "        </div>\n" +
+    "        Layouts are scored according to four weighted elements:<br/>\n" +
+    "        - distance fingers moved (33%)<br/>\n" +
+    "        - distribution of work among fingers (33%)<br/>\n" +
+    "        - same-finger bigrams (17%)<br/>\n" +
+    "        - hand alternation (17%)<br/>\n" +
     "    </p>\n" +
-    "    <p>\n" +
-    "        <div style=\"text-align: center;\">\n" +
-    "            <img src=\"http://patorjk.com/images/dvorak.png\" alt=\"\" />\n" +
-    "            <br/>\n" +
-    "            <strong>Dvorak (Simplified)</strong>\n" +
-    "        </div>\n" +
+    "    <p>I now present a critique of each of these elements, and where appropriate, describe the changes I have made in this version of the app:</p>\n" +
+    "    \n" +
+    "    <h3>Element 1: Distance calculation</h3>\n" +
+    "\n" +
+    "    <p>The distance calculation works by simulating the typing of the input text and measuring the distance between successive keys. These distances are summed up, and a score is calculated based on the average distance moved across all key presses. This method works well for the most part, but I have identified a couple of flaws:<br/>\n" +
     "    </p>\n" +
-    "    <p>\n" +
-    "        <div style=\"text-align: center;\">\n" +
-    "            <img src=\"http://patorjk.com/images/colemak.png\" alt=\"\" />\n" +
-    "            <br/>\n" +
-    "            <strong>Colemak</strong>\n" +
-    "        </div>\n" +
+    "    <p><b>Flaw 1</b>: no consideration is taken into account of the type of movement</p>\n" +
+    "    <p>Consider if you start with your right hand in the home position (using Qwerty), and type JH, JU, and JM. It is more difficult to move from J to H than it is from J to U or J to H. This is because the index finger can easily stretch outward to the U or curl inward to the M. However, to type the H, the finger has to splay outwards, or the whole hand has to move. Consequently, more effort is required for this type of lateral motion. This phenomenon is well-documented in the justification behind both the Workman and Colemak-DH layouts.</p>\n" +
+    "    <p>If you simply measure distance between J and its nearby keys however, then due to the keyboard stagger, JH is a shorter distance than JU or JM. In such cases, the default algorithm rewards motions involving more difficult (but slightly nearer) keys, as shown in the table below. What would be desired to fix this problem, is to replace the pure distance measure with a distance penalty, in which horizontal movements are given a higher penalty than vertical ones for the same distance moved.</p>\n" +
+    "    <p><b>Flaw 2</b>: Even with a directional penalty added, notice that the distance between JM and JN is the same. In reality though, again because of the stagger on standard boards, the JM movement is easier. To fix this issue, we need to consider that the hands approach the keyboard at an angle. On the right-hand side of the keyboard, the arms approach the keyboard in the same direction as the stagger, but on the left-side, the stagger is effectively the wrong way around. I'd argue that a complete and accurate algorithm should take this effect into account.</p>\n" +
+    "\n" +
+    "    <p><b><u>Fix:</u></b> This version of the app applies fixes to the algorithm to address these two flaws.<br/>\n" +
+    "    - The simple distance calculation is replaced by a \"distance penalty\". This is identical to the distance travelled for vertical movements, but a factor of 1.5 (i.e. a 50% penalty) is introduced for horizontal components of each movement.<br/>\n" +
+    "    - The coordinate system for movement vectors is rotated to align with the angle of approach of the hands. This currently set to a 15° angle, and is applied clockwise for the left hand, anticlockwise for the right hand.<br/>\n" +
+    "    <p>This element of the scoring system is now more highly prioritised too, increasing from 33% to 50%.</p>\n" +
+    "\n" +
+    "    <table>\n" +
+    "    <tr>\n" +
+    "    <td>\n" +
+    "        <img src=\"./img/kb-j-arrows.png\" class=\".center\"/>\n" +
+    "    </td>\n" +
+    "    <td>\n" +
+    "    <table style=\"display: inline-block; margin-left:40px\" border=\"1\" cellpadding=\"2\">\n" +
+    "        <tbody>\n" +
+    "        <tr><th>keys</th><th>distance¹</th><th>penalty²</th></tr>\n" +
+    "        <tr>\n" +
+    "        <td>JU</td><td>1.03u</td><td>1.03</td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "        <td>JH</td><td>1.00u</td><td>1.47</td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "        <td>JN</td><td>1.12u</td><td>1.35</td>\n" +
+    "        </tr>\n" +
+    "        <tr>\n" +
+    "        <td>JM</td><td>1.12u</td><td>1.17</td>\n" +
+    "        </tr>\n" +
+    "        </tbody>\n" +
+    "        <tfoot>\n" +
+    "        <tr>\n" +
+    "        <td colspan=\"3\">\n" +
+    "        ¹ Actual physical distance in key units<br/>\n" +
+    "        ² Distance penalty as calculated in this version of the app by applying the two fixes.\n" +
+    "        </td>\n" +
+    "        </tr>\n" +
+    "        </tfoot>\n" +
+    "    </table>    \n" +
+    "    </td>\n" +
+    "    </tr>\n" +
+    "    </table>\n" +
+    "\n" +
+    "    <h3>Element 2: Finger distribution</h3>\n" +
+    "\n" +
+    "    <p>The original algorithm defines a score value for each finger as follows:<br/>\n" +
+    "        PINKY: 0.5<br/>\n" +
+    "        RING: 1.0<br/>\n" +
+    "        MIDDLE: 4.0<br/>\n" +
+    "        INDEX: 2.0<br/>\n" +
+    "        THUMB: 0.5<br/>\n" +
     "    </p>\n" +
-    "    <p>\n" +
-    "        My interest in keyboard layouts came after I read a Discover magazine article entitled <a href=\"http://discovermagazine.com/1997/apr/thecurseofqwerty1099\">\"The Curse of QWERTY\"</a>. The article tells the story of the QWERTY and Dvorak keyboard layouts and makes a compelling case for switching from a QWERTY layout to a Dvorak layout. Here is a quick summary of its most important points:\n" +
+    "    <p>Then, it calculates what proportion of typing is done on each finger, subject to a maximum of 20% per finger. The final score is proportional to this sum over all fingers:\n" +
+    "    (finger-score) x (finger-frequency)</p>\n" +
+    "    <p>The consequence of this algorithm is that middle finger is heavily favoured and that high scoring layouts should aim to assign 20% of the work on each these fingers. Layouts should also attempt to use index finger heavily with very little or none on pinkies and thumbs. I think this method <i>may</i> be flawed in that it too heavily weights the middle finger, and encourages heavy loading of favoured fingers, upto the seemingly arbitrary 20%. However, I accept that this element of the algorithm may in fact be counter-balanced to some extent by the distance algorithm, which would reward all home key usage (including pinkies) by assigning a distance of zero.</p>\n" +
+    "    <p><b><u>Fix:</u></b> For the time being, I have changed the finger weights to these values:<br/>\n" +
+    "        PINKY: 0.5<br/>\n" +
+    "        RING: 1.0<br/>\n" +
+    "        MIDDLE: 2.0<br/>\n" +
+    "        INDEX: 2.0<br/>\n" +
+    "        THUMB: 1.0<br/>\n" +
     "    </p>\n" +
-    "    <p>\n" +
-    "        <ul>\n" +
-    "            <li>The QWERTY layout was created in the early 1870's before touch typing and without speed or comfort in mind.</li>\n" +
-    "            <li>The Dvorak layout was created in the 1930's and is based on years of research. It takes speed and comfort into account.</li>\n" +
-    "            <li>On average, the left hand does 56% of the typing when a QWERTY layout is used. With a Dvorak layout, the right hand does 56% of the typing.</li>\n" +
-    "            <li>The Dvorak layout forces you to alternate hands more frequently when typing, this causes you to type faster.</li>\n" +
-    "            <li>Users type fastest on the home row. With a QWERTY layout, only 32% of your typing occurs on the home row. With a Dvorak layout, 70% of your typing occurs on the home row.</li>\n" +
-    "            <li>It's hypothesized that the Dvorak layout will make it less likely that you'll develop <a href=\"http://en.wikipedia.org/wiki/Carpal_tunnel_syndrome\">Carpal Tunnel Syndrome (CTS)</a>.</li>\n" +
-    "            <li>Anecdotally, people who develop carpal tunnel syndrome seem to find relief when they switch from a QWERTY layout to Dvorak layout.</li>\n" +
-    "        </ul>\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        There are more reasons, but those were the ones that stuck with me. I was so convinced by what I read that I switched my work and home keyboard layouts to a Dvorak layout by configuring some Windows XP settings in the control panel (to see how <a href=\"http://kb.iu.edu/data/aepk.html\">click here</a>). This lasted for about 6 days (3 of those were over the Labor Day weekend), and then I had to switch back since learning the Dvorak layout was slowing me down at work. I also discovered that the Dvorak layout made all the nice QWERTY keyboard shortcuts (Undo, Cut, Copy and Paste) virtually unusable. This was a big minus since I use those shortcuts constantly. The Dvorak layout also over worked my right pinky. I found myself having to take typing breaks, something I hadn't done since high school.\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        After talking to someone who had Carpal Tunnel Syndrome (something I'm worried about getting), I learned about yet another improved keyboard \n" +
-    "        layout that preserved QWERTY's bottom row short cuts and didn't put massive amounts of stress on the right pinky. This layout was known as \n" +
-    "        the Colemak. Unlike the Dvorak, the Colemak layout is relatively new (developed within the last 5 years), doesn't have a lot of research \n" +
-    "        behind it, and it doesn't have a very large following (online estimates put the number of users between 650 and 1,300).  \n" +
-    "        However, the layout looks pretty promising.\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        All of this research is what motivated me to create this application. I wanted to visually compare my typing patterns with the different \n" +
-    "        layouts and get some stats on what hand and which fingers I was using the most.\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        Hopefully the user interface and output is straight forward enough. I had a lot of fun writing this application, hopefully some of you out \n" +
-    "        there will find it useful.\n" +
-    "    </p>\n" +
-    "    <h3>Copyright</h3>\n" +
-    "    <p>\n" +
-    "        All images used and generated by this app are released under <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0 license</a>. In short: feel free to use the images generated by this app however you want. I honestly don't care that much about attribution, so a footnote or mention somewhere in the document they're used in is fine.\n" +
-    "    </p>\n" +
-    "    <h3>Older Versions of the App</h3>\n" +
-    "    <p>\n" +
-    "        <ul>\n" +
-    "            <li>\n" +
-    "                <a href='/keyboard-layout-analyzer/v1/'>Version 1.0</a> - The original version I created in 2008.\n" +
-    "            </li>\n" +
-    "            <li>\n" +
-    "                <a href='/keyboard-layout-analyzer/v2/'>Version 2.0</a> - An overhauled re-write that I did in 2012.\n" +
-    "            </li>\n" +
-    "            <li>\n" +
-    "                <a href='/keyboard-layout-analyzer/'>Version 3.0</a> - The current version. I kept the core analysis code I did in 2012, and the code I did for the keyboard UI elements. The rest of the app was redesigned though, and the front-end code was re-architecuted to work with AngularJS, plus several features were added.\n" +
-    "            </li>\n" +
-    "        </ul>\n" +
-    "    </p>\n" +
-    "</div>"
+    "    <p>I also reduce the weighting of this element of the scoring from 33% to 20%.</p>\n" +
+    "    \n" +
+    "    <h3>Element 3: Same-finger bigrams</h3>\n" +
+    "    <p>The original app simply counts what proportion of each key presses and done with the same finger as the previous one. It then calculates a percentage score based on the same-finger ratio in the range 0 to 10%. In other worlds, a layouts with a 5% same-finger ratio, would score 50% in this element.</p>\n" +
+    "    <p><b><u>Fix:</u></b> No fix needed. The weighting of this element of the calculation is increased from 17% to 30%.<br/>\n" +
+    "\n" +
+    "    <h3>Element 4: Hand alternation</h3>\n" +
+    "    <p>Similar to the same-finger count, it simply counts which proportion of key presses were with same hand as the previous one. This favours heavily alternating layouts. However, in my view this flawed, as no account is taken that some same-hand combinations are actually some of the most comfortable bigrams of all: the Colemak ST and NE, or the Dvorak TH, for examples. Perhaps this element could be improved, for example to detect longer same-hand sequences which would be detrimental. In it's current form though, I don't see much value in this element.</p>\n" +
+    "    <p><b><u>Fix:</u></b> Removed from the scoring calculation.<br/>\n" +
+    "\n" +
+    "    <h2>Other changes made from the original repo</h2>\n" +
+    "\n" +
+    "    <ul>\n" +
+    "        <li>There were a lot of seemingly random, unrecognised layouts. I removed most of them. The list now only contains layouts that are at least semi-well-known in the community.</li>\n" +
+    "        <li>The Colemak-DH layout variants have been added.</li>\n" +
+    "        <li>Number of layouts in the comparison changed from 5 to 6.</li>\n" +
+    "        <li>Removed the generated 'Personalized Layout' as I considered it to not really have any value.</li>\n" +
+    "        <li>Various other input texts have been added, these were obtained from shenafu's fork of the same app.</li>\n" +
+    "        <li>Disabled the API functionality (e.g. link to results) as github hosting does not support php.</li>\n" +
+    "    </ul>\n" +
+    "\n" +
+    "    <h2>Bugs</h2>\n" +
+    "\n" +
+    "    <p>Please report bugs to at the <a href=\"https://github.com/stevep99/keyboard-layout-analyzer/issues\">issue tracker</a> on github.</p>\n" +
+    "\n" +
+    "</div>\n"
   );
 
 
@@ -357,7 +394,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/main.htm',
     "<div>\n" +
     "    <div class=\"jumbotron subhead\">\n" +
-    "        This is <a href=\"https://github.com/stevep99/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"#/about\">About Page</a> [@todo] for explanation.\n" +
+    "        This is <a href=\"https://github.com/stevep99/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"#/about\">About Page</a> for explanation.\n" +
     "        <br/>\n" +
     "        <br/>\n" +
     "        <h1>Analyze Text Input</h1>\n" +
@@ -565,17 +602,20 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "            </p>\n" +
     "            <p>\n" +
-    "                The optimal layout score is based on a weighed calculation that factors in the \n" +
-    "                distance your fingers moved (33%), \n" +
-    "                how often you use particular fingers (33%),\n" +
-    "                and how often you switch fingers and hands while typing (34%).\n" +
+    "                The layout score is based on a weighed calculation that factors in the \n" +
+    "                distance your fingers moved (50%), \n" +
+    "                how often you use particular fingers (20%),\n" +
+    "                and how often you switch fingers while typing (30%).\n" +
+    "                See the About page for detailed information.\n" +
     "            </p>\n" +
+    "            <!--\n" +
     "            <p>\n" +
     "                <div class='text-center' ng-show='share.showSection'>\n" +
     "                    <button class='btn' style='position:relative;margin-top:-12px;margin-right:10px;' ng-click='getUrlToShare()'>Get URL to Share Results →</button>\n" +
     "                    <input type='text' ng-model='share.url' style='width:475px;' />\n" +
     "                </div>\n" +
     "            </p>\n" +
+    "            -->\n" +
     "        </div>\n" +
     "        <div class='tab-pane' id='distance' style='position:relative'>\n" +
     "            <seriesbarchart width=\"940px\" height=\"300px\" source=\"results.distance\"></seriesbarchart>\n" +

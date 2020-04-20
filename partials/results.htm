@@ -53,17 +53,20 @@
                 </div>
             </p>
             <p>
-                The optimal layout score is based on a weighed calculation that factors in the 
-                distance your fingers moved (33%), 
-                how often you use particular fingers (33%),
-                and how often you switch fingers and hands while typing (34%).
+                The layout score is based on a weighed calculation that factors in the 
+                distance your fingers moved (50%), 
+                how often you use particular fingers (20%),
+                and how often you switch fingers while typing (30%).
+                See the About page for detailed information.
             </p>
+            <!--
             <p>
                 <div class='text-center' ng-show='share.showSection'>
                     <button class='btn' style='position:relative;margin-top:-12px;margin-right:10px;' ng-click='getUrlToShare()'>Get URL to Share Results →</button>
                     <input type='text' ng-model='share.url' style='width:475px;' />
                 </div>
             </p>
+            -->
         </div>
         <div class='tab-pane' id='distance' style='position:relative'>
             <seriesbarchart width="940px" height="300px" source="results.distance"></seriesbarchart>
