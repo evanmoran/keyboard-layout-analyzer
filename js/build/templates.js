@@ -249,6 +249,9 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"european.qwerty-spanish\">QWERTY (Spanish)</option>\n" +
     "                                                <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
     "                                            </optgroup>\n" +
+    "                                            <optgroup label=\"Split keyboards\">\n" +
+    "                                                <option value=\"european_split.qwerty\">QWERTY split</option>\n" +
+    "                                            </optgroup>\n" +
     "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
     "                                                <option value=\"ergodox.colemak2\">Colemak</option>\n" +
     "                                                <option value=\"ergodox.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
