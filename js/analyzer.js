@@ -48,8 +48,10 @@ KLA.Analyzer = (function() {
             xr = xDiff;
             yr = yDiff;
         }
-        // simulate lateral hand-movements move expensive than vertical finger movements
-        xr *= 1.5;
+        if (hand === "left" || hand === "right") {
+            // simulate lateral hand-movements move expensive than vertical finger movements
+            xr *= 1.5;
+        }
         //console.log("hand=%s finger=%s:  xdiff=%f, ydiff=%f ... xr=%f, yr=%f", hand, finger, xDiff, yDiff, xr, yr);
         return Math.sqrt(xr*xr + yr*yr);
     }
@@ -109,6 +111,13 @@ KLA.Analyzer = (function() {
             }
         }
 
+        if (ret.fingerUsed === null) {
+            if (charCode < 0) {
+                // If negative number charCode fails, attempt to use equivalent positive
+                return findCharInKeySet(keySet, -charCode);
+            }
+        }
+
         // Blogs often change certain characters to other codes, so do some character changes to accommodate certain instances
         if (ret.fingerUsed === null) {
 	        switch (charCode) {
@@ -130,7 +139,7 @@ KLA.Analyzer = (function() {
         }
         
         //console.dir(ret);
-        //console.log("Leaving findCharInKeySet");
+        //console.log("Leaving findCharInKeySet %d", charCode);
         
         return ret;
     }
@@ -524,7 +533,7 @@ KLA.Analyzer = (function() {
         curFingerPos[KB.finger.RIGHT_RING] = keySet.fingerStart[KB.finger.RIGHT_RING];
         curFingerPos[KB.finger.RIGHT_PINKY] = keySet.fingerStart[KB.finger.RIGHT_PINKY];
 
-        // shit and altgr keys        
+        // shift and altgr keys        
         char2KeyMap[16] = char2KeyMap[16] || findCharInKeySet(keySet, 16);
         char2KeyMap[-16] = char2KeyMap[-16] || findCharInKeySet(keySet, -16);
         char2KeyMap[-18] = char2KeyMap[-18] || findCharInKeySet(keySet, -18);
