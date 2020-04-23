@@ -243,14 +243,14 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"european.azerty\">AZERTY</option>\n" +
     "                                                <option value=\"european.bepo\">BÉPO</option>\n" +
     "                                                <option value=\"european.colemak\">Colemak</option>\n" +
+    "                                                <option value=\"european_split.colemak\">Colemak split-space</option>\n" +
     "                                                <option value=\"european.colemak_dh\">Colemak-DH (Mod-DH)</option>\n" +
+    "                                                <option value=\"european_split.colemak_dh\">Colemak-DH (Mod-DH) split-space</option>\n" +
     "                                                <option value=\"european.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
     "                                                <option value=\"european.qwerty\">QWERTY</option>\n" +
+    "                                                <option value=\"european_split.qwerty\">QWERTY split-space</option>\n" +
     "                                                <option value=\"european.qwerty-spanish\">QWERTY (Spanish)</option>\n" +
     "                                                <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
-    "                                            </optgroup>\n" +
-    "                                            <optgroup label=\"Split keyboards\">\n" +
-    "                                                <option value=\"european_split.qwerty\">QWERTY split</option>\n" +
     "                                            </optgroup>\n" +
     "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
     "                                                <option value=\"ergodox.colemak2\">Colemak</option>\n" +
@@ -262,12 +262,10 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"ergodox.workman\">Workman</option>\n" +
     "                                                <option value=\"ergodox.kinesis-advantage-colemak\">Colemak (Kinesis Advantage)</option>\n" +
     "                                            </optgroup>\n" +
-    "\n" +
     "                                        </select>\n" +
     "                                        <button class=\"kb-config-load btn\" ng-click=\"loadLayout()\">Load</button>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
-    "\n" +
     "<!--\n" +
     "                                <div class='control-group'>\n" +
     "                                    <label class='control-label'>Share:</label>\n" +
@@ -276,7 +274,6 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                    </div>\n" +
     "                                </div>\n" +
     "-->\n" +
-    "\n" +
     "                            </form>\n" +
     "                        </div>\n" +
     "\n" +

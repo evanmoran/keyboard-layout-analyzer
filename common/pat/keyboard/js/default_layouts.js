@@ -17,7 +17,7 @@ KB.keySet.ergodox = {};
 
 KB.keySet.standard.qwerty = {
     label: "QWERTY",
-    author: 'Patrick Gillespie',
+    author: "Patrick Gillespie",
     moreInfoUrl: "https://en.wikipedia.org/wiki/QWERTY", 
     moreInfoText: "Wikipedia Entry",
     fingerStart: {},
@@ -64,7 +64,7 @@ KB.keySet.standard.qwerty = {
         {primary:"k",  shift:"K",  finger:KB.finger.RIGHT_MIDDLE},//36
         {primary:"l",  shift:"L",  finger:KB.finger.RIGHT_RING},//37
         {primary:";",  shift:":",  finger:KB.finger.RIGHT_PINKY},//38
-        {primary:"'",  shift:'"',  finger:KB.finger.RIGHT_PINKY},//39
+        {primary:"'",  shift:"\"",  finger:KB.finger.RIGHT_PINKY},//39
         {primary:"\r",               finger:KB.finger.RIGHT_PINKY},//40
         
         {primary:16,               finger:KB.finger.LEFT_PINKY},//41
@@ -98,7 +98,7 @@ KB.keySet.standard.qwerty = {
 
 KB.keySet.standard.simplifiedDvorak = {
     label: "Simplified Dvorak",
-    author: 'Patrick Gillespie',
+    author: "Patrick Gillespie",
     moreInfoUrl: "https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard", 
     moreInfoText: "Wikipedia Entry",
     fingerStart: {},
@@ -120,7 +120,7 @@ KB.keySet.standard.simplifiedDvorak = {
         {primary:8,                 finger:KB.finger.RIGHT_PINKY},//13
     
         {primary:9,                 finger:KB.finger.LEFT_PINKY},//14
-        {primary:"'",   shift:'"',  finger:KB.finger.LEFT_PINKY},
+        {primary:"'",   shift:"\"",  finger:KB.finger.LEFT_PINKY},
         {primary:",",   shift:"<",  finger:KB.finger.LEFT_RING},
         {primary:".",   shift:">",  finger:KB.finger.LEFT_MIDDLE},
         {primary:"p",   shift:"P",  finger:KB.finger.LEFT_INDEX},
@@ -178,7 +178,7 @@ KB.keySet.standard.simplifiedDvorak = {
 
 KB.keySet.standard.colemak = {
     label: "Colemak",
-    author: 'Patrick Gillespie',
+    author: "Patrick Gillespie",
     moreInfoUrl: "http://colemak.com/", 
     moreInfoText: "colemak.com",
     fingerStart: {},
@@ -225,7 +225,7 @@ KB.keySet.standard.colemak = {
         {primary:"e",  shift:"E",  finger:KB.finger.RIGHT_MIDDLE},
         {primary:"i",  shift:"I",  finger:KB.finger.RIGHT_RING},
         {primary:"o",  shift:"O",  finger:KB.finger.RIGHT_PINKY},
-        {primary:"'",  shift:'"',  finger:KB.finger.RIGHT_PINKY},
+        {primary:"'",  shift:"\"",  finger:KB.finger.RIGHT_PINKY},
         {primary:"\r",               finger:KB.finger.RIGHT_PINKY},//40
         
         {primary:16,               finger:KB.finger.LEFT_PINKY},//41
@@ -258,7 +258,7 @@ KB.keySet.standard.colemak = {
 
 KB.keySet.standard.capewell = {
     label: "Capewell",
-    author: 'Patrick Gillespie',
+    author: "Patrick Gillespie",
     moreInfoUrl: "http://www.michaelcapewell.com/projects/keyboard/", 
     moreInfoText: "michaelcapewell.com",
     fingerStart: {},
@@ -318,7 +318,7 @@ KB.keySet.standard.capewell = {
         {primary:"m",  shift:"M",  finger:KB.finger.RIGHT_INDEX},
         {primary:"h",  shift:"H",  finger:KB.finger.RIGHT_MIDDLE},
         {primary:",",  shift:"<",  finger:KB.finger.RIGHT_RING},
-        {primary:"'",  shift:'"',  finger:KB.finger.RIGHT_PINKY},
+        {primary:"'",  shift:"\"",  finger:KB.finger.RIGHT_PINKY},
         {primary:-16,              finger:KB.finger.RIGHT_PINKY},//52
         
         {primary:17,               finger:KB.finger.LEFT_THUMB},//53
@@ -339,7 +339,7 @@ KB.keySet.standard.capewell = {
 
 KB.keySet.standard.programmerDvorak = {
     label: "Programmer Dvorak",
-    author: 'Patrick Gillespie',
+    author: "Patrick Gillespie",
     moreInfoUrl: "http://www.kaufmann.no/roland/dvorak/", 
     moreInfoText: "kaufmann.no",
     fingerStart: {},
@@ -361,7 +361,7 @@ KB.keySet.standard.programmerDvorak = {
         {primary:8,                 finger:KB.finger.RIGHT_PINKY},//13
     
         {primary:9,                 finger:KB.finger.LEFT_PINKY},//14
-        {primary:";",   shift:':',  finger:KB.finger.LEFT_PINKY},
+        {primary:";",   shift:":",  finger:KB.finger.LEFT_PINKY},
         {primary:",",   shift:"<",  finger:KB.finger.LEFT_RING},
         {primary:".",   shift:">",  finger:KB.finger.LEFT_MIDDLE},
         {primary:"p",   shift:"P",  finger:KB.finger.LEFT_INDEX},
@@ -390,7 +390,7 @@ KB.keySet.standard.programmerDvorak = {
         {primary:"\r",               finger:KB.finger.RIGHT_PINKY},//40
         
         {primary:16,               finger:KB.finger.LEFT_PINKY},//41
-        {primary:"'",  shift:'"',  finger:KB.finger.LEFT_PINKY},
+        {primary:"'",  shift:"\"",  finger:KB.finger.LEFT_PINKY},
         {primary:"q",  shift:"Q",  finger:KB.finger.LEFT_RING},
         {primary:"j",  shift:"J",  finger:KB.finger.LEFT_MIDDLE},
         {primary:"k",  shift:"K",  finger:KB.finger.LEFT_INDEX},
@@ -512,14 +512,14 @@ KB.keySet.european.azerty = {
 
 KB.keySet.european.simplifiedDvorak = {
     label: "Simplified Dvorak",
-    author: 'Patrick Gillespie',
-    authorUrl: '',
+    author: "Patrick Gillespie",
+    authorUrl: "",
     fingerStart: {},
     keyboardType: "european",
     keys: [
         {primary:"`",   shift:172,  finger:KB.finger.LEFT_PINKY},//0
         {primary:"1",   shift:"!",  finger:KB.finger.LEFT_PINKY},
-        {primary:"2",   shift:'"',  finger:KB.finger.LEFT_RING},
+        {primary:"2",   shift:"\"",  finger:KB.finger.LEFT_RING},
         {primary:"3",   shift:163,  finger:KB.finger.LEFT_MIDDLE},
         {primary:"4",   shift:"$",  finger:KB.finger.LEFT_INDEX},
         {primary:"5",   shift:"%",  finger:KB.finger.LEFT_INDEX},
@@ -533,7 +533,7 @@ KB.keySet.european.simplifiedDvorak = {
         {primary:8,                 finger:KB.finger.RIGHT_PINKY},//13
     
         {primary:9,                 finger:KB.finger.LEFT_PINKY},//14
-        {primary:"'",   shift:'@',  finger:KB.finger.LEFT_PINKY},
+        {primary:"'",   shift:"@",  finger:KB.finger.LEFT_PINKY},
         {primary:",",   shift:"<",  finger:KB.finger.LEFT_RING},
         {primary:".",   shift:">",  finger:KB.finger.LEFT_MIDDLE},
         {primary:"p",   shift:"P",  finger:KB.finger.LEFT_INDEX},
@@ -1555,7 +1555,7 @@ KB.keySet.european.colemak_dh = {
 
 KB.keySet.european.qwerty = {
     label: "QWERTY",
-    author: 'SteveP',
+    author: "",
     moreInfoUrl: "http://en.wikipedia.org/wiki/Qwerty", 
     moreInfoText: "Wikipedia Entry",
    "fingerStart":{
@@ -1576,7 +1576,7 @@ KB.keySet.european.qwerty = {
     keys: [ 
         {primary:"`",   shift:172,  finger:KB.finger.LEFT_PINKY},//0
         {primary:"1",   shift:"!",  finger:KB.finger.LEFT_PINKY},//1
-        {primary:"2",   shift:'"',  finger:KB.finger.LEFT_RING},//2
+        {primary:"2",   shift:"\"",  finger:KB.finger.LEFT_RING},//2
         {primary:"3",   shift:163,  finger:KB.finger.LEFT_MIDDLE},//3
         {primary:"4",   shift:"$",  finger:KB.finger.LEFT_INDEX},//4
         {primary:"5",   shift:"%",  finger:KB.finger.LEFT_INDEX},//5
@@ -1616,7 +1616,7 @@ KB.keySet.european.qwerty = {
         {primary:"l",  shift:"L",  finger:KB.finger.RIGHT_RING},//37
         {primary:";",  shift:":",  finger:KB.finger.RIGHT_PINKY},//38
         {primary:"'",  shift:"@",  finger:KB.finger.RIGHT_PINKY},//39
-        {primary:"#",  shift:'~',  finger:KB.finger.RIGHT_PINKY},//39
+        {primary:"#",  shift:"~",  finger:KB.finger.RIGHT_PINKY},//39
         
         
         {primary:16,                finger:KB.finger.LEFT_PINKY},//41
@@ -1645,8 +1645,8 @@ KB.keySet.european.qwerty = {
 };
 
 KB.keySet.european_split.qwerty = {
-    label: "QWERTY split",
-    author: 'SteveP',
+    label: "QWERTY split-space",
+    author: "SteveP",
     moreInfoUrl: "http://en.wikipedia.org/wiki/Qwerty", 
     moreInfoText: "Wikipedia Entry",
    "fingerStart":{
@@ -1667,7 +1667,7 @@ KB.keySet.european_split.qwerty = {
     keys: [ 
         {primary:"`",   shift:172,  finger:KB.finger.LEFT_PINKY},//0
         {primary:"1",   shift:"!",  finger:KB.finger.LEFT_PINKY},//1
-        {primary:"2",   shift:'"',  finger:KB.finger.LEFT_RING},//2
+        {primary:"2",   shift:"\"",  finger:KB.finger.LEFT_RING},//2
         {primary:"3",   shift:163,  finger:KB.finger.LEFT_MIDDLE},//3
         {primary:"4",   shift:"$",  finger:KB.finger.LEFT_INDEX},//4
         {primary:"5",   shift:"%",  finger:KB.finger.LEFT_INDEX},//5
@@ -1707,10 +1707,10 @@ KB.keySet.european_split.qwerty = {
         {primary:"l",  shift:"L",  finger:KB.finger.RIGHT_RING},//37
         {primary:";",  shift:":",  finger:KB.finger.RIGHT_PINKY},//38
         {primary:"'",  shift:"@",  finger:KB.finger.RIGHT_PINKY},//39
-        {primary:"#",  shift:'~',  finger:KB.finger.RIGHT_PINKY},//39
+        {primary:"#",  shift:"~",  finger:KB.finger.RIGHT_PINKY},//39
         
         
-        {primary:0,                finger:KB.finger.LEFT_PINKY},//41
+        {primary:-1,               finger:KB.finger.LEFT_PINKY},//41
         {primary:"|",  shift:"\\", finger:KB.finger.LEFT_PINKY},//42
         {primary:"z",  shift:"Z",  finger:KB.finger.LEFT_PINKY},//42
         {primary:"x",  shift:"X",  finger:KB.finger.LEFT_RING},//43
@@ -1722,7 +1722,7 @@ KB.keySet.european_split.qwerty = {
         {primary:",",  shift:"<",  finger:KB.finger.RIGHT_MIDDLE},//49
         {primary:".",  shift:">",  finger:KB.finger.RIGHT_RING},//50
         {primary:"/",  shift:"?",  finger:KB.finger.RIGHT_PINKY},//51
-        {primary:0,               finger:KB.finger.RIGHT_PINKY},//52
+        {primary:-1,               finger:KB.finger.RIGHT_PINKY},//52
         
         {primary:17,               finger:KB.finger.LEFT_THUMB},//53
         {primary:-91,              finger:KB.finger.LEFT_THUMB},//54
