@@ -538,7 +538,7 @@
             "id": 73
         },
         {
-            "primary": 32,
+            "primary": -1,
             "finger": 5,
             "id": 74,
             "shift": -1,

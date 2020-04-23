@@ -253,7 +253,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
     "                                            </optgroup>\n" +
     "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
-    "                                                <option value=\"ergodox.colemak2\">Colemak</option>\n" +
+    "                                                <option value=\"ergodox.colemak\">Colemak</option>\n" +
     "                                                <option value=\"ergodox.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
     "                                                <option value=\"ergodox.qgmlwbcub\">QGMLWB/Cub</option>\n" +
     "                                                <option value=\"ergodox.qgmlwycub\">QGMLWY/Cub</option>\n" +
