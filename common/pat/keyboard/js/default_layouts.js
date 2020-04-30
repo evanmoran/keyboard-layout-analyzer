@@ -13,6 +13,8 @@ KB.keySet.standard = {};
 KB.keySet.european = {};
 KB.keySet.european_split = {};
 KB.keySet.ergodox = {};
+KB.keySet.matrix = {};
+KB.keySet.matrix_split = {};
 
 
 KB.keySet.standard.qwerty = {

@@ -216,9 +216,8 @@ KB.Keyboard = (function() {
                 kk = new KB.Key();
                 kk.setKeyboard(me);
                 kk.setId(myKeySet.keys[ii].id);
-		        
-		        kk.setKeyModel( myKeySet.keys[ii] );
-		        
+                kk.setKeyModel( myKeySet.keys[ii] );
+
                 var defaultCoords = [ 
                     {
                         x:myKeyMap[ii].x,
@@ -234,7 +233,6 @@ KB.Keyboard = (function() {
                         y:myKeyMap[ii].y+myKeyMap[ii].h
                     } 
                 ];
-                
                 var theCoords = myKeyMap[ii].coords || defaultCoords;
                 
                 kk.setCoords( theCoords );

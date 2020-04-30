@@ -187,7 +187,6 @@ KB.glyphLayouts.standard[KB.SHIFT_ALTGR_PUSH] = function(keyCode,fontSize,coords
     };
 };
 
-
 KB.glyphLayouts.european = {};
 KB.glyphLayouts.european.getCoords = function(id, type, keyCode, fontSize, coords) {
     return KB.glyphLayouts.european[type](keyCode, fontSize, coords);
@@ -235,6 +234,53 @@ KB.glyphLayouts.european[KB.SHIFT_ALTGR_PUSH] = function(keyCode,fontSize,coords
     };
 };
 
+
+KB.glyphLayouts.matrix = {};
+KB.glyphLayouts.matrix.getCoords = function(id, type, keyCode, fontSize, coords) {
+    return KB.glyphLayouts.matrix[type](keyCode, fontSize, coords);
+};
+
+KB.glyphLayouts.matrix[KB.PRIME_PUSH] = function(keyCode,fontSize,coords) {
+    var width = coords[1].x - coords[0].x,
+        padding = fontSize*0.4;//width * 0.1;
+
+    return {
+        x: coords[3].x + padding,
+        y:coords[3].y - padding/2,
+        textAlign: "left",
+        textBaseline: "bottom"
+    };
+};
+KB.glyphLayouts.matrix[KB.SHIFT_PUSH] = function(keyCode,fontSize,coords) {
+    var width = coords[1].x - coords[0].x,
+        padding = fontSize*0.4;//width * 0.1;
+    return {
+        x: coords[0].x + padding,
+        y:coords[0].y + padding/2,
+        textAlign: "left",
+        textBaseline: "top"
+    };
+};
+KB.glyphLayouts.matrix[KB.ALTGR_PUSH] = function(keyCode,fontSize,coords) {
+    var width = coords[1].x - coords[0].x,
+        padding = fontSize*0.4;//width * 0.1;
+    return {
+        x: coords[2].x - padding,
+        y:coords[2].y - padding/2,
+        textAlign: "right",
+        textBaseline: "bottom"
+    };
+};
+KB.glyphLayouts.matrix[KB.SHIFT_ALTGR_PUSH] = function(keyCode,fontSize,coords) {
+    var width = coords[1].x - coords[0].x,
+        padding = fontSize*0.4;//width * 0.1;
+    return {
+        x: coords[1].x - padding,
+        y:coords[1].y + padding/2,
+        textAlign: "right",
+        textBaseline: "top"
+    };
+};
 
 KB.glyphLayouts.ergodox = {};
 KB.glyphLayouts.ergodox.getCoords = function(id, type, keyCode, fontSize, coords) {
@@ -285,6 +331,23 @@ KB.glyphLayouts.ergodox[KB.SHIFT_ALTGR_PUSH] = function(keyCode,fontSize,coords)
 
 
 KB.keyMap = {};
+
+var setMountPoints = function( key ) {
+	var mountPoint = {};
+	mountPoint["top"] = {};
+	mountPoint["right"] = {};
+	mountPoint["bottom"] = {};
+	mountPoint["left"] = {};
+	mountPoint["top"].x = key.x + (key.w/2);
+	mountPoint["top"].y = key.y;
+	mountPoint["right"].x = key.x + key.w;
+	mountPoint["right"].y = key.y + (key.h/2);
+	mountPoint["bottom"].x = key.x + (key.w/2);
+	mountPoint["bottom"].y = key.y + key.h;
+	mountPoint["left"].x = key.x;
+	mountPoint["left"].y = key.y + (key.h/2);
+	return mountPoint;
+};
 
 
 // standard keymap (ansi)
@@ -337,20 +400,7 @@ KB.keyMap.standard.s683_225.pixelsPerCm = 26.315789;
             
             // set the mount points - these are points where dialogs will attach to keys
             // all our keys are squares, so this is simple
-            km[index].mountPoint = {};
-            km[index].mountPoint["top"] = {};
-            km[index].mountPoint["right"] = {};
-            km[index].mountPoint["bottom"] = {};
-            km[index].mountPoint["left"] = {};
-            
-            km[index].mountPoint["top"].x = km[index].x + (km[index].w/2);
-            km[index].mountPoint["top"].y = km[index].y;
-            km[index].mountPoint["right"].x = km[index].x + km[index].w;
-            km[index].mountPoint["right"].y = km[index].y + (km[index].h/2);
-            km[index].mountPoint["bottom"].x = km[index].x + (km[index].w/2);
-            km[index].mountPoint["bottom"].y = km[index].y + km[index].h;
-            km[index].mountPoint["left"].x = km[index].x;
-            km[index].mountPoint["left"].y = km[index].y + (km[index].h/2);
+            km[index].mountPoint = setMountPoints( km[index] );
             
             curX += km[index].w;
             index++;
@@ -438,20 +488,7 @@ KB.keyMap.european.s683_225.pixelsPerCm = 26.315789;
             
             // set the mount points - these are points where dialogs will attach to keys
             // all our keys are squares, so this is simple
-            km[index].mountPoint = {};
-            km[index].mountPoint["top"] = {};
-            km[index].mountPoint["right"] = {};
-            km[index].mountPoint["bottom"] = {};
-            km[index].mountPoint["left"] = {};
-            
-            km[index].mountPoint["top"].x = km[index].x + (km[index].w/2);
-            km[index].mountPoint["top"].y = km[index].y;
-            km[index].mountPoint["right"].x = km[index].x + km[index].w;
-            km[index].mountPoint["right"].y = km[index].y + (km[index].h/2);
-            km[index].mountPoint["bottom"].x = km[index].x + (km[index].w/2);
-            km[index].mountPoint["bottom"].y = km[index].y + km[index].h;
-            km[index].mountPoint["left"].x = km[index].x;
-            km[index].mountPoint["left"].y = km[index].y + (km[index].h/2);
+            km[index].mountPoint = setMountPoints( km[index] );
             
             if (row === 1 && ii === 13) {
                 km[index].mountPoint["bottom"].x = km[index].x + (km[index].w/2);
@@ -545,20 +582,7 @@ KB.keyMap.european_split.s683_225.pixelsPerCm = 26.315789;
             
             // set the mount points - these are points where dialogs will attach to keys
             // all our keys are squares, so this is simple
-            km[index].mountPoint = {};
-            km[index].mountPoint["top"] = {};
-            km[index].mountPoint["right"] = {};
-            km[index].mountPoint["bottom"] = {};
-            km[index].mountPoint["left"] = {};
-            
-            km[index].mountPoint["top"].x = km[index].x + (km[index].w/2);
-            km[index].mountPoint["top"].y = km[index].y;
-            km[index].mountPoint["right"].x = km[index].x + km[index].w;
-            km[index].mountPoint["right"].y = km[index].y + (km[index].h/2);
-            km[index].mountPoint["bottom"].x = km[index].x + (km[index].w/2);
-            km[index].mountPoint["bottom"].y = km[index].y + km[index].h;
-            km[index].mountPoint["left"].x = km[index].x;
-            km[index].mountPoint["left"].y = km[index].y + (km[index].h/2);
+            km[index].mountPoint = setMountPoints( km[index] );
             
             if (row === 1 && ii === 13) {
                 km[index].mountPoint["bottom"].x = km[index].x + (km[index].w/2);
@@ -798,4 +822,117 @@ KB.keyMap.ergodox.s683_225.pixelsPerCm = 25.7894732;//26.315789;
         }
     }
 })();
+
+KB.keyMap.matrix = {};
+// 50 pixels = 1.9cm
+// 26.315789 pixels = 1cm
+KB.keyMap.matrix.s683_225 = {};
+KB.keyMap.matrix.s683_225.width = 12*50;
+KB.keyMap.matrix.s683_225.height = 254;
+KB.keyMap.matrix.s683_225.pixelsPerCm = 26.315789;
+(function() {
+    var ii,
+        km = KB.keyMap.matrix.s683_225,
+        normKeySize = 50,
+        row,
+        keyCount = [12,12,12,12,12],
+        index = 0,
+        curX = 0.5,//2.5
+        curY = 0.0,//2.5
+        maxW = KB.keyMap.matrix.s683_225.width;
+
+    km.leftX = curX;
+    km.leftY = 0;
+
+    for (row = 0; row < 5; row++) {
+        curX = km.leftX;
+        var rowmax = keyCount[row];
+        for (ii = 0; ii < rowmax; ii++) {
+            km[index] = {};
+            km[index].x = curX;
+            km[index].y = curY;
+            km[index].w = normKeySize;
+            km[index].h = normKeySize;
+            km[index].cx = km[index].x + (km[index].w/2);
+            km[index].cy = km[index].y + (km[index].h/2);
+            km[index].row = row;
+
+            // set the mount points - these are points where dialogs will attach to keys
+            // all our keys are squares, so this is simple
+            km[index].mountPoint = setMountPoints( km[index] );
+
+            curX += km[index].w;
+            index++;
+        }
+
+        curY += normKeySize;
+    }
+})();
+
+KB.keyMap.matrix_split = {};
+// 50 pixels = 1.9cm
+// 26.315789 pixels = 1cm
+KB.keyMap.matrix_split.s683_225 = {};
+KB.keyMap.matrix_split.s683_225.width = 12*50 + 150;
+KB.keyMap.matrix_split.s683_225.height = 254;
+KB.keyMap.matrix_split.s683_225.pixelsPerCm = 26.315789;
+(function() {
+    var ii,
+        km = KB.keyMap.matrix_split.s683_225,
+        normKeySize = 50,
+        row,
+        keyCount = [12,12,12,12,12],
+        index = 0,
+        curX = 0.5,//2.5
+        curY = 0.0,//2.5
+        maxW = KB.keyMap.matrix_split.s683_225.width;
+
+    km.leftX = curX;
+    km.leftY = 0;
+
+    for (row = 0; row < 5; row++) {
+        curX = km.leftX;
+        var rowmax = keyCount[row];
+        var halfrow = rowmax / 2;
+        for (ii = 0; ii < halfrow; ii++) {
+            km[index] = {};
+            km[index].x = curX;
+            km[index].y = curY;
+            km[index].w = normKeySize;
+            km[index].h = normKeySize;
+            km[index].cx = km[index].x + (km[index].w/2);
+            km[index].cy = km[index].y + (km[index].h/2);
+            km[index].row = row;
+
+            // set the mount points - these are points where dialogs will attach to keys
+            // all our keys are squares, so this is simple
+            km[index].mountPoint = setMountPoints( km[index] );
+
+            curX += km[index].w;
+            index++;
+        }
+
+        curX = maxW - ( halfrow * normKeySize ) - 6;
+        for (ii = halfrow; ii < rowmax; ii++) {
+            km[index] = {};
+            km[index].x = curX;
+            km[index].y = curY;
+            km[index].w = normKeySize;
+            km[index].h = normKeySize;
+            km[index].cx = km[index].x + (km[index].w/2);
+            km[index].cy = km[index].y + (km[index].h/2);
+            km[index].row = row;
+
+            // set the mount points - these are points where dialogs will attach to keys
+            // all our keys are squares, so this is simple
+            km[index].mountPoint = setMountPoints( km[index] );
+
+            curX += km[index].w;
+            index++;
+        }
+        curY += normKeySize;
+    }
+})();
+
+
 
