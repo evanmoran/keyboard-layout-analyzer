@@ -117,13 +117,14 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "        <li>The Colemak-DH layout variants have been added.</li>\n" +
     "        <li>Number of layouts in the comparison changed from 5 to 6.</li>\n" +
     "        <li>Removed the generated 'Personalized Layout' as I considered it to not really have any value.</li>\n" +
+    "        <li>Added support for additional keyboard types.</li>\n" +
     "        <li>Various other input texts have been added, these were obtained from shenafu's fork of the same app.</li>\n" +
     "        <li>Disabled the API functionality (e.g. link to results) as github hosting does not support php.</li>\n" +
     "    </ul>\n" +
     "\n" +
     "    <h2>Bugs</h2>\n" +
     "\n" +
-    "    <p>Please report bugs to at the <a href=\"https://github.com/stevep99/keyboard-layout-analyzer/issues\">issue tracker</a> on github.</p>\n" +
+    "    <p>Please report bugs at the <a href=\"https://github.com/stevep99/keyboard-layout-analyzer/issues\">issue tracker</a> on github.</p>\n" +
     "\n" +
     "</div>\n"
   );
@@ -209,6 +210,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                            <optgroup label=\"ANSI Keyboards\">\n" +
     "                                                <option value=\"standard.abcdef\">ABCDEF</option>\n" +
     "                                                <option value=\"standard.arensito\">Arensito</option>\n" +
+    "                                                <option value=\"standard.adnw\">AdnW</option>\n" +
     "                                                <option value=\"standard.asset\">Asset</option>\n" +
     "                                                <option value=\"standard.capewell\">Capewell</option>\n" +
     "                                                <option value=\"standard.carpalxq\">CarpalxQ</option>\n" +
@@ -262,10 +264,14 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                            </optgroup>\n" +
     "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
     "                                                <option value=\"ergodox.colemak\">Colemak</option>\n" +
-    "                                                <option value=\"ergodox.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
-    "                                                <option value=\"ergodox.qgmlwbcub\">QGMLWB/Cub</option>\n" +
-    "                                                <option value=\"ergodox.qgmlwycub\">QGMLWY/Cub</option>\n" +
+    "                                                <option value=\"ergodox.colemak-thumbshift\">Colemak thumbshift</option>\n" +
+    "                                                <option value=\"ergodox.colemak_dhm\">Colemak-DHm (Mod-DH) thumbshift</option>\n" +
+    "                                                <option value=\"ergodox.mtgap\">MTGAP</option>\n" +
+    "                                                <option value=\"ergodox.mtgap-thumbshift\">MTGAP thumbshift</option>\n" +
+    "                                                <option value=\"ergodox.qgmlwbcub\">QGMLWB</option>\n" +
+    "                                                <option value=\"ergodox.qgmlwycub\">QGMLWY</option>\n" +
     "                                                <option value=\"ergodox.qwerty\">QWERTY</option>\n" +
+    "                                                <option value=\"ergodox.qwerty-thumbshift\">QWERTY thumbshift</option>\n" +
     "                                                <option value=\"ergodox.norman\">Norman</option>\n" +
     "                                                <option value=\"ergodox.workman\">Workman</option>\n" +
     "                                                <option value=\"ergodox.kinesis-advantage-colemak\">Colemak (Kinesis Advantage)</option>\n" +
