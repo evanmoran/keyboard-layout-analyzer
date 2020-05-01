@@ -13,7 +13,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "    </p>\n" +
     "    <hr/>\n" +
     "    <p>\n" +
-    "    This version of the app was forked by SteveP from <a href=\"http://patorjk.com/keyboard-layout-analyzer/\">patorjk's original analyzer</a>.\n" +
+    "    This version of the app was <a href=\"https://github.com/stevep99/keyboard-layout-analyzer\">forked by SteveP</a> from the original <a href=\"http://patorjk.com/keyboard-layout-analyzer/\">Keyboard Layout Analyzer</a> by patorjk.\n" +
     "    </p>\n" +
     "    <p>A number of changes are made in this version with the aim of making the analyzer more useful and accurate, particularly in regard to the scoring calculation. \n" +
     "    The changes are detailed below, so you can evaluate the merits of these changes yourself. A huge thanks to Patrick (patorjk) for releasing his source code, making this forked version possible!\n" +
@@ -256,6 +256,9 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"matrix.qwerty\">QWERTY</option>\n" +
     "                                                <option value=\"matrix.colemak\">Colemak</option>\n" +
     "                                                <option value=\"matrix.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
+    "                                                <option value=\"matrix.dvorak\">Dvorak</option>\n" +
+    "                                                <option value=\"matrix.norman\">Norman</option>\n" +
+    "                                                <option value=\"matrix.workman\">Workman</option>\n" +
     "                                            </optgroup>\n" +
     "                                            <optgroup label=\"Ergodox Keyboards\">\n" +
     "                                                <option value=\"ergodox.colemak\">Colemak</option>\n" +
@@ -399,7 +402,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/main.htm',
     "<div>\n" +
     "    <div class=\"jumbotron subhead\">\n" +
-    "        This is <a href=\"https://github.com/stevep99/keyboard-layout-analyzer\">SteveP's fork</a> of patorjk's <a href=\"https://github.com/patorjk/keyboard-layout-analyzer\">Keyboard Layout Analyzer</a>. See the <a href=\"#/about\">About Page</a> for explanation.\n" +
+    "        This is SteveP's fork of patorjk's Keyboard Layout Analyzer, featuring new functionality and improved analytics. See the <a href=\"#/about\">About Page</a> for a detailed explanation.\n" +
     "        <br/>\n" +
     "        <br/>\n" +
     "        <h1>Analyze Text Input</h1>\n" +
