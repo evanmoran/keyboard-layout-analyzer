@@ -230,6 +230,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"standard.mtgap\">MTGAP</option>\n" +
     "                                                <option value=\"standard.neo2\">Neo 2 (v1)</option>\n" +
     "                                                <option value=\"standard.neo2_new\">Neo 2 (v2)</option>\n" +
+    "                                                <option value=\"standard.niro\">Niro</option>\n" +
     "                                                <option value=\"standard.norman\">Norman</option>\n" +
     "                                                <option value=\"standard.ohdvorakl\">One-handed Dvorak (Left)</option>\n" +
     "                                                <option value=\"standard.ohdvorakr\">One-handed Dvorak (Right)</option>\n" +
@@ -239,6 +240,7 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"standard.qwertywm\">QWERTY - Wide Mod</option>\n" +
     "                                                <option value=\"standard.qwpr\">QWPR</option>\n" +
     "                                                <option value=\"standard.russian\">Russian</option>\n" +
+    "                                                <option value=\"standard.soul\">Soul</option>\n" +
     "                                                <option value=\"standard.workman\">Workman</option>\n" +
     "                                            </optgroup>\n" +
     "                                            <optgroup label=\"ISO Keyboards\">\n" +
