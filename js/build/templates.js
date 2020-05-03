@@ -92,8 +92,8 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "    </p>\n" +
     "    <p>Then, it calculates what proportion of typing is done on each finger, subject to a maximum of 20% per finger. The final score is proportional to this sum over all fingers:\n" +
     "    (finger-score) x (finger-frequency)</p>\n" +
-    "    <p>The consequence of this algorithm is that middle finger is heavily favoured and that high scoring layouts should aim to assign 20% of the work on each these fingers. Layouts should also attempt to use index finger heavily with very little or none on pinkies and thumbs. I think this method <i>may</i> be flawed in that it too heavily weights the middle finger, and encourages heavy loading of favoured fingers, upto the seemingly arbitrary 20%. However, I accept that this element of the algorithm may in fact be counter-balanced to some extent by the distance algorithm, which would reward all home key usage (including pinkies) by assigning a distance of zero.</p>\n" +
-    "    <p><b><u>Fix:</u></b> For the time being, I have changed the finger weights to these values:<br/>\n" +
+    "    <p>The consequence of this algorithm is that middle finger is heavily favoured, even compared to the index finger. Layouts deemed high scoring would be those that assign 20% of the work to favoured fingers - middle especially followed by index - but with very little or none on pinkies and thumbs. I think this method may be flawed in that it too heavily weights the middle finger, and encourages loading of favoured fingers upto the seemingly arbitrary 20%. However, I accept that this element of the algorithm may in fact be counter-balanced by the distance algorithm, which would reward all home key usage (including pinkies and thumbs where defined), by assigning a movement distance of zero in those cases.</p>\n" +
+    "    <p><b><u>Fix:</u></b> I think further work is needed on this element of the algorithm, but for the time being, I have rebalanced the finger weights to these values:<br/>\n" +
     "        PINKY: 0.5<br/>\n" +
     "        RING: 1.0<br/>\n" +
     "        MIDDLE: 2.0<br/>\n" +
