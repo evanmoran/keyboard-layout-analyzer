@@ -268,12 +268,14 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"ergodox.colemak\">Colemak</option>\n" +
     "                                                <option value=\"ergodox.colemak-thumbshift\">Colemak thumbshift</option>\n" +
     "                                                <option value=\"ergodox.colemak_dhm\">Colemak-DHm (Mod-DH) thumbshift</option>\n" +
+    "                                                <option value=\"ergodox.maltron\">Maltron</option>\n" +
     "                                                <option value=\"ergodox.mtgap\">MTGAP</option>\n" +
     "                                                <option value=\"ergodox.mtgap-thumbshift\">MTGAP thumbshift</option>\n" +
     "                                                <option value=\"ergodox.qgmlwbcub\">QGMLWB</option>\n" +
     "                                                <option value=\"ergodox.qgmlwycub\">QGMLWY</option>\n" +
     "                                                <option value=\"ergodox.qwerty\">QWERTY</option>\n" +
     "                                                <option value=\"ergodox.qwerty-thumbshift\">QWERTY thumbshift</option>\n" +
+    "                                                <option value=\"ergodox.rsthd\">RSTHD</option>\n" +
     "                                                <option value=\"ergodox.norman\">Norman</option>\n" +
     "                                                <option value=\"ergodox.workman\">Workman</option>\n" +
     "                                                <option value=\"ergodox.kinesis-advantage-colemak\">Colemak (Kinesis Advantage)</option>\n" +
