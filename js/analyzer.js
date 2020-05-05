@@ -35,24 +35,27 @@ KLA.Analyzer = (function() {
         var xDiff = keyMap[keyIndex1].cx - keyMap[keyIndex2].cx,
             yDiff = keyMap[keyIndex1].cy - keyMap[keyIndex2].cy;
         
-        var hand = KB.finger.whichHand(parseInt(finger));
+        var isSplit = keyMap.split;
+        var hand = KB.finger.leftRightOrThumb(parseInt(finger));
 
         var xr, yr;
-        if (hand === "left" ) {
-            xr = xDiff * costheta + yDiff * sintheta
-            yr = -xDiff * sintheta + yDiff * costheta
-        } else if (hand === "right") {
-            xr = xDiff * costheta - yDiff * sintheta
-            yr = xDiff * sintheta + yDiff * costheta
+        if (!isSplit && hand === "left" ) {
+            // rotate the movement vector to align with the left hand's approach angle
+            xr = xDiff * costheta + yDiff * sintheta;
+            yr = -xDiff * sintheta + yDiff * costheta;
+        } else if (!isSplit && hand === "right") {
+            // rotate the movement vector to align with the right hand's approach angle
+            xr = xDiff * costheta - yDiff * sintheta;
+            yr = xDiff * sintheta + yDiff * costheta;
         } else {
             xr = xDiff;
             yr = yDiff;
         }
         if (hand === "left" || hand === "right") {
-            // simulate lateral hand-movements move expensive than vertical finger movements
+            // simulate lateral hand movement move expensive than vertical
             xr *= 1.5;
         }
-        //console.log("hand=%s finger=%s:  xdiff=%f, ydiff=%f ... xr=%f, yr=%f", hand, finger, xDiff, yDiff, xr, yr);
+        //console.log("split=%s hand=%s finger=%s:  xdiff=%f, ydiff=%f ... xr=%f, yr=%f", keyMap.split, hand, finger, xDiff, yDiff, xr, yr);
         return Math.sqrt(xr*xr + yr*yr);
     }
 

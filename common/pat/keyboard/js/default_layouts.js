@@ -11,7 +11,7 @@ var KB = KB || {}; // define namespace
 KB.keySet = {};
 KB.keySet.standard = {};
 KB.keySet.european = {};
-KB.keySet.european_split = {};
+KB.keySet.european_ss = {};
 KB.keySet.ergodox = {};
 KB.keySet.matrix = {};
 KB.keySet.matrix_split = {};
@@ -1638,7 +1638,7 @@ KB.keySet.european.qwerty = {
         {primary:17,               finger:KB.finger.LEFT_THUMB},//53
         {primary:-91,              finger:KB.finger.LEFT_THUMB},//54
         {primary:18,               finger:KB.finger.LEFT_THUMB},//55
-        {primary:" ",              finger:KB.finger.RIGHT_THUMB},//56
+        {primary:" ",              finger:KB.finger.LEFT_THUMB},//56
         {primary:-18,              finger:KB.finger.RIGHT_THUMB},//57
         {primary:-91,              finger:KB.finger.RIGHT_THUMB},//58
         {primary:-93,              finger:KB.finger.RIGHT_THUMB},//59
@@ -1692,7 +1692,7 @@ KB.keySet.european.qwerty = {
             
             var fs = KB.keySet[keySetName][layout].fingerStart;
             var spaceKey = 56;
-            if (keySetName === 'european' || keySetName === 'european_split') {
+            if (keySetName === 'european' || keySetName === 'european_ss') {
                 spaceKey = 57;
             } else if (keySetName === 'ergodox') {
                 spaceKey = 66;

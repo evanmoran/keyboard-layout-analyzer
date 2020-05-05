@@ -247,12 +247,12 @@ angular.module('kla').run(['$templateCache', function($templateCache) {
     "                                                <option value=\"european.azerty\">AZERTY</option>\n" +
     "                                                <option value=\"european.bepo\">BÉPO</option>\n" +
     "                                                <option value=\"european.colemak\">Colemak</option>\n" +
-    "                                                <option value=\"european_split.colemak\">Colemak split-space</option>\n" +
+    "                                                <option value=\"european_ss.colemak\">Colemak split-space</option>\n" +
     "                                                <option value=\"european.colemak_dh\">Colemak-DH (Mod-DH)</option>\n" +
-    "                                                <option value=\"european_split.colemak_dh\">Colemak-DH (Mod-DH) split-space</option>\n" +
+    "                                                <option value=\"european_ss.colemak_dh\">Colemak-DH (Mod-DH) split-space</option>\n" +
     "                                                <option value=\"european.colemak_dhm\">Colemak-DHm (Mod-DH)</option>\n" +
     "                                                <option value=\"european.qwerty\">QWERTY</option>\n" +
-    "                                                <option value=\"european_split.qwerty\">QWERTY split-space</option>\n" +
+    "                                                <option value=\"european_ss.qwerty\">QWERTY split-space</option>\n" +
     "                                                <option value=\"european.qwerty-spanish\">QWERTY (Spanish)</option>\n" +
     "                                                <option value=\"european.qwerty-estonian\">QWERTY (Estonian)</option>\n" +
     "                                            </optgroup>\n" +

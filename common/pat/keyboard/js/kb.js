@@ -359,6 +359,7 @@ KB.keyMap.standard.s683_225 = {};
 KB.keyMap.standard.s683_225.width = 754;//756
 KB.keyMap.standard.s683_225.height = 252;//254
 KB.keyMap.standard.s683_225.pixelsPerCm = 26.315789;
+KB.keyMap.standard.s683_225.split = false;
 (function() {
     var ii,
         km = KB.keyMap.standard.s683_225,
@@ -419,6 +420,7 @@ KB.keyMap.european.s683_225 = {};
 KB.keyMap.european.s683_225.width = 754;//756
 KB.keyMap.european.s683_225.height = 252;//254
 KB.keyMap.european.s683_225.pixelsPerCm = 26.315789;
+KB.keyMap.european.s683_225.split = false;
 (function() {
     var ii,
         km = KB.keyMap.european.s683_225,
@@ -504,17 +506,18 @@ KB.keyMap.european.s683_225.pixelsPerCm = 26.315789;
 })();
 
 // European keymap with split spacebar
-KB.keyMap.european_split = {};
+KB.keyMap.european_ss = {};
 
 // 50 pixels = 1.9cm
 // 26.315789 pixels = 1cm
-KB.keyMap.european_split.s683_225 = {};
-KB.keyMap.european_split.s683_225.width = 754;//756
-KB.keyMap.european_split.s683_225.height = 252;//254
-KB.keyMap.european_split.s683_225.pixelsPerCm = 26.315789;
+KB.keyMap.european_ss.s683_225 = {};
+KB.keyMap.european_ss.s683_225.width = 754;//756
+KB.keyMap.european_ss.s683_225.height = 252;//254
+KB.keyMap.european_ss.s683_225.pixelsPerCm = 26.315789;
+KB.keyMap.european_ss.s683_225.split = false;
 (function() {
     var ii,
-        km = KB.keyMap.european_split.s683_225,
+        km = KB.keyMap.european_ss.s683_225,
         normKeySize = 50,
         row,
         keyCount = [14,14,13,13,9],
@@ -608,6 +611,7 @@ KB.keyMap.ergodox.s683_225 = {};
 KB.keyMap.ergodox.s683_225.width = 935;
 KB.keyMap.ergodox.s683_225.height = 360;
 KB.keyMap.ergodox.s683_225.pixelsPerCm = 25.7894732;//26.315789;
+KB.keyMap.ergodox.s683_225.split = true;
 (function() {
     var ii,
         km = KB.keyMap.ergodox.s683_225,
@@ -830,6 +834,7 @@ KB.keyMap.matrix.s683_225 = {};
 KB.keyMap.matrix.s683_225.width = 12*50;
 KB.keyMap.matrix.s683_225.height = 254;
 KB.keyMap.matrix.s683_225.pixelsPerCm = 26.315789;
+KB.keyMap.matrix.s683_225.split = false;
 (function() {
     var ii,
         km = KB.keyMap.matrix.s683_225,
@@ -876,6 +881,7 @@ KB.keyMap.matrix_split.s683_225 = {};
 KB.keyMap.matrix_split.s683_225.width = 12*50 + 150;
 KB.keyMap.matrix_split.s683_225.height = 254;
 KB.keyMap.matrix_split.s683_225.pixelsPerCm = 26.315789;
+KB.keyMap.matrix_split.s683_225.split = true;
 (function() {
     var ii,
         km = KB.keyMap.matrix_split.s683_225,
