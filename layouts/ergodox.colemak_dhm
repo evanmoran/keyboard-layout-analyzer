@@ -8,8 +8,8 @@
         "2": 30,
         "3": 31,
         "4": 32,
-        "5": 75,
-        "6": 66,
+        "5": 66,
+        "6": 75,
         "7": 35,
         "8": 36,
         "9": 37,
@@ -486,7 +486,7 @@
         },
         {
             "primary": -1,
-            "finger": 6,
+            "finger": 5,
             "id": 64,
             "shift": -1,
             "altGr": -1,
@@ -494,12 +494,12 @@
         },
         {
             "primary": -1,
-            "finger": 6,
+            "finger": 5,
             "id": 65
         },
         {
             "primary": 16,
-            "finger": 6,
+            "finger": 5,
             "id": 66,
             "shift": -1,
             "altGr": -1,
@@ -507,7 +507,7 @@
         },
         {
             "primary": 8,
-            "finger": 6,
+            "finger": 5,
             "id": 67,
             "shift": -1,
             "altGr": -1,
@@ -515,37 +515,37 @@
         },
         {
             "primary": -1,
-            "finger": 6,
+            "finger": 5,
             "id": 68
         },
         {
             "primary": -1,
-            "finger": 6,
+            "finger": 5,
             "id": 69
         },
         {
             "primary": -1,
-            "finger": 5,
+            "finger": 6,
             "id": 70
         },
         {
             "primary": -1,
-            "finger": 5,
+            "finger": 6,
             "id": 71
         },
         {
             "primary": -1,
-            "finger": 5,
+            "finger": 6,
             "id": 72
         },
         {
             "primary": -1,
-            "finger": 5,
+            "finger": 6,
             "id": 73
         },
         {
             "primary": 13,
-            "finger": 5,
+            "finger": 6,
             "id": 74,
             "shift": -1,
             "altGr": -1,
@@ -553,7 +553,7 @@
         },
         {
             "primary": 32,
-            "finger": 5,
+            "finger": 6,
             "id": 75,
             "shift": -1,
             "altGr": -1,
