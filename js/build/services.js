@@ -26,7 +26,6 @@ appServices.factory('keyboards', [
             ;
 
         // setup layouts
-    
         layouts[0] = {};
         layouts[0].keySet = $.extend(true, {}, KB.keySet.standard.qwerty);
         layouts[0].keyMap = $.extend(true, {}, KB.keyMap.standard.s683_225);
@@ -363,6 +362,10 @@ appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'libra
             layouts = []
             ;
 
+        k=keyboards; 
+        l=library; 
+        a=analyzer;
+
         /*
 			Throws an Error if it fails
         */
@@ -370,18 +373,20 @@ appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'libra
 
             // --------------------------------------------------------------------
             // Create an analysis report on each layout
+            
 
             var analysis = [];
             var kLayouts = [];
             keyboards.forEach(function(layout) {
                 analysis[analysis.length] = analyzer.examine({
-                    text: txt,
+                    text: analyzer.t1000,
                     keyMap: layout.keyMap,
                     keySet: layout.keySet 
                 });
 
                 var idx = kLayouts.length;
                 kLayouts[idx] = {};
+                console.log("layout", layout);
                 kLayouts[idx].keyMap = layout.keyMap;
                 kLayouts[idx].keySet = layout.keySet;
             });
@@ -431,6 +436,7 @@ appServices.factory('resultsGenerator', ['$log', 'keyboards', 'analyzer', 'libra
                 bestLayout: scores.finalList[0].layoutName,
                 rankedLayouts: scores.finalList
             });
+            console.log("library", library.get("summary"));
 
             // --------------------------------------------------------------------
             // Prepare charts

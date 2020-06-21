@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "jquery": "latest",
-    "bootstrap": "http://twitter.github.com/bootstrap/assets/bootstrap.zip"
+    "bootstrap": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
+    "lodash": "latest"
   }
 }

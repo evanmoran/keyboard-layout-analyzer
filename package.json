@@ -1,7 +1,13 @@
 {
   "name": "keyboard-layout-analyzer",
   "version": "3.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "colors": "latest",
+    "dateformat": "^3.0.3",
+    "heapify": "^0.2.1",
+    "lodash": "^4.16.1",
+    "tinyqueue": "^2.0.3"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
